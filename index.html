@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2545E6">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>YDS Kelime Defteri</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&family=Zilla+Slab:wght@500;700&display=swap">
+<style>
+/* Layout: one phone-width column. Multiple-choice options are optical answer-sheet bubbles (A-E, as on the real YDS form); the English word carries a highlighter band; everything else stays quiet. */
+:root{
+  --paper:#F2F3EF; --card:#FFFFFF; --ink:#16202D; --ink2:#566174; --line:#D8DCD4; --soft:#E8EBE4;
+  --accent:#2545E6; --accent-ink:#FFFFFF; --accent-soft:#E3E8FD; --accent-mid:#8EA0F0;
+  --mark:#FFE35A; --good:#177A49; --good-soft:#DDF3E7; --bad:#BE3A3A; --bad-soft:#FBE3E1;
+  --graphite:#2A2F39; --on-graphite:#F2F3EF;
+  --f-disp:'Zilla Slab',Georgia,'Times New Roman',serif;
+  --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#10131A; --card:#181D27; --ink:#E7EAF1; --ink2:#9AA5B8; --line:#2B3343; --soft:#212836;
+    --accent:#8CA2FF; --accent-ink:#0D1230; --accent-soft:#222A4D; --accent-mid:#4A5BB0;
+    --mark:#8A7A12; --good:#4CC38A; --good-soft:#143427; --bad:#F27D7D; --bad-soft:#3B1D21;
+    --graphite:#C9CFDB; --on-graphite:#10131A; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#10131A; --card:#181D27; --ink:#E7EAF1; --ink2:#9AA5B8; --line:#2B3343; --soft:#212836;
+  --accent:#8CA2FF; --accent-ink:#0D1230; --accent-soft:#222A4D; --accent-mid:#4A5BB0;
+  --mark:#8A7A12; --good:#4CC38A; --good-soft:#143427; --bad:#F27D7D; --bad-soft:#3B1D21;
+  --graphite:#C9CFDB; --on-graphite:#10131A; color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:0;padding-bottom:96px}
+body.insess{padding-bottom:32px}
+.wrap{max-width:640px;margin:0 auto;min-width:0}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--f-disp);text-wrap:balance;line-height:1.15}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.dim{color:var(--ink2)}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+
+/* top header */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:16px 8px}
+.top h1{font-size:1.35rem;font-weight:700}
+.pill{font-size:.78rem;border:1px solid var(--line);background:var(--card);padding:3px 9px;border-radius:6px;white-space:nowrap}
+
+/* highlighter */
+.hl{background:linear-gradient(transparent 60%,var(--mark) 60%,var(--mark) 94%,transparent 94%);padding:0 .1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+
+/* cards & buttons */
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0}
+.stack{display:flex;flex-direction:column;gap:14px;padding-block:8px 8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 18px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:600}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.sm{min-height:40px;padding:6px 12px;font-size:.9rem}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.wide{width:100%}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.actions>.btn{flex:1 1 140px}
+.ico{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:6px;padding:6px 12px;min-height:38px;font-size:.9rem}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;white-space:nowrap}
+.bar{height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.coach{color:var(--ink2);font-size:.92rem}
+.sec-h{font-size:1.1rem;margin-bottom:8px}
+
+/* Today */
+.hero{padding-block:8px 4px;display:flex;flex-direction:column;gap:10px}
+.hero h2{font-size:clamp(1.7rem,7vw,2.2rem);font-weight:700}
+.lead{color:var(--ink2)}
+.steps3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.steps3 div{border-top:3px solid var(--ink);padding-top:8px;font-size:.88rem}
+.steps3 b{display:block;font-family:var(--f-disp);font-size:1rem}
+.wchips{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px}
+.wchips span{font-family:var(--f-disp);font-weight:500}
+details>summary{cursor:pointer;min-height:44px;display:flex;align-items:center}
+
+/* flashcard */
+.flash{display:flex;flex-direction:column;gap:12px;align-items:flex-start;padding:22px 18px}
+.big{font-family:var(--f-disp);font-weight:700;font-size:clamp(1.9rem,9vw,2.7rem);line-height:1.15;overflow-wrap:anywhere}
+.mean{font-size:1.2rem}
+
+/* session */
+.stbar{display:flex;align-items:center;gap:12px;padding-block:14px 10px}
+.stmid{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.stlab{display:flex;justify-content:space-between;gap:8px;font-size:.85rem;color:var(--ink2)}
+.q{display:flex;flex-direction:column;gap:8px;padding:12px 2px 14px}
+.qlab{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.qprompt{font-family:var(--f-disp);font-weight:700;font-size:clamp(1.6rem,7.5vw,2.2rem);line-height:1.2;overflow-wrap:anywhere}
+.q .ico{align-self:flex-start}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;width:100%;text-align:left;min-height:56px;padding:10px 14px;border:1px solid var(--line);background:var(--card);border-radius:8px}
+.opt .otxt{min-width:0;overflow-wrap:anywhere}
+.bub{flex:0 0 32px;height:32px;border:2px solid var(--ink2);border-radius:50%;display:grid;place-items:center;font:500 .85rem var(--f-mono);color:var(--ink2)}
+.opt:not(:disabled):hover .bub{background:var(--graphite);border-color:var(--graphite);color:var(--on-graphite)}
+.opt.ok{border-color:var(--good);background:var(--good-soft)}
+.opt.ok .bub{background:var(--good);border-color:var(--good);color:#fff}
+.opt.no{border-color:var(--bad);background:var(--bad-soft)}
+.opt.no .bub{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt:disabled{color:inherit;opacity:1}
+.fb{min-height:24px;margin-top:12px}
+.fb .good{color:var(--good);font-weight:600}
+.fb .bad{background:var(--bad-soft);border:1px solid var(--bad);border-radius:8px;padding:10px 12px}
+.slots{font-size:1.15rem;letter-spacing:.14em;color:var(--ink2);overflow-wrap:anywhere}
+input[type=text],input[type=search]{width:100%;min-height:52px;padding:10px 14px;border:2px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);font:500 1.15rem var(--f-mono)}
+input.shake,.tile.bad,.opt.no{animation:shake .3s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.row2{display:flex;gap:8px;flex-wrap:wrap}
+
+/* match */
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mcol{display:flex;flex-direction:column;gap:10px;min-width:0}
+.tile{min-height:60px;padding:8px 10px;border:1px solid var(--line);background:var(--card);border-radius:8px;text-align:left;overflow-wrap:anywhere;font-size:.95rem;line-height:1.3}
+.tile.en{font-family:var(--f-disp);font-weight:700;font-size:1.05rem}
+.tile.sel{border:2px solid var(--accent);background:var(--accent-soft)}
+.tile.done{border-color:var(--good);background:var(--good-soft);color:var(--ink);pointer-events:none;opacity:.75}
+.tile.bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* games */
+.gcard{display:flex;flex-direction:column;gap:8px}
+.gcard h3{font-size:1.2rem}
+.gbar{display:flex;align-items:center;gap:12px;padding-block:14px 8px}
+.gbar .bar{flex:1}
+.letters{display:flex;flex-wrap:wrap;gap:8px}
+.lt{width:48px;height:52px;border:1px solid var(--line);background:var(--card);border-radius:8px;font:500 1.25rem var(--f-mono);text-transform:lowercase}
+.lt:disabled{opacity:.25}
+.ans{display:flex;flex-wrap:wrap;gap:6px;min-height:56px;padding-block:6px}
+.ans span{width:40px;height:48px;border-bottom:3px solid var(--ink);display:grid;place-items:center;font:500 1.3rem var(--f-mono);text-transform:lowercase}
+.ans.okk span{border-color:var(--good);color:var(--good)}
+.ans.badd span{border-color:var(--bad);color:var(--bad)}
+
+/* list */
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:14px minmax(0,1fr) 44px;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.row b{font-family:var(--f-disp);font-size:1.08rem;overflow-wrap:anywhere}
+.row .tr{color:var(--ink2);font-size:.92rem;overflow-wrap:anywhere}
+.dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--ink2)}
+.dot.s1{background:var(--accent-mid);border-color:var(--accent-mid)}
+.dot.s2{background:var(--accent);border-color:var(--accent)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--ink2);align-items:center}
+.legend .dot{display:inline-block;vertical-align:-2px;margin-right:5px;width:10px;height:10px}
+
+/* plan */
+.day{border-bottom:1px solid var(--line)}
+.day summary{justify-content:space-between;gap:10px}
+.day .dn{font-family:var(--f-disp);font-weight:700}
+.day .st{font-size:.8rem}
+.day.now summary .dn{box-shadow:inset 0 -.45em var(--mark)}
+.dbody{padding:2px 0 12px;display:flex;flex-direction:column;gap:2px;font-size:.93rem}
+.dbody div{display:flex;gap:8px;justify-content:space-between}
+.dbody span:first-child{font-family:var(--f-disp);font-weight:500}
+.dbody span:last-child{color:var(--ink2);text-align:right}
+
+/* stats */
+.cbar{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--soft)}
+.cbar i{display:block;height:100%}
+.cbar .m{background:var(--accent)}.cbar .l{background:var(--accent-mid)}
+.crow{display:grid;grid-template-columns:104px minmax(0,1fr) auto;gap:10px;align-items:center;padding-block:6px;font-size:.92rem}
+.fc{display:flex;gap:8px;align-items:flex-end;height:110px}
+.fc div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:100%;min-width:0}
+.fc i{display:block;width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px}
+.fc span{font-size:.75rem;color:var(--ink2)}
+.kv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.kv div{border-top:3px solid var(--ink);padding-top:6px}
+.kv b{display:block;font-family:var(--f-disp);font-size:1.6rem;line-height:1.1}
+.kv span{font-size:.8rem;color:var(--ink2)}
+.sp{display:flex;flex-direction:column;gap:10px}
+
+/* bottom tabs */
+.nav{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);
+  padding:4px max(8px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(8px,env(safe-area-inset-left,0px));z-index:5}
+body.insess .nav{display:none}
+.tabs{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:56px;color:var(--ink2);text-decoration:none;font-size:.78rem;font-weight:500;border-radius:8px}
+.tab svg{width:22px;height:22px}
+.tab[aria-current="page"]{color:var(--ink);font-weight:600;box-shadow:inset 0 3px var(--accent)}
+
+/* confirm dialog */
+.scrim{position:fixed;inset:0;background:rgba(10,14,22,.55);display:grid;place-items:center;padding:20px;z-index:20}
+.dlg{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px;max-width:360px;width:100%}
+.scrim[hidden]{display:none!important}
+.note{font-size:.88rem;color:var(--ink2)}
+.warn{background:var(--bad-soft);border:1px solid var(--bad);border-radius:8px;padding:12px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head><body>
+<noscript><div style="max-width:640px;margin:24px auto;padding:16px;border:2px solid #2545E6;border-radius:8px;font:16px/1.5 system-ui,sans-serif;background:#fff;color:#16202D"><b>Kelimeler yüklenmedi.</b> Bu dosya bir önizleme ekranında açılmış, orada JavaScript çalışmaz. Dosyayı Safari, Chrome veya Firefox ile aç (iPhone'da: Paylaş, Safari'de aç ya da dosyayı Chrome'a gönder).</div></noscript>
+
+
+<div class="wrap">
+  <header class="top" id="top"></header>
+  <main id="view"></main>
+</div>
+<nav class="nav" aria-label="Ana gezinme"><div class="tabs">
+  <a class="tab" data-v="bugun" href="#bugun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>Bugün</a>
+  <a class="tab" data-v="oyun" href="#oyun"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 3L5 14h6l-1 7 8-11h-6z"/></svg>Oyun</a>
+  <a class="tab" data-v="liste" href="#liste"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>Liste</a>
+  <a class="tab" data-v="plan" href="#plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18V9M10 18V5M16 18v-7M22 18H2"/></svg>Plan</a>
+  <a class="tab" data-v="durum" href="#durum"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Durum</a>
+</div></nav>
+<div id="qm" class="scrim" hidden><div class="dlg" role="dialog" aria-modal="true" aria-label="Dersten çık">
+  <p>Dersten çıkıyorsun. Bu ana kadarki ilerleme kayıtlı kalır.</p>
+  <div class="actions"><button class="btn ghost" data-act="qno">Devam et</button><button class="btn" data-act="qyes">Çık</button></div>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+var DATA=[{"c":"fl","en":"Consist of","tr":"den oluşmak","id":0},{"c":"is","en":"Representation","tr":"temsil, sembol","id":1},{"c":"sf","en":"Essential","tr":"gerekli","id":2},{"c":"pv","en":"put up with","tr":"katlanmak, tahammül etmek","id":3},{"c":"fl","en":"Experience","tr":"yaşamak, başından geçmek","id":4},{"c":"is","en":"Access (to)","tr":"giriş, erişim","a":["Access (to)","Access","Access to"],"id":5},{"c":"zr","en":"Efficiently","tr":"etkili, verimli şekilde","id":6},{"c":"sf","en":"Commonplace","tr":"sıradan, basit","id":7},{"c":"fl","en":"Debate","tr":"tartışmak","id":8},{"c":"is","en":"Exposure","tr":"maruz kalma","id":9},{"c":"ep","en":"After all","tr":"kaldı ki, zaten, sonuçta","id":10},{"c":"sf","en":"Controversial","tr":"tartışmalı","id":11},{"c":"fl","en":"Survive","tr":"hayatta kalmak","id":12},{"c":"is","en":"Consequence","tr":"sonuç","id":13},{"c":"pv","en":"make out","tr":"anlamak, keşfetmek","id":14},{"c":"fl","en":"Involve","tr":"içermek, gerektirmek","id":15},{"c":"is","en":"Destruction","tr":"yıkım","id":16},{"c":"sf","en":"Concerned","tr":"ilgili/ endişeli","id":17},{"c":"zr","en":"Significantly","tr":"önemli ölçüde","id":18},{"c":"fl","en":"Utilize","tr":"kullanmak","id":19},{"c":"is","en":"Conservation","tr":"koruma","id":20},{"c":"sf","en":"Apparent","tr":"belli, açık","id":21},{"c":"fl","en":"Benefit","tr":"faydalanmak","id":22},{"c":"is","en":"Competition","tr":"rekabet, yarışma","id":23},{"c":"pv","en":"take after","tr":"benzemek","id":24},{"c":"fl","en":"Face","tr":"karşı karşıya kalmak","id":25},{"c":"sf","en":"Complicated","tr":"karmaşık","id":26},{"c":"is","en":"Aspect","tr":"açı, taraf","id":27},{"c":"zr","en":"Widely","tr":"yaygın şekilde","id":28},{"c":"fl","en":"Consume","tr":"tüketmek","id":29},{"c":"is","en":"Innovation","tr":"yenilik","id":30},{"c":"sf","en":"Convenient","tr":"uygun","id":31},{"c":"pv","en":"find out","tr":"bulmak, keşfetmek, anlamak","id":32},{"c":"fl","en":"Avoid","tr":"kaçınmak, sakınmak","id":33},{"c":"ep","en":"Amidst / amid","tr":"ortasında, arasında","a":["Amidst","amid"],"id":34},{"c":"is","en":"Outbreak","tr":"salgın, başlangıç","id":35},{"c":"sf","en":"Inaccessible","tr":"ulaşılamaz, erişilmez","id":36},{"c":"fl","en":"Attempt","tr":"teşebbüs etmek, çabalamak","id":37},{"c":"is","en":"Explanation","tr":"açıklama","id":38},{"c":"zr","en":"Extremely","tr":"oldukça, aşırı derecede","id":39},{"c":"fl","en":"Coincide","tr":"aynı zamana rastlamak","id":40},{"c":"sf","en":"Costly","tr":"pahalı","id":41},{"c":"is","en":"Establishment","tr":"kuruluş","id":42},{"c":"pv","en":"work out","tr":"çözmek, halletmek, sonuçlandırmak","id":43},{"c":"fl","en":"Suggest","tr":"önermek, ileri sürmek","id":44},{"c":"is","en":"Origin","tr":"köken, kaynak","id":45},{"c":"sf","en":"Common","tr":"yaygın, ortak","id":46},{"c":"fl","en":"Harm","tr":"zarar vermek","id":47},{"c":"is","en":"Rate","tr":"oran","id":48},{"c":"fl","en":"Reveal","tr":"açıklamak, açığa çıkarmak","id":49},{"c":"sf","en":"Capable","tr":"yetenekli","id":50},{"c":"zr","en":"Distinctly","tr":"belirgin, ayırt edici şekilde","id":51},{"c":"pv","en":"take over","tr":"devralmak, teslim almak","id":52},{"c":"is","en":"Device","tr":"alet, cihaz","id":53},{"c":"fl","en":"Misuse","tr":"yanlış, kötüye kullanmak","id":54},{"c":"sf","en":"Enormous","tr":"büyük, devasa","id":55},{"c":"is","en":"Excavation","tr":"kazı","id":56},{"c":"ep","en":"… and … alike","tr":"hem … hem de … (= both … and …)","nt":1,"id":57},{"c":"fl","en":"Worship","tr":"ibadet etmek","id":58},{"c":"is","en":"Extent","tr":"boyut, ölçü","id":59},{"c":"sf","en":"Proper","tr":"uygun, düzgün","id":60},{"c":"fl","en":"Claim","tr":"iddia etmek","id":61},{"c":"pv","en":"make up","tr":"oluşturmak, uydurmak","id":62},{"c":"zr","en":"Dramatically","tr":"önemli ölçüde","id":63},{"c":"is","en":"Remain","tr":"kalıntı","id":64},{"c":"fl","en":"Disrupt","tr":"bozmak, araya girmek","id":65},{"c":"sf","en":"Vital","tr":"hayati","id":66},{"c":"is","en":"Demand","tr":"talep","id":67},{"c":"fl","en":"Grant","tr":"vermek, bağışlamak","id":68},{"c":"sf","en":"Available","tr":"mevcut, ulaşılır","id":69},{"c":"is","en":"Wealth","tr":"zenginlik, servet","id":70},{"c":"pv","en":"look through","tr":"gözden geçirmek, incelemek","id":71},{"c":"fl","en":"Confer","tr":"danışmak, görüşmek","id":72},{"c":"zr","en":"Especially","tr":"özellikle","id":73},{"c":"is","en":"Decision","tr":"karar","id":74},{"c":"sf","en":"Extinct","tr":"nesli tükenmiş","id":75},{"c":"fl","en":"Cure","tr":"tedavi etmek","id":76},{"c":"is","en":"Clue","tr":"ipucu","id":77},{"c":"fl","en":"Execute","tr":"yürütmek, idam etmek","id":78},{"c":"ep","en":"Apart from","tr":"dışında, hariç (= other than)","id":79},{"c":"sf","en":"Dependent","tr":"bağımlı","id":80},{"c":"pv","en":"put off","tr":"ertelemek","id":81},{"c":"is","en":"Purpose","tr":"amaç","id":82},{"c":"fl","en":"Infer","tr":"sonucuna varmak","id":83},{"c":"sf","en":"Significant","tr":"önemli","id":84},{"c":"is","en":"Evidence","tr":"kanıt","id":85},{"c":"zr","en":"Exactly","tr":"tam olarak","id":86},{"c":"fl","en":"Emit","tr":"yaymak","id":87},{"c":"is","en":"Advent","tr":"oratay çıkış, geliş","id":88},{"c":"fl","en":"Inform","tr":"bilgilendirmek","id":89},{"c":"sf","en":"Responsible","tr":"sorumlu","id":90},{"c":"pv","en":"back out","tr":"caymak, sözünden dönmek","id":91},{"c":"is","en":"Effect","tr":"etki","id":92},{"c":"fl","en":"Abandon","tr":"terk etmek, bırakmak","id":93},{"c":"sf","en":"Unique","tr":"eşsiz, tek","id":94},{"c":"is","en":"Interaction","tr":"etkileşim","id":95},{"c":"fl","en":"Seek","tr":"araştırmak","id":96},{"c":"zr","en":"Increasingly","tr":"artarak","id":97},{"c":"pv","en":"seal off","tr":"tıkamak, kapatmak, mühürlemek","id":98},{"c":"is","en":"Destination","tr":"varış yeri, hedef","id":99},{"c":"sf","en":"Infinite","tr":"sonsuz","id":100},{"c":"fl","en":"Seek to","tr":"çabalamak","id":101},{"c":"ep","en":"Apart from","tr":"yanısıra (= in addition to)","id":102},{"c":"is","en":"Construction","tr":"inşaat, yapım","id":103},{"c":"fl","en":"Allocate","tr":"tahsis etmek, ayırmak","id":104},{"c":"sf","en":"Vast","tr":"geniş, büyük","id":105},{"c":"is","en":"Impact","tr":"etki","id":106},{"c":"fl","en":"Improve","tr":"gelişmek, ilerlemek","id":107},{"c":"zr","en":"Fairly","tr":"oldukça/ adilane","id":108},{"c":"pv","en":"see off","tr":"yolcu etmek, uğurlamak","id":109},{"c":"sf","en":"Inevitable","tr":"kaçınılmaz","id":110},{"c":"is","en":"Property","tr":"özellik, mal, mülk","id":111},{"c":"fl","en":"Support","tr":"desteklemek","id":112},{"c":"is","en":"Harm","tr":"zarar","id":113},{"c":"sf","en":"Widespread","tr":"yaygın","id":114},{"c":"fl","en":"Settle","tr":"yerleşmek, çözüme kavuşturmak","id":115},{"c":"fl","en":"Admit","tr":"kabul etmek","id":116},{"c":"is","en":"Proportion","tr":"oran","id":117},{"c":"pv","en":"look over","tr":"gözden geçirmek, incelemek","id":118},{"c":"sf","en":"Overwhelming","tr":"baskın, ezici","id":119},{"c":"zr","en":"Properly","tr":"doğru dürüst, adamakıllı","id":120},{"c":"fl","en":"Accomplish","tr":"başarmak","id":121},{"c":"is","en":"Commodity","tr":"mal, ürün","id":122},{"c":"sf","en":"Susceptible","tr":"savunmasız, kolay etkilenir","id":123},{"c":"fl","en":"Combat","tr":"mücadele etmek, savaşmak","id":124},{"c":"is","en":"Pattern","tr":"örnek, kalıp, model","id":125},{"c":"ep","en":"As far as I am / you are etc. concerned","tr":"bana göre, sana göre","a":["As far as I am","you are etc. concerned"],"nt":1,"id":126},{"c":"pv","en":"make up for","tr":"telafi etmek","id":127},{"c":"fl","en":"Deter","tr":"caydırmak","id":128},{"c":"is","en":"Importance","tr":"önem","id":129},{"c":"sf","en":"Hazardous","tr":"tehlikeli","id":130},{"c":"zr","en":"Substantially","tr":"önemli ölçüde","id":131},{"c":"fl","en":"Assure","tr":"temin etmek, söz vermek","id":132},{"c":"is","en":"Process","tr":"işlem, süreç","id":133},{"c":"sf","en":"Innovative","tr":"yenilikci","id":134},{"c":"fl","en":"Contain","tr":"içermek","id":135},{"c":"is","en":"Component","tr":"bileşen, unsur","id":136},{"c":"pv","en":"keep up with","tr":"ayak uydurmak","id":137},{"c":"sf","en":"Willing","tr":"istekli","id":138},{"c":"fl","en":"Erupt","tr":"patlamak (yanardağ)","id":139},{"c":"is","en":"Agent","tr":"faktör, temsilci","id":140},{"c":"zr","en":"Particularly","tr":"özellikle","id":141},{"c":"fl","en":"Invest","tr":"yatırım yapmak","id":142},{"c":"is","en":"Care","tr":"ilgi, dikkat","id":143},{"c":"sf","en":"Indispensible","tr":"vazgeçilmez","id":144},{"c":"fl","en":"Prohibit","tr":"yasaklamak","id":145},{"c":"is","en":"Conversion","tr":"dönüşüm, çevirme","id":146},{"c":"pv","en":"get rid of","tr":"kurtulmak","id":147},{"c":"sf","en":"Sustainable","tr":"sürdürülebilir","id":148},{"c":"ep","en":"As regards / Regarding / With regard to / With respect to / Pertain to / Pertaining to","tr":"hakkında, ile ilgili (= ABOUT)","a":["As regards","Regarding","With regard to","With respect to","Pertain to","Pertaining to"],"id":149},{"c":"fl","en":"Eradicate","tr":"kökünü kazımak","id":150},{"c":"is","en":"Significance","tr":"önem","id":151},{"c":"fl","en":"Infect","tr":"bulaştırmak","id":152},{"c":"sf","en":"Extensive","tr":"kapsamlı, geniş","id":153},{"c":"zr","en":"Excessively","tr":"aşırı derecede","id":154},{"c":"is","en":"Recreation","tr":"ara, dinlenme","id":155},{"c":"fl","en":"Result in","tr":"neden olmak, ile sonuçlanmak","id":156},{"c":"pv","en":"bring about / bring on","tr":"neden olmak, gündeme getirmek","a":["bring about","bring on"],"id":157},{"c":"is","en":"Ancestor","tr":"ata, cet","id":158},{"c":"sf","en":"Various","tr":"çeşitli, farklı","id":159},{"c":"fl","en":"Strive to","tr":"çabalamak","id":160},{"c":"is","en":"Episode","tr":"olay, bölüm","id":161},{"c":"sf","en":"Noticeable","tr":"dikkate değer","id":162},{"c":"fl","en":"Afford","tr":"gücü yetmek","id":163},{"c":"is","en":"Manifestation","tr":"belirti, gösterge","id":164},{"c":"zr","en":"Probably","tr":"muhtemelen","id":165},{"c":"pv","en":"keep out","tr":"uzak durmak, hariç tutmak","id":166},{"c":"fl","en":"Appeal","tr":"cezbetmek, çekmek/başvurmak","id":167},{"c":"sf","en":"Constant","tr":"sürekli, sabit","id":168},{"c":"is","en":"Confidence","tr":"güven","id":169},{"c":"fl","en":"Comprise","tr":"içermek, kapsamak","id":170},{"c":"ep","en":"As of / As from","tr":"-den itibaren (+ zaman ifadesi)","a":["As of","As from"],"id":171},{"c":"is","en":"Precaution","tr":"önlem","id":172},{"c":"sf","en":"Mature","tr":"olgun","id":173},{"c":"fl","en":"Appreciate","tr":"beğenmek, anlamak","id":174},{"c":"pv","en":"stand up against","tr":"karşı koymak","id":175},{"c":"is","en":"Reservation","tr":"tereddüt","id":176},{"c":"zr","en":"Approximately","tr":"yaklaşık olarak","id":177},{"c":"sf","en":"Accurate","tr":"doğru","id":178},{"c":"fl","en":"Capture","tr":"ele geçirmek","id":179},{"c":"is","en":"Legitimacy","tr":"yasallık, geçerlilik","id":180},{"c":"fl","en":"Borrow","tr":"ödünç almak","id":181},{"c":"sf","en":"Remarkable","tr":"dikkate değer","id":182},{"c":"is","en":"Occurence","tr":"olay","id":183},{"c":"fl","en":"Discard","tr":"atmak","id":184},{"c":"pv","en":"put out of","tr":"hariç bırakmak","id":185},{"c":"is","en":"Intention","tr":"niyet","id":186},{"c":"sf","en":"Excessive","tr":"aşırı","id":187},{"c":"zr","en":"Eventually","tr":"nihayetinde, sonunda","id":188},{"c":"fl","en":"Draw","tr":"çizmek/çekmek","id":189},{"c":"is","en":"Misuse","tr":"yanlış kullanım","id":190},{"c":"fl","en":"Dedicate (to)","tr":"adamak","a":["Dedicate (to)","Dedicate","Dedicate to"],"id":191},{"c":"sf","en":"Glamorous","tr":"büyüleyici","id":192},{"c":"is","en":"Negotiation","tr":"müzakere, görüşme","id":193},{"c":"pv","en":"run over","tr":"ezmek, geçmek","id":194},{"c":"ep","en":"As to","tr":"hakkında, konusunda (+ wh…)","id":195},{"c":"fl","en":"Depend on","tr":"bağlı olmak, güvenmek","id":196},{"c":"sf","en":"Immense","tr":"büyük, kocaman","id":197},{"c":"is","en":"Duty","tr":"görev, sorumluluk","id":198},{"c":"fl","en":"Disgust","tr":"tiksindirmek","id":199},{"c":"zr","en":"Primarily","tr":"başlıca","id":200},{"c":"is","en":"Neighbourhood","tr":"semt, mahalle, çevre","id":201},{"c":"sf","en":"Certain","tr":"belli, bazı, kesin","id":202},{"c":"fl","en":"Excuse","tr":"affetmek","id":203},{"c":"pv","en":"make over","tr":"yenilemek, üzerine geçirmek","id":204},{"c":"is","en":"Inhabitant","tr":"sakin, yaşayan","id":205},{"c":"fl","en":"Endanger","tr":"tehlikeye atmak","id":206},{"c":"sf","en":"Considerable","tr":"önemli, hatırı sayılır ölçüde","id":207},{"c":"is","en":"Product","tr":"ürün","id":208},{"c":"fl","en":"Fulfill","tr":"yerine getirmek, yapmak","id":209},{"c":"zr","en":"Uniquely","tr":"eşsiz biçimde","id":210},{"c":"sf","en":"Valuable","tr":"değerli","id":211},{"c":"is","en":"Allowance","tr":"harçlık, izin, pay","id":212},{"c":"fl","en":"Impress","tr":"etkilemek","id":213},{"c":"pv","en":"turn down","tr":"reddetmek, sesini","id":214},{"c":"is","en":"Attempt","tr":"çaba, girişim","id":215},{"c":"fl","en":"Interpret","tr":"yorumlamak, gibi kabul etmek","id":216},{"c":"sf","en":"Unlikely","tr":"muhtemel olmayan","id":217},{"c":"ep","en":"As for","tr":"e gelince","id":218},{"c":"is","en":"Suggestion","tr":"öneri","id":219},{"c":"fl","en":"Laugh","tr":"gülmek","id":220},{"c":"sf","en":"Mutual","tr":"karşılıklı","id":221},{"c":"zr","en":"Largely","tr":"büyük ölçüde","id":222},{"c":"is","en":"Layer","tr":"tabaka, katman","id":223},{"c":"pv","en":"play down","tr":"önemsememek, olay vb. yatıştırmak","id":224},{"c":"fl","en":"Own","tr":"sahip olmak","id":225},{"c":"sf","en":"Adequate","tr":"yeterli","id":226},{"c":"is","en":"Prevalence","tr":"yaygınlık","id":227},{"c":"fl","en":"Match","tr":"eşleşmek, uymak","id":228},{"c":"is","en":"View","tr":"görüş, fikir","id":229},{"c":"fl","en":"Pertain","tr":"ilgili olmak","id":230},{"c":"sf","en":"Dazzling","tr":"büyüleyici, şaşırtıcı","id":231},{"c":"pv","en":"pull through","tr":"iyileşmek","id":232},{"c":"zr","en":"Progressively","tr":"giderek","id":233},{"c":"is","en":"Deficiency","tr":"eksiklik","id":234},{"c":"fl","en":"Order","tr":"emretmek, sipariş etmek","id":235},{"c":"sf","en":"Loyal","tr":"sadık","id":236},{"c":"fl","en":"Proclaim","tr":"ilan etmek, duyurmak","id":237},{"c":"is","en":"Disturbace","tr":"rahatsızlık","id":238},{"c":"ep","en":"As such","tr":"bu yüzden, böylece","id":239},{"c":"sf","en":"Sufficient","tr":"yeterli","id":240},{"c":"fl","en":"Promote","tr":"terfi ettirmek, yükseltmek","id":241},{"c":"is","en":"Framework","tr":"yapı, iskelet, çerçeve","id":242},{"c":"pv","en":"break down","tr":"kırmak, bozulmak","id":243},{"c":"fl","en":"Reinforce","tr":"güçlendirmek","id":244},{"c":"is","en":"Issue","tr":"konu, mesele","id":245},{"c":"zr","en":"Nearly","tr":"yaklaşık olarak","id":246},{"c":"sf","en":"Appropriate","tr":"uygun, yerinde","id":247},{"c":"fl","en":"Revise","tr":"gözden geçirmek","id":248},{"c":"is","en":"Consideration","tr":"düşünce, saygı","id":249},{"c":"sf","en":"Incalculable","tr":"hesaplanamayan","id":250},{"c":"fl","en":"Divert","tr":"yönünü değiştirmek, saptırmak","id":251},{"c":"pv","en":"get away with","tr":"kurtulmak, kaçmak","id":252},{"c":"is","en":"Reference","tr":"başvuru, atıf","id":253},{"c":"fl","en":"Outweigh","tr":"aşmak, geçmek","id":254},{"c":"sf","en":"Feasible","tr":"mümkün, yapılabilir","id":255},{"c":"is","en":"Accumulation","tr":"birikme, yığın","id":256},{"c":"zr","en":"Tremendously","tr":"çok, büyük ölçüde","id":257},{"c":"fl","en":"Recruit","tr":"işe, askere almak/kaydetmek","id":258},{"c":"is","en":"Risk","tr":"risk","id":259},{"c":"sf","en":"Enthusiastic","tr":"hevesli, coşkulu","id":260},{"c":"pv","en":"fall in with","tr":"benimsemek, karışmak","id":261},{"c":"fl","en":"Cease","tr":"kesmek, durdurmak","id":262},{"c":"is","en":"Administration","tr":"yönetim, idare","id":263},{"c":"ep","en":"Aside from","tr":"yanısıra, bunun dışında","id":264},{"c":"sf","en":"Substantial","tr":"önemli","id":265},{"c":"fl","en":"Require","tr":"gerektirmek","id":266},{"c":"is","en":"Corruption","tr":"yolsuzluk, bozulma","id":267},{"c":"zr","en":"Enormously","tr":"çok, büyük ölçüde","id":268},{"c":"fl","en":"Alter","tr":"değiştirmek","id":269},{"c":"sf","en":"Beneficial","tr":"faydalı","id":270},{"c":"is","en":"Correlation","tr":"ilişki, oran","id":271},{"c":"pv","en":"stir up","tr":"kışkırtmak, kötü etkilemek, rahatsız etmek","id":272},{"c":"fl","en":"Owe (to)","tr":"borçlu olmak","a":["Owe (to)","Owe","Owe to"],"id":273},{"c":"is","en":"Detriment","tr":"zarar","id":274},{"c":"sf","en":"Sole","tr":"tek","id":275},{"c":"fl","en":"Signal","tr":"işaret etmek","id":276},{"c":"is","en":"Conductivity","tr":"iletkenlik","id":277},{"c":"zr","en":"Relatively","tr":"nispeten, kıyasla","id":278},{"c":"fl","en":"Absorb","tr":"emmek","id":279},{"c":"sf","en":"Brief","tr":"kısa, öz","id":280},{"c":"pv","en":"hold up","tr":"bekletmek, geciktirmek, ertelemek","id":281},{"c":"is","en":"Excess","tr":"fazlalık","id":282},{"c":"fl","en":"Protect","tr":"korumak","id":283},{"c":"sf","en":"Gradual","tr":"aşamalı, yavaş","id":284},{"c":"is","en":"Gap","tr":"boşluk, fark","id":285},{"c":"ep","en":"As opposed to / In contrast to / Contrary to / Unlike","tr":"aksine","a":["As opposed to","In contrast to","Contrary to","Unlike"],"id":286},{"c":"fl","en":"Accelerate","tr":"hızlandırmak","id":287},{"c":"is","en":"Settlement","tr":"yerleşim","id":288},{"c":"sf","en":"Internal","tr":"iç","id":289},{"c":"pv","en":"deal with","tr":"ilgilenmek, üstesinden gelmek","id":290},{"c":"fl","en":"Increase","tr":"artırmak, artmak","id":291},{"c":"zr","en":"Accurately","tr":"doğru şekilde","id":292},{"c":"is","en":"Reassessment","tr":"yeniden değerlendirme","id":293},{"c":"fl","en":"Belong (to)","tr":"ait olmak","a":["Belong (to)","Belong","Belong to"],"id":294},{"c":"sf","en":"Probable","tr":"muhtemel, olası","id":295},{"c":"is","en":"Compensation","tr":"tazminat, telafi","id":296},{"c":"fl","en":"Emerge (from)","tr":"ortaya çıkmak","a":["Emerge (from)","Emerge","Emerge from"],"id":297},{"c":"pv","en":"point out","tr":"açıklamak, vurgulamak","id":298},{"c":"is","en":"Interpretation","tr":"yorum","id":299},{"c":"sf","en":"Crucial","tr":"hayati, önemli","id":300},{"c":"fl","en":"Convert (into)","tr":"e dönüştürmek","a":["Convert (into)","Convert","Convert into"],"id":301},{"c":"zr","en":"Permanently","tr":"kalıcı, sürekli şekilde","id":302},{"c":"is","en":"Display","tr":"sergi, gösteri","id":303},{"c":"sf","en":"Keen","tr":"hevesli, istekli","id":304},{"c":"fl","en":"Raise","tr":"yükseltmek, çoğalmak","id":305},{"c":"is","en":"Conformity","tr":"benzerlik, uyum","id":306},{"c":"fl","en":"Appear (to be)","tr":"görünmek, ortaya çıkmak","a":["Appear (to be)","Appear","Appear to be"],"id":307},{"c":"pv","en":"write out","tr":"kopya etmek, yazıya dökmek","id":308},{"c":"sf","en":"Loose","tr":"gevşek","id":309},{"c":"ep","en":"As well as / Besides / In addition to / Apart from / Along with / Aside from","tr":"nın yanısıra","a":["As well as","Besides","In addition to","Apart from","Along with","Aside from"],"id":310},{"c":"is","en":"Circumstance","tr":"durum, koşul","id":311},{"c":"fl","en":"Present","tr":"sunmak","id":312},{"c":"zr","en":"Virtually","tr":"neredeyse, hemen hemen","id":313},{"c":"is","en":"Deficit","tr":"eksiklik","id":314},{"c":"sf","en":"Vulnerable","tr":"hassas, savunmasız","id":315},{"c":"fl","en":"Endure","tr":"katlanmak","id":316},{"c":"is","en":"Balance","tr":"denge","id":317},{"c":"pv","en":"fall through","tr":"başarısız olmak","id":318},{"c":"fl","en":"Occur","tr":"meydana gelmek","id":319},{"c":"sf","en":"Countless","tr":"sayısız","id":320},{"c":"is","en":"Asset","tr":"varlıık, değerli şey","id":321},{"c":"fl","en":"Tend (to)","tr":"eğiliminde olmak","a":["Tend (to)","Tend","Tend to"],"id":322},{"c":"sf","en":"Relative","tr":"nisbi, göreceli","id":323},{"c":"is","en":"Disease","tr":"hastalık","id":324},{"c":"zr","en":"Entirely","tr":"tamamen","id":325},{"c":"fl","en":"Diagnose","tr":"teşhis etmek","id":326},{"c":"pv","en":"end up with","tr":"ile sonuçlanmak","id":327},{"c":"is","en":"Obsession","tr":"saplantı","id":328},{"c":"sf","en":"Comprehensive","tr":"kapsamlı","id":329},{"c":"fl","en":"Progress","tr":"gelişmek, ilerlemek","id":330},{"c":"is","en":"Involvement","tr":"karışma, dahil olma","id":331},{"c":"fl","en":"Persuade","tr":"ikna etmek","id":332},{"c":"ep","en":"At all costs","tr":"ne pahasına olursa olsun","id":333},{"c":"sf","en":"Indicative","tr":"belirtici, gösteren","id":334},{"c":"is","en":"Interval","tr":"ara, mola","id":335},{"c":"fl","en":"Maintain","tr":"sürdürmek, muhafaza etmek/ileri sürmek (that)","id":336},{"c":"zr","en":"Profoundly","tr":"derinlemesine, kökten","id":337},{"c":"pv","en":"run off","tr":"kaçmak","id":338},{"c":"sf","en":"Expanding","tr":"genişleyen, büyüyen","id":339},{"c":"is","en":"Determination","tr":"kararlılık, azim, belirleme","id":340},{"c":"fl","en":"Postpone","tr":"ertelemek","id":341},{"c":"is","en":"Combination","tr":"kombinasyon, bileşim","id":342},{"c":"sf","en":"Steady","tr":"sabit, devamlı","id":343},{"c":"fl","en":"Enact","tr":"yasa çıkarmak, yasalaştırmak","id":344},{"c":"is","en":"Requirement","tr":"gereksinim, koşul","id":345},{"c":"fl","en":"Counter","tr":"karşı koymak","id":346},{"c":"pv","en":"put up","tr":"ağırlamak, aday göstermek, arttırmak","id":347},{"c":"zr","en":"Incredibly","tr":"son derece, inanılmaz biçimde","id":348},{"c":"sf","en":"Binding","tr":"bağlayıcı","id":349},{"c":"is","en":"Benefit","tr":"fayda","id":350},{"c":"fl","en":"Constitute","tr":"oluşturmak, yapmak","id":351},{"c":"sf","en":"Compelling","tr":"inandırıcı, zorlayıcı","id":352},{"c":"fl","en":"Arrange","tr":"düzenlemek","id":353},{"c":"is","en":"Disaster","tr":"felaket","id":354},{"c":"ep","en":"At the expense of","tr":"zararına, pahasına","id":355},{"c":"pv","en":"make into","tr":"e dönüştürmek","id":356},{"c":"fl","en":"Choose","tr":"seçmek","id":357},{"c":"is","en":"Approval","tr":"onay","id":358},{"c":"sf","en":"Inquisitive","tr":"meraklı, araştırmacı","id":359},{"c":"zr","en":"Inconsiderately","tr":"düşüncesizce","id":360},{"c":"fl","en":"Acquire","tr":"kazanmak, elde etmek","id":361},{"c":"is","en":"Resignation","tr":"istifa","id":362},{"c":"sf","en":"Competitive","tr":"rekabetçi","id":363},{"c":"fl","en":"Indicate","tr":"göstermek, işaret etmek","id":364},{"c":"is","en":"Collaboration","tr":"işbirliği","id":365},{"c":"pv","en":"replace by/with","tr":"değiştirmek, yerini almak","a":["replace by","replace with"],"id":366},{"c":"sf","en":"Ultimate","tr":"en son, kesin","id":367},{"c":"fl","en":"Focus","tr":"odaklanmak","id":368},{"c":"is","en":"Course","tr":"kurs, yol, rota","id":369},{"c":"zr","en":"Confidentially","tr":"gizlice","id":370},{"c":"fl","en":"Negotiate","tr":"görüşmek, müzakere etmek","id":371},{"c":"is","en":"Concern","tr":"ilgi, kaygı","id":372},{"c":"sf","en":"Compatible","tr":"uyumlu","id":373},{"c":"fl","en":"Deny","tr":"inkar etmek","id":374},{"c":"pv","en":"put over","tr":"aktarmak, mesaj vermek, demir atmak","id":375},{"c":"is","en":"Application","tr":"başvuru, uygulama","id":376},{"c":"sf","en":"Deceptive","tr":"aldatıcı","id":377},{"c":"fl","en":"Revolt","tr":"isyan etmek, ayaklanmak","id":378},{"c":"ep","en":"At one’s disposal","tr":"emrinde, kullanımında (= available to sb)","id":379},{"c":"is","en":"Species","tr":"tür","id":380},{"c":"zr","en":"Immediately","tr":"hemen, aniden","id":381},{"c":"fl","en":"Reject","tr":"reddetmek","id":382},{"c":"sf","en":"Ingenious","tr":"yaratıcı, dahi","id":383},{"c":"is","en":"Challenge","tr":"engel, sorun, mücadele","id":384},{"c":"pv","en":"show up","tr":"belirmek","id":385},{"c":"fl","en":"Damage","tr":"zarar vermek","id":386},{"c":"is","en":"Distinction","tr":"ayrım, fark","id":387},{"c":"sf","en":"Conclusive","tr":"son, kesin","id":388},{"c":"fl","en":"Display","tr":"sergilemek, göstermek","id":389},{"c":"is","en":"Treatment","tr":"tedavi, davranış","id":390},{"c":"sf","en":"Diverse","tr":"farklı, çeşitli","id":391},{"c":"fl","en":"Refuse","tr":"reddetmek","id":392},{"c":"zr","en":"Considerably","tr":"büyük, önemli ölçüde","id":393},{"c":"is","en":"Resistance","tr":"direnç","id":394},{"c":"pv","en":"turn out (to be)","tr":"ortaya çıkmak","a":["turn out (to be)","turn out","turn out to be"],"id":395},{"c":"fl","en":"Collapse","tr":"çökmek","id":396},{"c":"sf","en":"Perennial","tr":"sürekli, daimi","id":397},{"c":"is","en":"Incident","tr":"olay, vaka","id":398},{"c":"fl","en":"Force","tr":"zorlamak","id":399},{"c":"is","en":"Recommendation","tr":"tavsiye, öneri","id":400},{"c":"ep","en":"But for","tr":"olmaksızın (= without)","id":401},{"c":"sf","en":"Prominent","tr":"seçkin, öenmli","id":402},{"c":"fl","en":"Thrive","tr":"gelişmek, büyümek","id":403},{"c":"pv","en":"take part in","tr":"katılmak","id":404},{"c":"is","en":"Defect","tr":"kusur","id":405},{"c":"zr","en":"Remarkably","tr":"dikkate değer, önemli ölçüde","id":406},{"c":"sf","en":"Annual","tr":"yıllık","id":407},{"c":"fl","en":"Condemn","tr":"kınamak, suçlamak","id":408},{"c":"is","en":"Association","tr":"ilişki, kuruluş","id":409},{"c":"fl","en":"Commit","tr":"işlemek (suç vb.)/ adamak (to)","id":410},{"c":"sf","en":"Extreme","tr":"aşırı","id":411},{"c":"is","en":"Support","tr":"destek","id":412},{"c":"pv","en":"make do with","tr":"idare etmek, ile yetinmek","id":413},{"c":"fl","en":"Devise","tr":"icat etmek, tasarlamak","id":414},{"c":"is","en":"Discussion","tr":"tartışma","id":415},{"c":"zr","en":"Partially","tr":"kısmen","id":416},{"c":"sf","en":"Exclusive","tr":"özel","id":417},{"c":"fl","en":"Attract","tr":"çekmek, cezbetmek","id":418},{"c":"is","en":"Discrimination","tr":"ayrımcılık, ayrım","id":419},{"c":"fl","en":"Contradict","tr":"çelişmek, karşı çıkmak","id":420},{"c":"sf","en":"Brilliant","tr":"parlak, zeki","id":421},{"c":"is","en":"Abolition","tr":"fesih, iptal","id":422},{"c":"pv","en":"bring down","tr":"azaltmak, indirmek","id":423},{"c":"fl","en":"Evolve","tr":"evrilmek, gelişmek","id":424},{"c":"ep","en":"By means of / Through / Via","tr":"vasıtasıyla, yoluyla","a":["By means of","Through","Via"],"id":425},{"c":"sf","en":"Prevalent","tr":"yaygın","id":426},{"c":"is","en":"Task","tr":"iş, görev","id":427},{"c":"zr","en":"Heavily","tr":"ağırlıklı olarak, yoğun şekilde","id":428},{"c":"fl","en":"Neglect","tr":"ihmal etmek","id":429},{"c":"is","en":"Scholarship","tr":"ilim, burs","id":430},{"c":"sf","en":"Exceptional","tr":"istisnai, nadir","id":431},{"c":"fl","en":"Recover","tr":"iyileşmek","id":432},{"c":"pv","en":"set up","tr":"kurmak, oluşturmak","id":433},{"c":"is","en":"Impression","tr":"etki, izlenim","id":434},{"c":"fl","en":"Mention","tr":"bahsetmek","id":435},{"c":"sf","en":"Sophisticated","tr":"gelişmiş, kültürlü","id":436},{"c":"is","en":"Expression","tr":"ifade","id":437},{"c":"fl","en":"Invent","tr":"icat etmek","id":438},{"c":"zr","en":"Adequately","tr":"yeteri kadar","id":439},{"c":"sf","en":"Profound","tr":"derin, şiddetli","id":440},{"c":"is","en":"Essence","tr":"öz, esas","id":441},{"c":"fl","en":"Relieve","tr":"hafiflemek, yatışmak, rahatlamak","id":442},{"c":"pv","en":"put out","tr":"söndürmek, çıkartmak","id":443},{"c":"is","en":"Intervention","tr":"müdahale","id":444},{"c":"fl","en":"Resist","tr":"karşı koymak, direnmek","id":445},{"c":"sf","en":"Latest","tr":"en son, en yeni","id":446},{"c":"ep","en":"By no means","tr":"asla, hiçbir şekilde (= not at all = whatsoever)","id":447},{"c":"is","en":"Initiative","tr":"girişim, teşebbüs","id":448},{"c":"fl","en":"Undertake","tr":"üstlenmek","id":449},{"c":"sf","en":"Numerous","tr":"sayısız","id":450},{"c":"zr","en":"Notably","tr":"özellikle","id":451},{"c":"pv","en":"take up","tr":"işgal etmek, hobi olarak başlamak","id":452},{"c":"is","en":"Integration","tr":"bütünlük, birleştirme","id":453},{"c":"fl","en":"Soar","tr":"artmak","id":454},{"c":"sf","en":"Suitable","tr":"uygun, elverişli","id":455},{"c":"is","en":"Profit","tr":"kar","id":456},{"c":"fl","en":"Alienate","tr":"yabancılaştırmak","id":457},{"c":"is","en":"Emphasis","tr":"vurgu","id":458},{"c":"fl","en":"Abduct","tr":"adam kaçırmak","id":459},{"c":"sf","en":"Anxious","tr":"kaygılı","id":460},{"c":"pv","en":"settle down","tr":"yerleşmek","id":461},{"c":"zr","en":"Reluctantly","tr":"gönülsüzce, istemeyerek","id":462},{"c":"is","en":"Shortage","tr":"eksiklik, kıtlık","id":463},{"c":"fl","en":"Adhere (to)","tr":"yapışmak, bağlı kalmak","a":["Adhere (to)","Adhere","Adhere to"],"id":464},{"c":"sf","en":"Impressive","tr":"etkileyici","id":465},{"c":"is","en":"Code","tr":"yasa, kural","id":466},{"c":"fl","en":"Appoint","tr":"atamak","id":467},{"c":"sf","en":"Prolonged","tr":"uzun süreli","id":468},{"c":"is","en":"Abundance","tr":"bolluk","id":469},{"c":"fl","en":"Waste","tr":"israf etmek, boşa harcamak","id":470},{"c":"pv","en":"take off","tr":"( uçak) havalanmak","id":471},{"c":"ep","en":"In any case","tr":"her durumda; üstelik","id":472},{"c":"zr","en":"Promptly","tr":"acilen, hemen","id":473},{"c":"fl","en":"Bargain","tr":"görüşmek, pazarlık etmek","id":474},{"c":"is","en":"Restriction","tr":"kısıtlama","id":475},{"c":"sf","en":"Faulty","tr":"kusurlu, hatalı","id":476},{"c":"fl","en":"Arouse","tr":"uyandırmak, canlandırmak","id":477},{"c":"is","en":"Settler","tr":"yerleşimci, göçmen","id":478},{"c":"sf","en":"Distinct","tr":"farklı, belirgin","id":479},{"c":"pv","en":"depend on","tr":"bağlı olmak, güvenmek","id":480},{"c":"fl","en":"Cast","tr":"atmak, fırlatmak/rol vermek","id":481},{"c":"is","en":"Prosperity","tr":"zenginlik, refah","id":482},{"c":"fl","en":"Compile","tr":"derlemek, biraraya getirmek","id":483},{"c":"sf","en":"Memorable","tr":"hatırlanmaya değer","id":484},{"c":"is","en":"Discovery","tr":"keşif","id":485},{"c":"zr","en":"Desperately","tr":"ümitsizce","id":486},{"c":"fl","en":"Correlate","tr":"ilişkilendirmek, ilişkili olmak","id":487},{"c":"is","en":"Claim","tr":"iddia","id":488},{"c":"sf","en":"Reluctant","tr":"gönülsüz, isteksiz","id":489},{"c":"pv","en":"break into","tr":"zorla girmek","id":490},{"c":"fl","en":"Denounce","tr":"suçlamak, kınamak","id":491},{"c":"is","en":"Means","tr":"yol, araç, methot","id":492},{"c":"ep","en":"Given / In view of / Considering / Taking into account / Taking into consideration","tr":"dikkate alındığında, göz önünde bulundurulduğunda","a":["Given","In view of","Considering","Taking into account","Taking into consideration"],"id":493},{"c":"sf","en":"Compulsive","tr":"zorunlu","id":494},{"c":"fl","en":"Discharge","tr":"tahliye etmek, görevden çıkarmak","id":495},{"c":"is","en":"Condition","tr":"koşul, hastalık","id":496},{"c":"zr","en":"Highly","tr":"son derece","id":497},{"c":"fl","en":"Educate","tr":"eğitmek","id":498},{"c":"pv","en":"do without","tr":"sız yapmak, -sız yaşamak","id":499},{"c":"is","en":"Contribution","tr":"katkı","id":500},{"c":"sf","en":"Self-assertive","tr":"kendinden emin, iddialı","id":501},{"c":"fl","en":"Deem","tr":"dikkate almak, düşünmek","id":502},{"c":"is","en":"Exception","tr":"istisna","id":503},{"c":"sf","en":"Reliable","tr":"güvenli","id":504},{"c":"fl","en":"Deplete","tr":"boşaltmak, tüketmek","id":505},{"c":"is","en":"Reduction","tr":"azalma","id":506},{"c":"zr","en":"Necessarily","tr":"illaki, mutlaka","id":507},{"c":"pv","en":"hang around","tr":"başıboş gezmek","id":508},{"c":"fl","en":"Direct","tr":"yönetmek","id":509},{"c":"sf","en":"Recurrent","tr":"tekrarlayan","id":510},{"c":"is","en":"Assumption","tr":"varsayım","id":511},{"c":"fl","en":"Exhale","tr":"nefes vermek","id":512},{"c":"is","en":"Definition","tr":"tanım","id":513},{"c":"sf","en":"Intensive","tr":"yoğun","id":514},{"c":"fl","en":"Escape","tr":"kaçmak","id":515},{"c":"ep","en":"Due to / Because of / Owing to / On account of / In view of","tr":"yüzünden, sayesinde","a":["Due to","Because of","Owing to","On account of","In view of"],"id":516},{"c":"is","en":"Denial","tr":"inkar","id":517},{"c":"pv","en":"go up against","tr":"e karşı olmak","id":518},{"c":"sf","en":"Indefinite","tr":"belirsiz, süresiz, sayısız","id":519},{"c":"zr","en":"Almost","tr":"neredeyse, yaklaşık olarak","id":520},{"c":"fl","en":"Found","tr":"kurmak","id":521},{"c":"is","en":"Recovery","tr":"iyileşme","id":522},{"c":"fl","en":"Inspire","tr":"ilham vermek","id":523},{"c":"sf","en":"Likely","tr":"olası, muhtemel","id":524},{"c":"is","en":"Approach","tr":"yaklaşım","id":525},{"c":"fl","en":"Intend","tr":"niyet etmek, planlamak","id":526},{"c":"pv","en":"head towards","tr":"e yönelmek","id":527},{"c":"is","en":"Force","tr":"güç","id":528},{"c":"sf","en":"Indifferent","tr":"kayıtsız, umursamaz","id":529},{"c":"fl","en":"Lead","tr":"yönetmek","id":530},{"c":"zr","en":"Potentially","tr":"imkan dahilinde","id":531},{"c":"is","en":"Harvest","tr":"ürün, hasat","id":532},{"c":"sf","en":"Preventive","tr":"önleyici, koruyucu","id":533},{"c":"fl","en":"Lead to","tr":"neden olmak, yol açmak","id":534},{"c":"is","en":"Influence","tr":"etki","id":535},{"c":"pv","en":"stand for","tr":"simgelemek, savunmak","id":536},{"c":"fl","en":"Inflict","tr":"(sıkıntı vb) vermek, yüklemek","id":537},{"c":"sf","en":"Sensitive","tr":"duyarlı, hassas","id":538},{"c":"is","en":"Interest","tr":"ilgi, faiz, çıkar","id":539},{"c":"ep","en":"Thanks to","tr":"sayesinde","id":540},{"c":"fl","en":"Permit","tr":"izin vermek","id":541},{"c":"zr","en":"Instantly","tr":"hemen derhal","id":542},{"c":"is","en":"Measure","tr":"önlem","id":543},{"c":"sf","en":"Progressive","tr":"ilerleyen, gelişen","id":544},{"c":"fl","en":"Plant","tr":"dikmek, ekmek","id":545},{"c":"is","en":"Notice","tr":"duyuru, uyarı, dikkat","id":546},{"c":"pv","en":"go along with","tr":"ile beraber gitmek, -e razı olmak","id":547},{"c":"fl","en":"Profit","tr":"faydalanmak","id":548},{"c":"sf","en":"Redundant","tr":"gereksiz, fazla","id":549},{"c":"is","en":"Progress","tr":"ilerleme","id":550},{"c":"fl","en":"Provoke","tr":"kışkırtmak, neden olmak","id":551},{"c":"sf","en":"Severe","tr":"ağır, ciddi","id":552},{"c":"zr","en":"Firmly","tr":"sıkıca","id":553},{"c":"is","en":"Objective","tr":"amaç, hedef","id":554},{"c":"fl","en":"Repair","tr":"onarmak","id":555},{"c":"pv","en":"fall back on","tr":"başvurmak","id":556},{"c":"is","en":"Reversal","tr":"geri dönüş, tersine çevirme","id":557},{"c":"sf","en":"Profitable","tr":"karlı","id":558},{"c":"fl","en":"Reward","tr":"ödüllendirmek","id":559},{"c":"is","en":"Account","tr":"açıklama, hesap","id":560},{"c":"fl","en":"Regret","tr":"pişman olmak, üzülmek","id":561},{"c":"ep","en":"To such an extent that","tr":"okadar ki","id":562},{"c":"sf","en":"Delicate","tr":"hassas, kırılgan","id":563},{"c":"is","en":"Admission","tr":"kabul, giriş","id":564},{"c":"zr","en":"Previously","tr":"eskiden, önceki","id":565},{"c":"fl","en":"Exploit","tr":"kullanmak, sömürmek","id":566},{"c":"pv","en":"keep up","tr":"devam etmek","id":567},{"c":"sf","en":"Irrelevant","tr":"alakasız","id":568},{"c":"is","en":"Amount","tr":"miktar","id":569},{"c":"fl","en":"Determine","tr":"belirlemek, saptamak","id":570},{"c":"is","en":"Appreciation","tr":"takdir, teşekkür","id":571},{"c":"sf","en":"Respective","tr":"ayrı ayrı, bireysel","id":572},{"c":"fl","en":"Prevent","tr":"engellemek, alıkoymak","id":573},{"c":"pv","en":"rely on","tr":"güvenmek, bağlı olmak","id":574},{"c":"is","en":"Consumption","tr":"tüketim","id":575},{"c":"fl","en":"Reach","tr":"ulaşmak","id":576},{"c":"zr","en":"Respectively","tr":"sırasıyla","id":577},{"c":"sf","en":"Adverse","tr":"olumsuz, ters","id":578},{"c":"is","en":"Departure","tr":"ayrılma, kalkış","id":579},{"c":"fl","en":"Perform","tr":"yapmak, yerine getirmek","id":580},{"c":"sf","en":"Confident","tr":"emin, kesin","id":581},{"c":"is","en":"Discretion","tr":"akıl, sağduyu","id":582},{"c":"fl","en":"Arise","tr":"ortaya çıkmak, doğmak","id":583},{"c":"pv","en":"drop out","tr":"üyelikten ayrılmak, okula devam etmemek","id":584},{"c":"ep","en":"Fall short of","tr":"başarısız olmak, ulaşamamak","id":585},{"c":"is","en":"Expectation","tr":"beklenti","id":586},{"c":"fl","en":"Interact","tr":"etkileşimde olmak","id":587},{"c":"sf","en":"Consecutive","tr":"ardışık","id":588},{"c":"zr","en":"Randomly","tr":"rastgele, gelişigüzel","id":589},{"c":"fl","en":"Remain","tr":"kalmak","id":590},{"c":"is","en":"Expenditure","tr":"harcama, gider","id":591},{"c":"sf","en":"Coherent","tr":"tutarlı","id":592},{"c":"fl","en":"Decide","tr":"karar vermek","id":593},{"c":"is","en":"Failure","tr":"başarısızlık","id":594},{"c":"pv","en":"run out of","tr":"tüketmek, tükenmek","id":595},{"c":"sf","en":"Contemporary","tr":"çağdaş","id":596},{"c":"fl","en":"Manufacture","tr":"üretmek","id":597},{"c":"is","en":"Impairment","tr":"sakatlık, güçsüzlük","id":598},{"c":"zr","en":"Sensitively","tr":"duyarlı şekilde","id":599},{"c":"fl","en":"Describe","tr":"tanımlamak, tasvir etmek","id":600},{"c":"is","en":"Invention","tr":"icat","id":601},{"c":"sf","en":"Deliberate","tr":"kasti, planlı","id":602},{"c":"pv","en":"write up","tr":"yazıya dökmek, güncellemek","id":603},{"c":"fl","en":"Generate","tr":"üretmek, oluşturmak","id":604},{"c":"is","en":"Investment","tr":"yatırım","id":605},{"c":"sf","en":"Extravagant","tr":"savurgan, müsrif","id":606},{"c":"fl","en":"Advance","tr":"ilerlemek","id":607},{"c":"is","en":"Maintenance","tr":"bakım, koruma","id":608},{"c":"ep","en":"For + zaman","tr":"-den beri / -dır (since, for)","nt":1,"id":609},{"c":"zr","en":"Suitably","tr":"uygun şekilde","id":610},{"c":"fl","en":"Develop","tr":"gelişmek","id":611},{"c":"sf","en":"Fertile","tr":"verimli","id":612},{"c":"is","en":"Output","tr":"ürün, üretim","id":613},{"c":"pv","en":"set out/off","tr":"yola çıkmak, başlamak","a":["set out","set off"],"id":614},{"c":"fl","en":"Complete","tr":"tamamlamak","id":615},{"c":"is","en":"Prediction","tr":"tahmin","id":616},{"c":"sf","en":"Forceful","tr":"etkili, güçlü","id":617},{"c":"fl","en":"Interfere","tr":"müdahale etmek, araya girmek","id":618},{"c":"is","en":"Preference","tr":"tercih","id":619},{"c":"sf","en":"Fragile","tr":"hassas, kırılgan","id":620},{"c":"fl","en":"Decay","tr":"çürümek","id":621},{"c":"zr","en":"Effectively","tr":"etkili şekilde","id":622},{"c":"pv","en":"turn on","tr":"açmak, çevirmek","id":623},{"c":"is","en":"Recurrence","tr":"nüksetme, tekrarlama","id":624},{"c":"fl","en":"Assess","tr":"değerlendirmek","id":625},{"c":"sf","en":"Bilateral","tr":"çift yönlü, iki taraflı","id":626},{"c":"is","en":"Redundancy","tr":"fazlalık","id":627},{"c":"fl","en":"Separate","tr":"ayırmak","id":628},{"c":"is","en":"Separation","tr":"ayırma","id":629},{"c":"sf","en":"Inadequate","tr":"yetersiz","id":630},{"c":"ep","en":"For + isim / V-ing","tr":"için","a":["For + isim","V-ing"],"nt":1,"id":631},{"c":"pv","en":"take down","tr":"indirmek, parçalara ayırmak, yazmak","id":632},{"c":"fl","en":"Enforce","tr":"uygulamak, yürürlüğe koymak","id":633},{"c":"zr","en":"Initially","tr":"başlangıçta","id":634},{"c":"is","en":"Relevance","tr":"ilişki, alaka","id":635},{"c":"sf","en":"Relentless","tr":"acımasız","id":636},{"c":"fl","en":"Compensate (for)","tr":"telafi etmek","a":["Compensate (for)","Compensate","Compensate for"],"id":637},{"c":"is","en":"Response","tr":"cevap, tepki","id":638},{"c":"fl","en":"Mistrust","tr":"güvenmemek, şüphe etmek","id":639},{"c":"sf","en":"Subsequent","tr":"sonraki, ardından gelen","id":640},{"c":"is","en":"Responsibility","tr":"sorumluluk","id":641},{"c":"pv","en":"bring in","tr":"ithal etmek, getirmek, iş vermek","id":642},{"c":"fl","en":"Deserve","tr":"haketmek","id":643},{"c":"is","en":"Trial","tr":"deney, mahkeme","id":644},{"c":"zr","en":"Ultimately","tr":"sonunda, nihayetinde","id":645},{"c":"sf","en":"Undesirable","tr":"istenmeyen","id":646},{"c":"fl","en":"Admire","tr":"hayran olmak","id":647},{"c":"is","en":"Attachment","tr":"bağlılık, ilave","id":648},{"c":"fl","en":"Withhold","tr":"alıkoymak, tutmak","id":649},{"c":"sf","en":"Desirable","tr":"arzu edilen","id":650},{"c":"pv","en":"put through","tr":"bitirmek, telefon bağlamak","id":651},{"c":"is","en":"Completion","tr":"tamamlama, bitme","id":652},{"c":"fl","en":"Consolidate","tr":"güçlendirmek","id":653},{"c":"ep","en":"For + S + V + O","tr":"çünkü (= because)","nt":1,"id":654},{"c":"sf","en":"Reasonable","tr":"makul, akla yatkın","id":655},{"c":"is","en":"Compression","tr":"basınç, sıkıştırma","id":656},{"c":"zr","en":"Abruptly","tr":"aniden, hemen","id":657},{"c":"fl","en":"Incorporate","tr":"birleştirmek","id":658},{"c":"is","en":"Contradiction","tr":"çelişki","id":659},{"c":"sf","en":"Consistent","tr":"tutarlı","id":660},{"c":"fl","en":"Urge","tr":"zorlamak, tavsiye etmek","id":661},{"c":"pv","en":"look down on","tr":"küçümsemek","id":662},{"c":"is","en":"Diagnosis","tr":"teşhis, tanı","id":663},{"c":"fl","en":"React","tr":"tepki vermek","id":664},{"c":"sf","en":"Hostile","tr":"düşman","id":665},{"c":"is","en":"Adaption","tr":"alıştırma, uyum","id":666},{"c":"zr","en":"Precisely","tr":"tam olarak","id":667},{"c":"fl","en":"Prevail","tr":"egemen olmak, yaygın olmak","id":668},{"c":"sf","en":"Persuasive","tr":"ikna edici","id":669},{"c":"is","en":"Attentiveness","tr":"dikkat","id":670},{"c":"pv","en":"come up with","tr":"öne sürmek, ortaya atmak","id":671},{"c":"fl","en":"Deceive","tr":"kandırmak","id":672},{"c":"is","en":"Citizen","tr":"vatandaş","id":673},{"c":"fl","en":"Accept","tr":"kabul etmek","id":674},{"c":"sf","en":"Adamant","tr":"inatçı","id":675},{"c":"is","en":"Complexity","tr":"karmaşıklık","id":676},{"c":"ep","en":"For all","tr":"-e rağmen (= in spite of / despite)","id":677},{"c":"fl","en":"Compel","tr":"zorlamak","id":678},{"c":"zr","en":"Vaguely","tr":"belli belirsiz","id":679},{"c":"sf","en":"Ancient","tr":"eski, antik","id":680},{"c":"pv","en":"look up","tr":"(sözlük vb.) araştırmak","id":681},{"c":"is","en":"Conflict","tr":"çatışma, anlaşmazlık","id":682},{"c":"fl","en":"Harvest","tr":"hasat etmek, biçmek","id":683},{"c":"sf","en":"Avoidable","tr":"kaçınılabilir","id":684},{"c":"is","en":"Dependence","tr":"bağımlılık","id":685},{"c":"fl","en":"Interest","tr":"ilgilendirmek","id":686},{"c":"is","en":"Difference","tr":"fark, ayrım","id":687},{"c":"fl","en":"Pursue","tr":"takip etmek, kovalamak","id":688},{"c":"pv","en":"turn in","tr":"teslim etmek","id":689},{"c":"sf","en":"Bearable","tr":"katlanılabilir","id":690},{"c":"zr","en":"Appropriately","tr":"doğru dürüst, uygun şekilde","id":691},{"c":"is","en":"Achievement","tr":"başarı","id":692},{"c":"fl","en":"Reflect","tr":"yansıtmak","id":693},{"c":"sf","en":"Considerate","tr":"düşünceli, saygılı","id":694},{"c":"is","en":"Adoption","tr":"benimseme, kabul","id":695},{"c":"fl","en":"Sustain","tr":"sürdürmek","id":696},{"c":"pv","en":"bring through","tr":"kurtarmak","id":697},{"c":"is","en":"Acquisition","tr":"kazanım, edinim","id":698},{"c":"sf","en":"Decadent","tr":"çökmüş","id":699},{"c":"fl","en":"Struggle","tr":"mücadele etmek, çabalamak","id":700},{"c":"ep","en":"For good","tr":"sonsuza dek, kalıcı olarak (= for ever)","id":701},{"c":"zr","en":"Chiefly","tr":"başlıca","id":702},{"c":"is","en":"Affection","tr":"ilgi, şefkat","id":703},{"c":"fl","en":"Apply for/to","tr":"başvurmak","a":["Apply for","Apply to"],"id":704},{"c":"sf","en":"Successive","tr":"ard arda gelen","id":705},{"c":"is","en":"Assessment","tr":"degerlendirme","id":706},{"c":"fl","en":"Apply","tr":"uygulamak","id":707},{"c":"pv","en":"look over","tr":"göz atmak","id":708},{"c":"sf","en":"Restricted","tr":"sınırlı, yasak","id":709},{"c":"fl","en":"Confirm","tr":"doğrulamak","id":710},{"c":"is","en":"Coincidence","tr":"tesadüf","id":711},{"c":"zr","en":"Adversely","tr":"olumsuz şekilde","id":712},{"c":"fl","en":"Assert","tr":"iddia etmek","id":713},{"c":"is","en":"Comparision","tr":"karşılaştırma","id":714},{"c":"sf","en":"Urgent","tr":"acil","id":715},{"c":"fl","en":"Complain","tr":"şikayet etmek","id":716},{"c":"is","en":"Development","tr":"gelişim, ilerleme","id":717},{"c":"pv","en":"look forward","tr":"dört gözle beklemek","id":718},{"c":"sf","en":"Violent","tr":"şiddetli","id":719},{"c":"fl","en":"Contract","tr":"küçültmek, kısaltmak/sözleşme yapmak/ (hastalık) kapmak","id":720},{"c":"is","en":"Advance","tr":"ilerleme","id":721},{"c":"ep","en":"Have to do with / Concerned with / Related to","tr":"ile ilişkili, bağlantılı","a":["Have to do with","Concerned with","Related to"],"id":722},{"c":"sf","en":"Separate","tr":"ayrı","id":723},{"c":"fl","en":"Disappear","tr":"gözden kaybolmak","id":724},{"c":"is","en":"Cost","tr":"maliyet, ücret","id":725},{"c":"zr","en":"Apparently","tr":"görünüşe göre","id":726},{"c":"pv","en":"bring forth","tr":"ön plana getirmek","id":727},{"c":"fl","en":"Cost","tr":"mal olmak, tutmak","id":728},{"c":"is","en":"Disposition","tr":"eğilim, karakter","id":729},{"c":"sf","en":"Conceivable","tr":"olası","id":730},{"c":"fl","en":"Examine","tr":"incelemek, muayene etmek","id":731},{"c":"is","en":"Edition","tr":"basım, baskı","id":732},{"c":"sf","en":"Decisive","tr":"kesin, nihai","id":733},{"c":"fl","en":"Implicate","tr":"dahil etmek, ima etmek","id":734},{"c":"is","en":"Effort","tr":"çaba","id":735},{"c":"zr","en":"Generously","tr":"cömertçe","id":736},{"c":"pv","en":"bring off","tr":"başarmak","id":737},{"c":"fl","en":"Notice","tr":"farkına varmak","id":738},{"c":"sf","en":"Deficient","tr":"eksik, yetersiz","id":739},{"c":"is","en":"Experience","tr":"deneyim","id":740},{"c":"fl","en":"Strike","tr":"vurmak, çarpmak, grev yapmak","id":741},{"c":"is","en":"Indication","tr":"işaret, belirti","id":742},{"c":"sf","en":"Desperate","tr":"umutsuz, çaresiz","id":743},{"c":"fl","en":"Respect","tr":"saygı göstermek","id":744},{"c":"is","en":"Make-up","tr":"yapı","id":745},{"c":"pv","en":"do well by","tr":"başarılı olmak","id":746},{"c":"ep","en":"In accordance with / In agreement with / In compliance with / In conformity with","tr":"e uygun olarak","a":["In accordance with","In agreement with","In compliance with","In conformity with"],"id":747},{"c":"zr","en":"Consecutively","tr":"ard arda","id":748},{"c":"sf","en":"Competent","tr":"yetenekli","id":749},{"c":"fl","en":"Advise","tr":"tavsiye etmek","id":750},{"c":"is","en":"Policy","tr":"politika","id":751},{"c":"fl","en":"Uphold","tr":"desteklemek, onaylamak","id":752},{"c":"sf","en":"Conditional","tr":"koşullu","id":753},{"c":"is","en":"Disorder","tr":"bozukluk, hastalık","id":754},{"c":"fl","en":"Approve","tr":"onaylamak","id":755},{"c":"pv","en":"set down to","tr":"e koyulmak","id":756},{"c":"is","en":"Distraction","tr":"dikkatin dağılması","id":757},{"c":"sf","en":"Deceitful","tr":"hilekar","id":758},{"c":"zr","en":"Consequently","tr":"sonuç olarak, bu nedenle","id":759},{"c":"fl","en":"Conform (to)","tr":"uymak, boyun eğmek","a":["Conform (to)","Conform","Conform to"],"id":760},{"c":"is","en":"Engagement","tr":"sözleşme, meşguliyet","id":761},{"c":"sf","en":"Temporary","tr":"geçici","id":762},{"c":"fl","en":"Assign","tr":"atamak, görevlendirmek","id":763},{"c":"is","en":"Fulfillment","tr":"yerine getirme","id":764},{"c":"pv","en":"look into","tr":"araştırmak","id":765},{"c":"fl","en":"Bury","tr":"gömmek","id":766},{"c":"sf","en":"Ambiguous","tr":"belirsiz, karmaşık","id":767},{"c":"is","en":"Pollutant","tr":"kirletici madde","id":768},{"c":"ep","en":"Ahead of / In advance of","tr":"den önce","a":["Ahead of","In advance of"],"id":769},{"c":"fl","en":"Corrupt","tr":"bozulmak","id":770},{"c":"zr","en":"Equally","tr":"aynı derecede, eşit şekilde","id":771},{"c":"is","en":"Protection","tr":"koruma","id":772},{"c":"sf","en":"Arrogant","tr":"kibirli","id":773},{"c":"fl","en":"Decrease","tr":"azalmak, azaltmak","id":774},{"c":"pv","en":"come across","tr":"karşılaşmak","id":775},{"c":"is","en":"Provision","tr":"temin, tedarik, koşul","id":776},{"c":"fl","en":"Depict","tr":"tasvir etmek, anlatmak","id":777},{"c":"sf","en":"Defensive","tr":"savunmalı, koruyucu","id":778},{"c":"is","en":"Reason","tr":"mantık, neden","id":779},{"c":"fl","en":"Descend","tr":"inmek, alçalmak","id":780},{"c":"zr","en":"Evenly","tr":"eşit olarak","id":781},{"c":"sf","en":"Detrimental","tr":"zararlı","id":782},{"c":"is","en":"Distribution","tr":"dağıtım","id":783},{"c":"fl","en":"Distribute","tr":"dağıtmak","id":784},{"c":"pv","en":"take place","tr":"olmak, gerçekleşmek","id":785},{"c":"is","en":"Examination","tr":"inceleme, muayene, sınav","id":786},{"c":"sf","en":"Elective","tr":"seçmeli","id":787},{"c":"fl","en":"Entail","tr":"gerektirmek","id":788},{"c":"is","en":"Expansion","tr":"genişleme, yayılma","id":789},{"c":"fl","en":"Expect","tr":"ummak, beklemek","id":790},{"c":"sf","en":"Limited","tr":"sınırlı","id":791},{"c":"ep","en":"In defiance of","tr":"karşı gelerek, aldırmayarak (= ignoring)","id":792},{"c":"zr","en":"Inevitably","tr":"kaçınılmaz olarak","id":793},{"c":"is","en":"Expense","tr":"masraf","id":794},{"c":"pv","en":"result in","tr":"neden olmak","id":795},{"c":"fl","en":"Foresee","tr":"tahmin etmek","id":796},{"c":"sf","en":"Expansive","tr":"geniş","id":797},{"c":"is","en":"Obligation","tr":"zorunluluk","id":798},{"c":"fl","en":"Invite","tr":"davet etmek, çağırmak, neden olmak","id":799},{"c":"is","en":"Promotion","tr":"terfi, ilerleme","id":800},{"c":"sf","en":"Obscure","tr":"belirsiz, anlaşılması güç","id":801},{"c":"fl","en":"Locate","tr":"yerleştirmek, oturtmak","id":802},{"c":"pv","en":"compensate for","tr":"telafi etmek, karşılamak","id":803},{"c":"is","en":"Recession","tr":"durgunluk","id":804},{"c":"zr","en":"Intentionally","tr":"kasten, bilerek","id":805},{"c":"fl","en":"Limit","tr":"sınırlamak","id":806},{"c":"sf","en":"Obvious","tr":"açık, belirli","id":807},{"c":"is","en":"Recognition","tr":"tanıma, doğrulama","id":808},{"c":"fl","en":"Integrate","tr":"birleştirmek","id":809},{"c":"sf","en":"Reckless","tr":"dikkatsiz","id":810},{"c":"is","en":"Refusal","tr":"red","id":811},{"c":"fl","en":"Omit","tr":"çıkarmak, dahil etmemek","id":812},{"c":"pv","en":"withdraw from","tr":"den geri çek(il) mek","id":813},{"c":"is","en":"Regulation","tr":"düzenleme","id":814},{"c":"ep","en":"In a row / Successively / In succession / Consecutively / In sequence / Running / Respectively","tr":"sırasıyla","a":["In a row","Successively","In succession","Consecutively","In sequence","Running","Respectively"],"id":815},{"c":"fl","en":"Portray","tr":"tasvir etmek, betimlemek","id":816},{"c":"zr","en":"Extensively","tr":"geniş çapta, yaygın şekilde","id":817},{"c":"sf","en":"Private","tr":"özel, gizli","id":818},{"c":"is","en":"Reliance","tr":"güven, bağımlılık","id":819},{"c":"fl","en":"Obstruct","tr":"tıkamak, engellemek","id":820},{"c":"sf","en":"Exact","tr":"tam, kesin","id":821},{"c":"pv","en":"put over","tr":"anlatmak, açıklamak","id":822},{"c":"is","en":"Replacement","tr":"yedek, yerine geçme","id":823},{"c":"fl","en":"Overwhelm","tr":"etkisi altına almak","id":824},{"c":"sf","en":"Generous","tr":"cömert, bol","id":825},{"c":"fl","en":"Proceed","tr":"ilerlemek/dava açmak","id":826},{"c":"is","en":"Suspicion","tr":"şüphe","id":827},{"c":"zr","en":"Principally","tr":"temel olarak, başlıca","id":828},{"c":"fl","en":"Purchase","tr":"satın almak","id":829},{"c":"is","en":"Reinforcement","tr":"güçlendirme, takviye","id":830},{"c":"sf","en":"Implicit","tr":"dolaylı, imalı","id":831},{"c":"pv","en":"cope with","tr":"başarmak, üstesinden gelmek","id":832},{"c":"fl","en":"Replace (with)","tr":"yerini almak, değiştirmek","a":["Replace (with)","Replace","Replace with"],"id":833},{"c":"is","en":"Supplement","tr":"ilave, ek","id":834},{"c":"sf","en":"Impulsive","tr":"fevri, atılgan","id":835},{"c":"fl","en":"Prosper","tr":"zenginleşmek","id":836},{"c":"is","en":"Vacancy","tr":"açık kadro, boşluk","id":837},{"c":"ep","en":"In proportion to","tr":"oranla","id":838},{"c":"zr","en":"Plainly","tr":"açıkça","id":839},{"c":"fl","en":"Retire","tr":"emekli olmak","id":840},{"c":"sf","en":"Invisible","tr":"görünmez","id":841},{"c":"is","en":"Allusion","tr":"ima","id":842},{"c":"pv","en":"put forward","tr":"önermek","id":843},{"c":"fl","en":"Rule","tr":"yönetmek","id":844},{"c":"is","en":"Amplification","tr":"artırma, yükselme","id":845},{"c":"sf","en":"Impartial","tr":"tarafsız, tam","id":846},{"c":"fl","en":"Reclaim","tr":"geri istemek","id":847},{"c":"is","en":"Admiration","tr":"hayranlık","id":848},{"c":"zr","en":"Solely","tr":"sadece","id":849},{"c":"sf","en":"Intrinsic","tr":"hakiki, iç","id":850},{"c":"fl","en":"Implement","tr":"uygulamak","id":851},{"c":"pv","en":"cut down","tr":"azaltmak","id":852},{"c":"is","en":"Affair","tr":"iş, ilişki","id":853},{"c":"fl","en":"Introduce","tr":"getirmek, tanıtmak","id":854},{"c":"sf","en":"Disturbing","tr":"rahatsız edici","id":855},{"c":"is","en":"Ambition","tr":"hırs, tutku","id":856},{"c":"fl","en":"Exist","tr":"var olmak","id":857},{"c":"is","en":"Appearance","tr":"görünüş, ortaya çıkma","id":858},{"c":"sf","en":"Efficient","tr":"verimli, etkili","id":859},{"c":"pv","en":"put on","tr":"giymek, kilo almak","id":860},{"c":"ep","en":"In pursuit of","tr":"peşinde, arayışında (= in search of)","id":861},{"c":"fl","en":"Divide","tr":"bölmek","id":862},{"c":"zr","en":"Sufficiently","tr":"yeterince","id":863},{"c":"is","en":"Absorption","tr":"emme","id":864},{"c":"sf","en":"Pure","tr":"saf, katkısız","id":865},{"c":"fl","en":"Identify","tr":"tanımlamak, saptamak","id":866},{"c":"is","en":"Acceptance","tr":"kabul, alma","id":867},{"c":"fl","en":"Suffer","tr":"muzdarip olmak, acı çekmek","id":868},{"c":"sf","en":"Occasional","tr":"ara sıra olan, nadir","id":869},{"c":"is","en":"Allocation","tr":"ödenek, tahsisat","id":870},{"c":"pv","en":"lead to","tr":"neden olmak","id":871},{"c":"fl","en":"Consider","tr":"düşünmek","id":872},{"c":"zr","en":"Simply","tr":"sadece","id":873},{"c":"is","en":"Alteration","tr":"değişiklik","id":874},{"c":"sf","en":"Persistent","tr":"ısrarcı, sürekli","id":875},{"c":"fl","en":"Achieve","tr":"başarmak, ulaşmak","id":876},{"c":"is","en":"Strike","tr":"grev, saldırı, vurma","id":877},{"c":"fl","en":"Demand","tr":"istemek, gerektirmek","id":878},{"c":"sf","en":"Nasty","tr":"kötü, pis, kaba","id":879},{"c":"pv","en":"give in","tr":"teslim olmak, razı olmak","id":880},{"c":"is","en":"State","tr":"durum, devlet","id":881},{"c":"fl","en":"Conflict","tr":"çatışmak, çelişmek","id":882},{"c":"ep","en":"In turn for / In exchange for","tr":"karşılığında","a":["In turn for","In exchange for"],"id":883},{"c":"is","en":"Apology","tr":"özür","id":884},{"c":"sf","en":"Negligible","tr":"önemsiz, gözardı edilebilir","id":885},{"c":"zr","en":"Abundantly","tr":"bolca","id":886},{"c":"fl","en":"Spread","tr":"yaymak, dağılmak","id":887},{"c":"is","en":"Advice","tr":"tavsiye","id":888},{"c":"pv","en":"take along","tr":"yanına almak, beraberinde götürmek","id":889},{"c":"sf","en":"Nutritious","tr":"besleyici","id":890},{"c":"fl","en":"Satisfy","tr":"tatmin etmek","id":891},{"c":"is","en":"Aim","tr":"amaç","id":892},{"c":"fl","en":"Conduct","tr":"yürütmek, iletmek","id":893},{"c":"sf","en":"Variable","tr":"değişken","id":894},{"c":"is","en":"Utilization","tr":"kullanım","id":895},{"c":"zr","en":"Cautiously","tr":"dikkatli şekilde","id":896},{"c":"fl","en":"Allow","tr":"izin vermek","id":897},{"c":"pv","en":"make for","tr":"e doğru gitmek, neden olmak","id":898},{"c":"is","en":"Welfare","tr":"refah, zenginlik","id":899},{"c":"sf","en":"Relevant","tr":"ilişkili","id":900},{"c":"fl","en":"Refer","tr":"bahsetmek","id":901},{"c":"is","en":"Variety","tr":"çeşitlilik","id":902},{"c":"fl","en":"Measure","tr":"ölçmek","id":903},{"c":"sf","en":"Tentative","tr":"geçici, belirsiz","id":904},{"c":"is","en":"Wage","tr":"ücret","id":905},{"c":"zr","en":"Closely","tr":"yakından","id":906},{"c":"fl","en":"Approach","tr":"yaklaşmak, ele almak","id":907},{"c":"ep","en":"In terms of","tr":"e göre, bakımından","id":908},{"c":"pv","en":"rule out","tr":"çıkarmak, silmek","id":909},{"c":"sf","en":"Uneasy","tr":"endişeli, huzursuz","id":910},{"c":"is","en":"Wonder","tr":"şaşkınlık, mucize","id":911},{"c":"fl","en":"Combine","tr":"birleştirmek","id":912},{"c":"is","en":"Verse","tr":"kıta, mısra","id":913},{"c":"sf","en":"Appealing","tr":"çekici, cazip","id":914},{"c":"fl","en":"Attribute (to)","tr":"atfetmek, bağlamak","a":["Attribute (to)","Attribute","Attribute to"],"id":915},{"c":"is","en":"Withdrawal","tr":"geri çekilme","id":916},{"c":"pv","en":"play down","tr":"hafife almak, önemsememek","id":917},{"c":"fl","en":"Defy","tr":"karşı gelmek","id":918},{"c":"sf","en":"Regrettable","tr":"üzücü","id":919},{"c":"zr","en":"Conclusively","tr":"kesin olarak","id":920},{"c":"is","en":"Victim","tr":"kurban","id":921},{"c":"fl","en":"Refrain (from)","tr":"kaçınmak, sakınmak","a":["Refrain (from)","Refrain","Refrain from"],"id":922},{"c":"sf","en":"Absolute","tr":"kesin, mutlak","id":923},{"c":"is","en":"Appointment","tr":"atama, randevu","id":924},{"c":"fl","en":"Expand","tr":"genişletmek, yaymak","id":925},{"c":"pv","en":"give rise to","tr":"neden olmak","id":926},{"c":"is","en":"Arrival","tr":"varış, geliş","id":927},{"c":"sf","en":"Admirable","tr":"hayranlık uyandıran","id":928},{"c":"fl","en":"View","tr":"görmek","id":929},{"c":"zr","en":"Constantly","tr":"devamlı","id":930},{"c":"ep","en":"In turn","tr":"sırayla / sonuç olarak","id":931},{"c":"is","en":"Assistance","tr":"destek yardım","id":932},{"c":"fl","en":"Mean","tr":"anlamına gelmek","id":933},{"c":"sf","en":"Affluent","tr":"bol, zengin","id":934},{"c":"is","en":"Avidity","tr":"hırs, açgözlülük","id":935},{"c":"fl","en":"Exert","tr":"(güç vb.) kullanmak, uygulamak","id":936},{"c":"pv","en":"get on (well) with","tr":"ile iyi geçinmek","a":["get on (well) with","get on with","get on well with"],"id":937},{"c":"sf","en":"Underlying","tr":"altında yatan","id":938},{"c":"is","en":"Awareness","tr":"farkındalık","id":939},{"c":"fl","en":"Restrict","tr":"sınırlandırmak","id":940},{"c":"zr","en":"Decisively","tr":"kararlı şekilde","id":941},{"c":"is","en":"Bargain","tr":"pazarlık, ucuz şey","id":942},{"c":"fl","en":"Stem (from)","tr":"den kaynaklanmak","a":["Stem (from)","Stem","Stem from"],"id":943},{"c":"sf","en":"Unfair","tr":"adaletsiz","id":944},{"c":"fl","en":"Cite","tr":"alıntı yapmak, bahsetmek","id":945},{"c":"is","en":"Candidate","tr":"aday","id":946},{"c":"pv","en":"take into account","tr":"hesaba katmak, düşünmek","id":947},{"c":"sf","en":"Selective","tr":"seçici","id":948},{"c":"fl","en":"Regulate","tr":"düzenlemek","id":949},{"c":"is","en":"Cavity","tr":"oyuk, çukur","id":950},{"c":"sf","en":"Sensible","tr":"makul","id":951},{"c":"zr","en":"Conventionally","tr":"geleneksel olarak","id":952},{"c":"fl","en":"Exceed","tr":"aşmak, geçmek","id":953},{"c":"ep","en":"In the wake of","tr":"-in ardından (= following / after)","id":954},{"c":"is","en":"Clarity","tr":"açıklık","id":955},{"c":"pv","en":"cut free from","tr":"bağlı olduğu yerden kurtarmak","id":956},{"c":"fl","en":"Span","tr":"kapsamak","id":957},{"c":"is","en":"Collapse","tr":"çöküş","id":958},{"c":"sf","en":"Sizeable","tr":"büyük","id":959},{"c":"fl","en":"Extend","tr":"uzatmak","id":960},{"c":"is","en":"Compliment","tr":"övgü, iltifat","id":961},{"c":"sf","en":"Tedious","tr":"cansıkıcı","id":962},{"c":"fl","en":"Establish","tr":"kurmak","id":963},{"c":"zr","en":"Conversely","tr":"aksine","id":964},{"c":"is","en":"Concession","tr":"ödün, taviz","id":965},{"c":"pv","en":"cut back on","tr":"budamak, azaltmak, düşürmek","id":966},{"c":"fl","en":"Explore","tr":"keşfetmek","id":967},{"c":"sf","en":"Abusive","tr":"istirmarcı, yolsuz","id":968},{"c":"is","en":"Conclusion","tr":"sonuç","id":969},{"c":"fl","en":"Hinder","tr":"engellemek","id":970},{"c":"is","en":"Confinement","tr":"hapsedilme","id":971},{"c":"sf","en":"Astonished","tr":"şaşırmış","id":972},{"c":"fl","en":"Overcome","tr":"üstesinden gelmek","id":973},{"c":"pv","en":"bring out","tr":"üretmek, yayımlamak, göstermek","id":974},{"c":"is","en":"Consistency","tr":"tutarlılık","id":975},{"c":"zr","en":"Fundamentally","tr":"esasında","id":976},{"c":"ep","en":"Irrespective of / Regardless of / Without considering","tr":"bakılmaksızın, göz önünde bulundurmaksızın","a":["Irrespective of","Regardless of","Without considering"],"id":977},{"c":"sf","en":"Abundant","tr":"bol, çok","id":978},{"c":"fl","en":"Relate (to)","tr":"ilişkilendirmek","a":["Relate (to)","Relate","Relate to"],"id":979},{"c":"is","en":"Contingency","tr":"olasılık, ihtimal","id":980},{"c":"fl","en":"Construct","tr":"kurmak, inşa etmek","id":981},{"c":"sf","en":"Charming","tr":"çekici","id":982},{"c":"is","en":"Audience","tr":"izleyizi, dinleyici","id":983},{"c":"pv","en":"account for","tr":"açıklamak, -den sorumlu olmak","id":984},{"c":"fl","en":"Discourage","tr":"cesaretini kırmak","id":985},{"c":"is","en":"Avoidance","tr":"kaçınma, sakınma","id":986},{"c":"sf","en":"Arbitrary","tr":"keyfi, rastgele","id":987},{"c":"zr","en":"Exceedingly","tr":"aşırı şekilde","id":988},{"c":"fl","en":"Associate","tr":"ilişkilendirmek, bağlamak","id":989},{"c":"is","en":"Belongings","tr":"eşya","id":990},{"c":"sf","en":"Affordable","tr":"satın alınabilir","id":991},{"c":"fl","en":"Compromise","tr":"anlaşmak","id":992},{"c":"is","en":"Budget","tr":"bütçe","id":993},{"c":"pv","en":"get through","tr":"varmak, ulaşmak, tamamlamak","id":994},{"c":"fl","en":"Declare","tr":"deklare etmek, açıklamak","id":995},{"c":"sf","en":"Restrictive","tr":"kısıtlayıcı","id":996},{"c":"is","en":"Certainty","tr":"kesinlik","id":997},{"c":"zr","en":"Favourably","tr":"uygun şekilde","id":998},{"c":"fl","en":"Dismay","tr":"dehşete düşürmek, can sıkmak","id":999},{"c":"ep","en":"Keep abreast of / Keep up with / Keep track of","tr":"izlemek, ayak uydurmak","a":["Keep abreast of","Keep up with","Keep track of"],"id":1000},{"c":"is","en":"Civilization","tr":"uygarlık","id":1001},{"c":"sf","en":"Casual","tr":"günlük, tesadüfi","id":1002},{"c":"fl","en":"Induce","tr":"ikna etmek, sebep olmak","id":1003},{"c":"pv","en":"make over","tr":"yenilemek, devretmek","id":1004},{"c":"is","en":"Cohesion","tr":"bağlantı, uyum","id":1005},{"c":"fl","en":"Object (to)","tr":"itiraz etmek","a":["Object (to)","Object","Object to"],"id":1006},{"c":"sf","en":"Attainable","tr":"ulaşılabilir","id":1007},{"c":"is","en":"Commitment","tr":"bağlılık, sorumluluk","id":1008},{"c":"fl","en":"Supplement","tr":"takviye etmek","id":1009},{"c":"zr","en":"Fluently","tr":"akıcı şekilde","id":1010},{"c":"sf","en":"Cautious","tr":"tedbirli, dikkatli","id":1011},{"c":"is","en":"Compliance","tr":"uyma, riayet","id":1012},{"c":"pv","en":"leave out","tr":"atlamak, hariç bırakmak","id":1013},{"c":"fl","en":"Occupy","tr":"işgal etmek","id":1014},{"c":"is","en":"Confiscation","tr":"el koyma, haciz, kamulaştırma","id":1015},{"c":"sf","en":"Challenging","tr":"zor","id":1016},{"c":"fl","en":"Exchange","tr":"takas etmek, değiştirmek","id":1017},{"c":"is","en":"Conscience","tr":"vicdan","id":1018},{"c":"fl","en":"State","tr":"ifade etmek","id":1019},{"c":"sf","en":"Confidential","tr":"gizli","id":1020},{"c":"zr","en":"Gradually","tr":"aşama aşama","id":1021},{"c":"ep","en":"Let alone / Much less","tr":"şöyle dursun, bir yana bırak","a":["Let alone","Much less"],"id":1022},{"c":"pv","en":"get over","tr":"iyileşmek, üstesinden gelmek","id":1023},{"c":"is","en":"Consultancy","tr":"danışmanlık","id":1024},{"c":"fl","en":"Witness","tr":"tanık olmak","id":1025},{"c":"sf","en":"Constructive","tr":"yapıcı, faydalı","id":1026},{"c":"is","en":"Apprehension","tr":"andişe, korku","id":1027},{"c":"fl","en":"Adapt","tr":"uyum sağlamak, ayarlamak","id":1028},{"c":"is","en":"Area","tr":"alan, bölge","id":1029},{"c":"sf","en":"Conventional","tr":"geleneksel, sıradan","id":1030},{"c":"fl","en":"Anticipate","tr":"beklemek, ummak","id":1031},{"c":"pv","en":"do with","tr":"ile ilgili olmak","id":1032},{"c":"zr","en":"Indefinitely","tr":"belirsiz şekilde, süresiz olarak","id":1033},{"c":"is","en":"Article","tr":"makale, madde, eşya","id":1034},{"c":"fl","en":"Argue","tr":"tartışmak, ileri sürmek","id":1035},{"c":"sf","en":"Corrupt","tr":"bozulmuş, yozlaşmış","id":1036},{"c":"is","en":"Attention","tr":"dikkat","id":1037},{"c":"fl","en":"Conquer","tr":"fethetmek","id":1038},{"c":"sf","en":"Existing","tr":"mevcut, hali hazırda","id":1039},{"c":"is","en":"Colleague","tr":"meslektaş","id":1040},{"c":"fl","en":"Confide","tr":"güvenmek","id":1041},{"c":"pv","en":"lay out","tr":"düzenlemek, yerleştirmek","id":1042},{"c":"zr","en":"Indifferently","tr":"ilgisizce, umursamazca","id":1043},{"c":"is","en":"Common sense","tr":"sağduyu","id":1044},{"c":"fl","en":"Confine","tr":"sınırlandırmak, hapsetmek","id":1045},{"c":"ep","en":"Live beyond / within one’s means","tr":"gelirinin üstünde / içinde yaşamak (= spend more or less than you earn or can afford)","a":["Live beyond","within one's means"],"id":1046},{"c":"sf","en":"Depressing","tr":"iç karartıcı","id":1047},{"c":"is","en":"Complaint","tr":"şikayet","id":1048},{"c":"fl","en":"Curtail","tr":"kısaltmak, azaltmak","id":1049},{"c":"sf","en":"Destructive","tr":"yıkıcı","id":1050},{"c":"pv","en":"keep pace with","tr":"ayak uydurmak","id":1051},{"c":"is","en":"Composition","tr":"kompozisyon, oluşum","id":1052},{"c":"fl","en":"Deduct","tr":"çıkarmak, azaltmak","id":1053},{"c":"sf","en":"Disputable","tr":"tartışmalı","id":1054},{"c":"is","en":"Constraint","tr":"sınırlama, zorlama","id":1055},{"c":"fl","en":"Cover","tr":"kaplamak, kapsamak","id":1056},{"c":"zr","en":"Mainly","tr":"temel olarak","id":1057},{"c":"is","en":"Consultation","tr":"danışma, görüşme","id":1058},{"c":"fl","en":"Entitle","tr":"izin, yetki vb.vermek","id":1059},{"c":"sf","en":"Dull","tr":"donuk, sıkıcı","id":1060},{"c":"pv","en":"break through","tr":"atılım yapmak, hamle yapmak","id":1061},{"c":"fl","en":"Foster","tr":"büyütmek, geliştirmek","id":1062},{"c":"is","en":"Contest","tr":"yarışma","id":1063},{"c":"sf","en":"Eager","tr":"hevesli, istekli","id":1064},{"c":"fl","en":"Embark (on)","tr":"(gemiye) binmek, bir işe başlamak","a":["Embark (on)","Embark","Embark on"],"id":1065},{"c":"is","en":"Conviction","tr":"görüş, inanç","id":1066},{"c":"zr","en":"Partly","tr":"kısmen","id":1067},{"c":"ep","en":"Make allowance for","tr":"dikkate almak, düşünmek","id":1068},{"c":"fl","en":"Impair","tr":"zarar vermek, bozmak","id":1069},{"c":"sf","en":"Convertible","tr":"dönüştürülebilir","id":1070},{"c":"is","en":"Counterpart","tr":"emsal, benzer","id":1071},{"c":"pv","en":"use up","tr":"tüketmek","id":1072},{"c":"fl","en":"Lift","tr":"kaldırmak","id":1073},{"c":"is","en":"Credibility","tr":"güvenilirlik","id":1074},{"c":"sf","en":"Credible","tr":"inandırıcı, güvenilir","id":1075},{"c":"fl","en":"Invade","tr":"işgal, istila etmek","id":1076},{"c":"is","en":"Cruise","tr":"gemi seyahati","id":1077},{"c":"zr","en":"Reasonably","tr":"makul şekilde","id":1078},{"c":"sf","en":"Diffident","tr":"utangaç, çekingen","id":1079},{"c":"pv","en":"run down","tr":"yorulmak, eleştirmek, ezmek","id":1080},{"c":"fl","en":"Merge","tr":"birleştirmek, birleşmek","id":1081},{"c":"is","en":"Deceit","tr":"hilekarlık","id":1082},{"c":"fl","en":"Recreate","tr":"canlandırmak","id":1083},{"c":"is","en":"Deception","tr":"aldatma, hile","id":1084},{"c":"sf","en":"Discredited","tr":"adı çıkmış, itibarsız","id":1085},{"c":"fl","en":"Reply","tr":"cevap vermek","id":1086},{"c":"is","en":"Deserter","tr":"firari, kaçak","id":1087},{"c":"pv","en":"tell off","tr":"azarlamak","id":1088},{"c":"sf","en":"Disposable","tr":"tek kullanımlık","id":1089},{"c":"zr","en":"Roughly","tr":"kabaca, aşağı yukarı","id":1090},{"c":"fl","en":"Reverse","tr":"tersine çevirmek, geri geri gitmek","id":1091},{"c":"ep","en":"Of one’s own accord / Of one’s own will","tr":"kendi isteğiyle, gönüllü olarak (= voluntarily)","a":["Of one's own accord","Of one's own will"],"id":1092},{"c":"is","en":"Destiny","tr":"kader","id":1093},{"c":"sf","en":"Distant","tr":"uzak","id":1094},{"c":"fl","en":"Retain","tr":"tutmak, korumak","id":1095},{"c":"is","en":"Detection","tr":"saptama, bulma","id":1096},{"c":"fl","en":"Distinguish","tr":"ayırt etmek, ayrım yapmak","id":1097},{"c":"pv","en":"figure out","tr":"anlamak, çözmek","id":1098},{"c":"is","en":"Disappointment","tr":"hayal kırıklığı","id":1099},{"c":"sf","en":"Drastic","tr":"şiddetli, önemli","id":1100},{"c":"fl","en":"Detect","tr":"saptamak, bulmak","id":1101},{"c":"zr","en":"Practically","tr":"neredeyse, hemen hemen","id":1102},{"c":"is","en":"Dismissal","tr":"kovma, red","id":1103},{"c":"sf","en":"Durable","tr":"dayanıklı, sağlam","id":1104},{"c":"fl","en":"Predict","tr":"tahmin etmek","id":1105},{"c":"is","en":"Diversity","tr":"çeşitlilik","id":1106},{"c":"pv","en":"go for","tr":"seçmek, tercih etmek","id":1107},{"c":"fl","en":"Participate (in)","tr":"katılmak","a":["Participate (in)","Participate","Participate in"],"id":1108},{"c":"sf","en":"Decent","tr":"doğru dürüst, adam akıllı","id":1109},{"c":"is","en":"Cooperation","tr":"iş birliği","id":1110},{"c":"fl","en":"Initiate","tr":"başlatmak","id":1111},{"c":"zr","en":"Severely","tr":"şiddetli, ciddi şekilde","id":1112},{"c":"is","en":"Creativity","tr":"yaratıcılık","id":1113},{"c":"sf","en":"Definite","tr":"kesin, belirli","id":1114},{"c":"ep","en":"On behalf of/for","tr":"adına namına","a":["On behalf of","On behalf for"],"id":1115},{"c":"fl","en":"Discover","tr":"keşfetmek, bulmak","id":1116},{"c":"is","en":"Custom","tr":"adet, gelenek","id":1117},{"c":"pv","en":"show off","tr":"gösteriş yapmak","id":1118},{"c":"sf","en":"Deplorable","tr":"üzücü, acınacak halde","id":1119},{"c":"fl","en":"Affect","tr":"etkilemek","id":1120},{"c":"is","en":"Customs","tr":"gümrük","id":1121},{"c":"fl","en":"Last","tr":"sürmek, devam etmek","id":1122},{"c":"sf","en":"Endemic","tr":"sık görülen, yöresel","id":1123},{"c":"zr","en":"Casually","tr":"gelişigüzel","id":1124},{"c":"is","en":"Danger","tr":"tehlike","id":1125},{"c":"fl","en":"Encounter","tr":"karşılaşmak","id":1126},{"c":"pv","en":"make up of","tr":"den oluşmak","id":1127},{"c":"is","en":"Debate","tr":"tartışma","id":1128},{"c":"sf","en":"Frustrated","tr":"hayal kırıklığına uğramış","id":1129},{"c":"fl","en":"Regard (as)","tr":"gibi kabul etmek","a":["Regard (as)","Regard","Regard as"],"id":1130},{"c":"is","en":"Declaration","tr":"ilan, açıklama","id":1131},{"c":"fl","en":"Estimate","tr":"tahmin etmek","id":1132},{"c":"sf","en":"Fundamental","tr":"temel, esas","id":1133},{"c":"is","en":"Defense","tr":"savunma","id":1134},{"c":"zr","en":"Urgently","tr":"acilen","id":1135},{"c":"fl","en":"Compete","tr":"yarışmak","id":1136},{"c":"pv","en":"work at","tr":"birşey için çaba göstermek","id":1137},{"c":"ep","en":"Once and for all","tr":"kesin olarak, son kez (= for the last time)","id":1138},{"c":"sf","en":"Harsh","tr":"sert, kaba","id":1139},{"c":"is","en":"Description","tr":"tanım","id":1140},{"c":"fl","en":"Contribute (to)","tr":"katkıda bulunmak, sebep olmak","a":["Contribute (to)","Contribute","Contribute to"],"id":1141},{"c":"is","en":"Detention","tr":"tutuklama","id":1142},{"c":"sf","en":"Faithful","tr":"sadık, inanılır","id":1143},{"c":"fl","en":"Gather","tr":"toplamak, biriktirmek","id":1144},{"c":"is","en":"Discrepancy","tr":"çelişki, farklılık","id":1145},{"c":"pv","en":"work through","tr":"üzerinde çalışmak","id":1146},{"c":"zr","en":"Compulsively","tr":"zorunlu olarak","id":1147},{"c":"fl","en":"Adopt","tr":"benimsemek, evlat edinmek","id":1148},{"c":"sf","en":"Fanciful","tr":"hayali, düşsel","id":1149},{"c":"is","en":"Disobedience","tr":"itaatsizlik","id":1150},{"c":"fl","en":"Rise","tr":"artmak, yükselmek","id":1151},{"c":"sf","en":"Genuine","tr":"gerçek, samimi","id":1152},{"c":"is","en":"Disruption","tr":"dağılma, kesinti","id":1153},{"c":"fl","en":"Launch","tr":"fırlatmak, başlatmak","id":1154},{"c":"pv","en":"work back","tr":"işe geri dönmek","id":1155},{"c":"is","en":"Diversion","tr":"sapma","id":1156},{"c":"sf","en":"Grateful","tr":"minnettar","id":1157},{"c":"fl","en":"Provide","tr":"sağlamak","id":1158},{"c":"zr","en":"Densely","tr":"yoğun şekilde","id":1159},{"c":"ep","en":"On no account / Under no circumstance","tr":"hiçbir koşulda","a":["On no account","Under no circumstance"],"id":1160},{"c":"is","en":"Creature","tr":"yaratık","id":1161},{"c":"fl","en":"Withdraw","tr":"geri çekilmek","id":1162},{"c":"sf","en":"Harmful","tr":"zararlı","id":1163},{"c":"is","en":"Crew","tr":"mürettebat, ekip","id":1164},{"c":"fl","en":"Explain","tr":"açıklamak","id":1165},{"c":"pv","en":"work for","tr":"birisi için çalışmak","id":1166},{"c":"sf","en":"Futile","tr":"yararsız, nafile","id":1167},{"c":"is","en":"Dedication","tr":"adama, bağlılık","id":1168},{"c":"fl","en":"Migrate","tr":"göç etmek","id":1169},{"c":"zr","en":"Consciously","tr":"bilinçli olarak","id":1170},{"c":"is","en":"Demonstration","tr":"gösteri, gösterme","id":1171},{"c":"fl","en":"Derive (from)","tr":"türemek, kaynaklanmak","a":["Derive (from)","Derive","Derive from"],"id":1172},{"c":"sf","en":"Erroneous","tr":"yanlış, hatalı","id":1173},{"c":"pv","en":"put forward","tr":"önermek, ileri sürmek","id":1174},{"c":"is","en":"Descendant","tr":"soy, torun, varis","id":1175},{"c":"fl","en":"Convince","tr":"ikna etmek","id":1176},{"c":"sf","en":"Explicit","tr":"açık","id":1177},{"c":"is","en":"Drought","tr":"kuraklık","id":1178},{"c":"fl","en":"Accustom","tr":"alıştırmak","id":1179},{"c":"zr","en":"Consistently","tr":"devamlı olarak, tutarlı şekilde","id":1180},{"c":"sf","en":"Infamous","tr":"kötü şöhretli","id":1181},{"c":"fl","en":"Comply (with)","tr":"uymak","a":["Comply (with)","Comply","Comply with"],"id":1182},{"c":"is","en":"Duration","tr":"süre, devamlılık","id":1183},{"c":"ep","en":"On the point of / Be about to","tr":"mek üzere","a":["On the point of","Be about to"],"id":1184},{"c":"pv","en":"Take on","tr":"üstlenmek, işe almak","id":1185},{"c":"fl","en":"Decline","tr":"azalmak/reddetmek","id":1186},{"c":"is","en":"Efficiency","tr":"verimlilik","id":1187},{"c":"sf","en":"Influential","tr":"etkili","id":1188},{"c":"fl","en":"Design","tr":"tasarlamak","id":1189},{"c":"is","en":"Elimination","tr":"eleme, ortadan kaldırma","id":1190},{"c":"sf","en":"Insufficient","tr":"yetersiz","id":1191},{"c":"zr","en":"Convincingly","tr":"ikna edici şekilde","id":1192},{"c":"fl","en":"Supply","tr":"tedarik etmek, sağlamak","id":1193},{"c":"is","en":"Emmission","tr":"yayılma, salınım","id":1194},{"c":"pv","en":"Try out","tr":"denemek","id":1195},{"c":"fl","en":"Stimulate","tr":"uyarmak, teşvik etmek","id":1196},{"c":"sf","en":"Innocent","tr":"masum","id":1197},{"c":"is","en":"Encouragement","tr":"teşvik, cesaretlendirme","id":1198},{"c":"fl","en":"Succeed","tr":"başarmak, ardından gelmek, varisi olmak","id":1199},{"c":"is","en":"Enlargement","tr":"genişleme","id":1200},{"c":"sf","en":"Indecisive","tr":"kararsız","id":1201},{"c":"pv","en":"Try on","tr":"(giysi) denemek","id":1202},{"c":"fl","en":"Evaluate","tr":"değerlendirmek","id":1203},{"c":"zr","en":"Broadly","tr":"genel anlamda","id":1204},{"c":"is","en":"Enthusiasm","tr":"heves, coşku","id":1205},{"c":"ep","en":"On the verge of / On the brink of / On the threshold of / On the point of","tr":"eşiğinde, mek üzere","a":["On the verge of","On the brink of","On the threshold of","On the point of"],"id":1206},{"c":"sf","en":"Involved","tr":"müdahil, karmaşık","id":1207},{"c":"fl","en":"Compare","tr":"karşılaştırmak","id":1208},{"c":"is","en":"Eruption","tr":"patlama","id":1209},{"c":"fl","en":"Demonstrate","tr":"göstermek","id":1210},{"c":"sf","en":"Irregular","tr":"düzensiz","id":1211},{"c":"is","en":"Existence","tr":"varoluş","id":1212},{"c":"pv","en":"Wipe out","tr":"yok etmek","id":1213},{"c":"fl","en":"Encourage","tr":"teşvik etmek","id":1214},{"c":"is","en":"Experiment","tr":"deney","id":1215},{"c":"zr","en":"Commonly","tr":"genel olarak, yaygın şekilde","id":1216},{"c":"sf","en":"Irresistible","tr":"dayanılmaz, karşı konulmaz","id":1217},{"c":"fl","en":"Remove","tr":"ortadan kaldırmak","id":1218},{"c":"is","en":"Extinction","tr":"yok olma","id":1219},{"c":"sf","en":"Illegible","tr":"okunaksız","id":1220},{"c":"fl","en":"Tackle (with)","tr":"ele almak, üstesinden gelmek","a":["Tackle (with)","Tackle","Tackle with"],"id":1221},{"c":"pv","en":"Carry on","tr":"devam etmek","id":1222},{"c":"is","en":"Extremity","tr":"uç","id":1223},{"c":"fl","en":"Accompany","tr":"eşlik etmek","id":1224},{"c":"sf","en":"Ignorant","tr":"cahil, bilgisiz","id":1225},{"c":"is","en":"Falsehood","tr":"sahtecilik, yalancılık","id":1226},{"c":"zr","en":"Conveniently","tr":"uygun olarak","id":1227},{"c":"fl","en":"Abolish","tr":"yürürlükten kaldırmak","id":1228},{"c":"ep","en":"Other than / Apart from / Except (for) / Excluding / With the exception of / Save for / But","tr":"dışında, hariç","a":["Other than","Apart from","Except (for)","Except","Except for","Excluding","With the exception of","Save for","But"],"id":1229},{"c":"is","en":"Fertility","tr":"verimlilik, doğurganlık","id":1230},{"c":"sf","en":"Improbable","tr":"beklenmeyen, olasılık dışı","id":1231},{"c":"fl","en":"Conclude","tr":"sonuç çıkarmak","id":1232},{"c":"pv","en":"Draw up","tr":"ayarlamak, düzenlemek","id":1233},{"c":"is","en":"Fluctuation","tr":"dalgalanma, değişme","id":1234},{"c":"fl","en":"Deduce","tr":"sonuç çıkarmak","id":1235},{"c":"sf","en":"Inclusive","tr":"kapsamlı","id":1236},{"c":"is","en":"Fury","tr":"öfke","id":1237},{"c":"zr","en":"Distantly","tr":"uzaktan","id":1238},{"c":"fl","en":"Engage (in)","tr":"meşgul olmak, işe almak","a":["Engage (in)","Engage","Engage in"],"id":1239},{"c":"sf","en":"Liable","tr":"sorumlu","id":1240},{"c":"is","en":"Generation","tr":"üretim, nesil","id":1241},{"c":"pv","en":"Hold out","tr":"ileri sürmek, ısrar etmek","id":1242},{"c":"fl","en":"Join (in)","tr":"katılmak","a":["Join (in)","Join","Join in"],"id":1243},{"c":"is","en":"Employment","tr":"iş, istihdam","id":1244},{"c":"sf","en":"Initial","tr":"ilk","id":1245},{"c":"fl","en":"Pretend","tr":"gibi davranmak, iddia etmek","id":1246},{"c":"is","en":"Endurance","tr":"dayanma, katlanma","id":1247},{"c":"fl","en":"Reserve","tr":"ayırmak, tahsis etmek","id":1248},{"c":"zr","en":"Inclusively","tr":"kapsamlı şekilde","id":1249},{"c":"sf","en":"Invalid","tr":"geçersiz","id":1250},{"c":"pv","en":"Hold back","tr":"dizginlemek, engellemek","id":1251},{"c":"is","en":"Escape","tr":"kaçış","id":1252},{"c":"ep","en":"Out of the question","tr":"söz konusu bile olamaz (= impossible)","id":1253},{"c":"fl","en":"Suspect","tr":"şüphelenmek","id":1254},{"c":"sf","en":"Irresponsible","tr":"sorumsuz","id":1255},{"c":"is","en":"Exhaustion","tr":"yorgunluk, tükenme","id":1256},{"c":"fl","en":"Aim","tr":"amaçlamak","id":1257},{"c":"is","en":"Expectancy","tr":"umut, beklenti","id":1258},{"c":"sf","en":"Novel","tr":"yeni","id":1259},{"c":"fl","en":"Accuse (of)","tr":"suçlamak","a":["Accuse (of)","Accuse","Accuse of"],"id":1260},{"c":"pv","en":"Look up to","tr":"saygı duymak","id":1261},{"c":"zr","en":"Effortlessly","tr":"zahmetsizce","id":1262},{"c":"is","en":"Extension","tr":"genişletme, uzatma","id":1263},{"c":"fl","en":"Allude","tr":"ima etmek","id":1264},{"c":"sf","en":"Precarious","tr":"tehlikeli, sallantılı","id":1265},{"c":"is","en":"Feature","tr":"özellik","id":1266},{"c":"fl","en":"Venture","tr":"tehlikeye atmak, risk almak","id":1267},{"c":"sf","en":"Nervous","tr":"gergin, sinirli","id":1268},{"c":"is","en":"Habitat","tr":"yaşam alanı","id":1269},{"c":"pv","en":"Run up","tr":"fırlamak, artmak","id":1270},{"c":"fl","en":"Astonish","tr":"şaşırtmak","id":1271},{"c":"zr","en":"Recklessly","tr":"umursamazca, dikkatsizce","id":1272},{"c":"is","en":"Emergence","tr":"belirme, ortaya çıkış","id":1273},{"c":"fl","en":"Betray","tr":"kandırmak","id":1274},{"c":"sf","en":"Notorious","tr":"kötü ünlü","id":1275},{"c":"ep","en":"Pros and cons","tr":"artılar ve eksiler (= advantages and disadvantages)","id":1276},{"c":"is","en":"Event","tr":"olay, müsabaka","id":1277},{"c":"fl","en":"Conserve","tr":"muhafaza etmek","id":1278},{"c":"pv","en":"Turn into","tr":"e dönüştürmek","id":1279},{"c":"sf","en":"Obliged","tr":"zorunlu, mecburi","id":1280},{"c":"is","en":"Enrollment","tr":"kayıt","id":1281},{"c":"fl","en":"Confuse","tr":"kafasını karıştırmak","id":1282},{"c":"zr","en":"Painfully","tr":"üzücü, acıklı şekilde","id":1283},{"c":"is","en":"Estimation","tr":"tahmin","id":1284},{"c":"sf","en":"Outrageous","tr":"acımasız, ahlaksız","id":1285},{"c":"fl","en":"Defeat","tr":"yenmek","id":1286},{"c":"is","en":"Entrance","tr":"giriş","id":1287},{"c":"fl","en":"Cultivate","tr":"yetiştirmek, ekmek, eğitmek","id":1288},{"c":"pv","en":"Break out","tr":"patlak vermek","id":1289},{"c":"sf","en":"Partial","tr":"kısmi/taraflı","id":1290},{"c":"is","en":"Explosion","tr":"patlama","id":1291},{"c":"fl","en":"Delay","tr":"ertelemek, geciktirmek","id":1292},{"c":"sf","en":"Perishable","tr":"çabuk bozulan","id":1293},{"c":"is","en":"Familiarity","tr":"aşinalık, tanıma","id":1294},{"c":"fl","en":"Desire","tr":"arzu etmek","id":1295},{"c":"zr","en":"Externally","tr":"dıştan, haricen","id":1296},{"c":"ep","en":"Relative to / Related to / Concerned with / Pertinent to","tr":"ilişkili olarak, bağlantılı olarak","a":["Relative to","Related to","Concerned with","Pertinent to"],"id":1297},{"c":"pv","en":"Break off","tr":"koparmak, kesmek","id":1298},{"c":"fl","en":"Dominate","tr":"egemen olmak","id":1299},{"c":"is","en":"Exploitation","tr":"kullanma, sömürme","id":1300},{"c":"sf","en":"Precise","tr":"kesin, tam","id":1301},{"c":"fl","en":"Explode","tr":"patlamak","id":1302},{"c":"is","en":"Frequency","tr":"sıklık","id":1303},{"c":"sf","en":"Pretentious","tr":"gösterişli, iddialı","id":1304},{"c":"fl","en":"Frustrate","tr":"üzmek, hayal kırıklığına uğratmak","id":1305},{"c":"is","en":"Identity","tr":"kimlik","id":1306},{"c":"zr","en":"Formerly","tr":"eskiden","id":1307},{"c":"pv","en":"Clear out","tr":"boşaltmak, tahliye etmek","id":1308},{"c":"sf","en":"Productive","tr":"verimli, üretken","id":1309},{"c":"fl","en":"Guide","tr":"yol göstermek","id":1310},{"c":"is","en":"Inadequacy","tr":"yetersizlik","id":1311},{"c":"fl","en":"Fluctuate","tr":"dalgalanmak, değişiklik göstermek","id":1312},{"c":"is","en":"Inclination","tr":"eğilim","id":1313},{"c":"sf","en":"Obstructive","tr":"engelleyici","id":1314},{"c":"fl","en":"Empower","tr":"yetki vermek, güçlendirmek","id":1315},{"c":"is","en":"Ingredient","tr":"içerik","id":1316},{"c":"pv","en":"Come up","tr":"ortaya çıkmak, gündeme gelmek","id":1317},{"c":"zr","en":"Equivalently","tr":"eşit şekilde","id":1318},{"c":"sf","en":"Primitive","tr":"ilkel","id":1319},{"c":"fl","en":"Forego","tr":"vazgeçmek","id":1320},{"c":"is","en":"Law","tr":"yasa, kanun","id":1321},{"c":"ep","en":"Standpoint","tr":"bakış açısı (= viewpoint)","id":1322},{"c":"sf","en":"Nutritional","tr":"besinsel","id":1323},{"c":"fl","en":"Jeopardize","tr":"tehlikeye atmak","id":1324},{"c":"is","en":"Linkage","tr":"bağlantı","id":1325},{"c":"fl","en":"Insist (on)","tr":"ısrar etmek","a":["Insist (on)","Insist","Insist on"],"id":1326},{"c":"pv","en":"Get on","tr":"binmek","id":1327},{"c":"is","en":"Hesitation","tr":"tereddüt","id":1328},{"c":"sf","en":"Negotiable","tr":"tartışılabilir","id":1329},{"c":"zr","en":"Essentially","tr":"aslında, gerçekte","id":1330},{"c":"fl","en":"Irrigate","tr":"sulamak","id":1331},{"c":"is","en":"Ignorance","tr":"bilgisizlik, cehalet","id":1332},{"c":"sf","en":"Notable","tr":"ünlü/dikkate değer","id":1333},{"c":"fl","en":"Hold","tr":"tutmak, düzenlemek","id":1334},{"c":"is","en":"Illusion","tr":"yanılgı, göz aldanması","id":1335},{"c":"pv","en":"Get in","tr":"binmek","id":1336},{"c":"fl","en":"Overlook","tr":"göz ardı etmek / tepeden bakmak","id":1337},{"c":"sf","en":"Moderate","tr":"ılımlı, orta","id":1338},{"c":"is","en":"Imitation","tr":"taklit","id":1339},{"c":"fl","en":"Place","tr":"koymak, yerleştirmek","id":1340},{"c":"zr","en":"Exceptionally","tr":"olağanüstü, istisnai şekilde","id":1341},{"c":"is","en":"Implication","tr":"ima, çıkarım","id":1342},{"c":"sf","en":"Negligent","tr":"ihmalkar","id":1343},{"c":"ep","en":"From the standpoint of","tr":"-e göre, açısından (= from the point of view of)","id":1344},{"c":"fl","en":"Propose","tr":"önermek","id":1345},{"c":"pv","en":"Get off","tr":"inmek","id":1346},{"c":"is","en":"Incentive","tr":"teşvik","id":1347},{"c":"sf","en":"Painful","tr":"ağrılı, acıtıcı","id":1348},{"c":"fl","en":"Range (from..to)","tr":"değişmek, sıralanmak","a":["Range (from..to)","Range","Range from..to"],"id":1349},{"c":"is","en":"Indicator","tr":"gösterge, işaret","id":1350},{"c":"fl","en":"Record","tr":"kaydetmek","id":1351},{"c":"sf","en":"Particular","tr":"belirli, özel","id":1352},{"c":"zr","en":"Immensely","tr":"çok fazla","id":1353},{"c":"is","en":"Infant","tr":"bebek, çocuk","id":1354},{"c":"fl","en":"Represent","tr":"temsil etmek","id":1355},{"c":"pv","en":"Hold on","tr":"(telefonda) bekletmek","id":1356},{"c":"is","en":"Inversion","tr":"tersine çevirme","id":1357},{"c":"sf","en":"Permanent","tr":"kalıcı, sürekli","id":1358},{"c":"fl","en":"Resolve","tr":"çözmek","id":1359},{"c":"is","en":"Judgement","tr":"yargı, kanı","id":1360},{"c":"fl","en":"Reduce","tr":"azaltmak","id":1361},{"c":"sf","en":"Responsive","tr":"duyarlı, hassas","id":1362},{"c":"zr","en":"Mutually","tr":"karşılıklı olarak","id":1363},{"c":"is","en":"Liability","tr":"sorumluluk","id":1364},{"c":"pv","en":"Look out for","tr":"dikkat etmek","id":1365},{"c":"fl","en":"Differ","tr":"farklılaşmak","id":1366},{"c":"ep","en":"Subject to","tr":"-e bağlı, -e tabi (= susceptible to = depending on = dependent on)","id":1367},{"c":"sf","en":"Rigid","tr":"katı, sert","id":1368},{"c":"is","en":"Link","tr":"bağlantı","id":1369},{"c":"fl","en":"Enable","tr":"olanak tanımak, izin vermek","id":1370},{"c":"is","en":"Immunity","tr":"bağışıklık","id":1371},{"c":"sf","en":"Remaining","tr":"kalan, var olan","id":1372},{"c":"fl","en":"Encompass","tr":"kapsamak","id":1373},{"c":"pv","en":"Pull up","tr":"kaldırmak, sökmek","id":1374},{"c":"is","en":"Indifference","tr":"ilgisizlik, kaygısızlık","id":1375},{"c":"zr","en":"Notoriously","tr":"herkesin bildiği gibi (olumsuz anlamda)","id":1376},{"c":"fl","en":"Dispute","tr":"tartışmak","id":1377},{"c":"sf","en":"Reputable","tr":"saygı değer","id":1378},{"c":"is","en":"Instinct","tr":"içgüdü","id":1379},{"c":"fl","en":"Trigger","tr":"tetiklemek","id":1380},{"c":"sf","en":"Retired","tr":"emekli","id":1381},{"c":"is","en":"Insurance","tr":"sigorta","id":1382},{"c":"fl","en":"Influence","tr":"etkilemek","id":1383},{"c":"pv","en":"Put away","tr":"bırakmak, bir kenara koymak","id":1384},{"c":"is","en":"Intersection","tr":"kavşak","id":1385},{"c":"sf","en":"Random","tr":"gelişigüzel, rastgele","id":1386},{"c":"fl","en":"Respond (to)","tr":"yanıt, tepki vermek","a":["Respond (to)","Respond","Respond to"],"id":1387},{"c":"zr","en":"Obviously","tr":"açıkça","id":1388},{"c":"is","en":"Investigation","tr":"araştırma, soruşturma","id":1389},{"c":"ep","en":"Take sth for granted (that)","tr":"kanıksamak, kabul etmek","a":["Take sth for granted (that)","Take sth for granted","Take sth for granted that"],"nt":1,"id":1390},{"c":"fl","en":"Offer","tr":"önermek, teklif etmek","id":1391},{"c":"sf","en":"Refutable","tr":"çürütülebilir","id":1392},{"c":"is","en":"Jeopardy","tr":"tehlike","id":1393},{"c":"pv","en":"Cast off/out","tr":"atmak, çıkarmak","a":["Cast off","Cast out"],"id":1394},{"c":"fl","en":"Define","tr":"tanımlamak, açıklamak","id":1395},{"c":"sf","en":"Provisional","tr":"geçici","id":1396},{"c":"is","en":"Slide","tr":"kayma, düşme","id":1397},{"c":"fl","en":"Abuse","tr":"istismar etmek","id":1398},{"c":"zr","en":"Offensively","tr":"saldırganca","id":1399},{"c":"is","en":"Intake","tr":"giriş, alınan miktar","id":1400},{"c":"fl","en":"Receive","tr":"almak","id":1401},{"c":"sf","en":"Secular","tr":"laik, dünyevi","id":1402},{"c":"pv","en":"Cast aside","tr":"birkenara ayırmak","id":1403},{"c":"is","en":"Manuscript","tr":"el yazması","id":1404},{"c":"fl","en":"Include","tr":"içermek","id":1405},{"c":"sf","en":"Single","tr":"tek, bekar","id":1406},{"c":"is","en":"Measurement","tr":"ölçü, ölçüm","id":1407},{"c":"fl","en":"Originate (from)","tr":"kaynaklanmak, ortaya çıkmak","a":["Originate (from)","Originate","Originate from"],"id":1408},{"c":"zr","en":"Inadequately","tr":"yetersiz olarak","id":1409},{"c":"sf","en":"Stagnant","tr":"durgun, sakin","id":1410},{"c":"is","en":"Mystery","tr":"gizem","id":1411},{"c":"fl","en":"Produce","tr":"üretmek","id":1412},{"c":"pv","en":"Count on","tr":"güvenmek","id":1413},{"c":"ep","en":"Thereby","tr":"böylece, bu sayede (= thus / by that means / therefore)","id":1414},{"c":"is","en":"Nutrient","tr":"besin, gıda","id":1415},{"c":"fl","en":"Threaten","tr":"tehdit etmek","id":1416},{"c":"sf","en":"Resentful","tr":"içerlemiş, kızgın","id":1417},{"c":"fl","en":"Vary","tr":"değişiklik göstermek","id":1418},{"c":"is","en":"Observation","tr":"gözlem","id":1419},{"c":"sf","en":"Respectable","tr":"saygın","id":1420},{"c":"zr","en":"Independently","tr":"bağımsız olarak","id":1421},{"c":"pv","en":"Count out","tr":"hariç tutmak, dahil etmemek","id":1422},{"c":"fl","en":"Compose","tr":"oluşturmak, bestelemek","id":1423},{"c":"is","en":"Occasion","tr":"fırsat, vesile, durum","id":1424},{"c":"fl","en":"Attend","tr":"katılmak, gitmek","id":1425},{"c":"sf","en":"Reversible","tr":"tersine çevrilebilir","id":1426},{"c":"is","en":"Opportunity","tr":"fırsat","id":1427},{"c":"fl","en":"Outlaw","tr":"feshetmek, yasaklamak","id":1428},{"c":"is","en":"Phase","tr":"aşama, evre","id":1429},{"c":"sf","en":"Ridiculous","tr":"saçma, gülünç","id":1430},{"c":"pv","en":"Step down","tr":"düşmek, gerilemek, istifa etmek","id":1431},{"c":"zr","en":"Plausibly","tr":"makul şekilde","id":1432},{"c":"fl","en":"Adjust","tr":"ayarlamak, adapte etmek","id":1433},{"c":"is","en":"Pretension","tr":"gösteriş","id":1434},{"c":"sf","en":"Solvable","tr":"çözülebilir","id":1435},{"c":"ep","en":"Vice versa","tr":"o da aynı şekilde / ya da tam tersi","id":1436},{"c":"fl","en":"Dispose","tr":"düzene koymak","id":1437},{"c":"is","en":"Manner","tr":"tarz, biçim, tutum","id":1438},{"c":"fl","en":"Dispose of","tr":"atmak, imha etmek","id":1439},{"c":"sf","en":"Spiritual","tr":"manevi","id":1440},{"c":"is","en":"Malady","tr":"hastalık","id":1441},{"c":"pv","en":"Take back","tr":"geri götürmek, eskiyi hatırlatmak","id":1442},{"c":"fl","en":"Imply","tr":"ima etmek, anlamına gelmek","id":1443},{"c":"zr","en":"Merely","tr":"sadece","id":1444},{"c":"is","en":"Negligence","tr":"ihmal","id":1445},{"c":"sf","en":"Stimulating","tr":"uyarıcı","id":1446},{"c":"fl","en":"Run","tr":"işletmek, çalıştırmak","id":1447},{"c":"is","en":"Option","tr":"seçenek","id":1448},{"c":"sf","en":"Strict","tr":"katı, sert","id":1449},{"c":"fl","en":"Flow","tr":"akmak","id":1450},{"c":"pv","en":"Look back on/upon","tr":"geriye bakmak, hatırlamak","a":["Look back on","Look back upon"],"id":1451},{"c":"is","en":"Outcome","tr":"sonuç","id":1452},{"c":"fl","en":"Violate","tr":"ihlal, tecavüz etmek","id":1453},{"c":"sf","en":"Subtle","tr":"kurnaz, güç anlaşılan, gizli","id":1454},{"c":"is","en":"Participation","tr":"katılım","id":1455},{"c":"zr","en":"Similarly","tr":"benzer şekilde","id":1456},{"c":"fl","en":"Wonder","tr":"merak etmek","id":1457},{"c":"is","en":"Nominee","tr":"aday","id":1458},{"c":"ep","en":"Would-be","tr":"sözde, muhtemel","id":1459},{"c":"sf","en":"Thorough","tr":"tam, bütün","id":1460},{"c":"pv","en":"Take to","tr":"ısınmak, sempati duymak","id":1461},{"c":"fl","en":"Destroy","tr":"yıkmak","id":1462},{"c":"is","en":"Permanence","tr":"kalıcılık, süreklilik","id":1463},{"c":"fl","en":"Disturb","tr":"rahatsız etmek, karıştırmak","id":1464},{"c":"sf","en":"Threatening","tr":"tehditkar","id":1465},{"c":"is","en":"Precipitation","tr":"yağış","id":1466},{"c":"zr","en":"Drastically","tr":"şiddetli şekilde, sert biçimde","id":1467},{"c":"fl","en":"Stipulate","tr":"şart koşmak","id":1468},{"c":"sf","en":"Transient","tr":"kısa süreli, geçici","id":1469},{"c":"is","en":"Innundation","tr":"sel","id":1470},{"c":"pv","en":"Back up","tr":"desteklemek","id":1471},{"c":"fl","en":"Upgrade","tr":"yükseltmek","id":1472},{"c":"is","en":"Possession","tr":"mal, mülk, sahip olma","id":1473},{"c":"sf","en":"Straightforward","tr":"açık, anlaşılır","id":1474},{"c":"fl","en":"Undermine","tr":"baltalamak, zayıflatmak","id":1475},{"c":"is","en":"Predictor","tr":"kahin","id":1476},{"c":"zr","en":"Ingeniously","tr":"dahice","id":1477},{"c":"fl","en":"Exclude","tr":"hariç tutmak, çıkarmak","id":1478},{"c":"pv","en":"Carry away","tr":"alıp götürmek","id":1479},{"c":"sf","en":"Unpredictable","tr":"tahmin edilemez","id":1480},{"c":"is","en":"Opposition","tr":"muhalefet, itiraz","id":1481},{"c":"fl","en":"Recognize","tr":"tanımak, kabul etmek","id":1482},{"c":"ep","en":"Prior to","tr":"den önce","id":1483},{"c":"is","en":"Neglect","tr":"ihmal","id":1484},{"c":"sf","en":"Unreliable","tr":"güvenilmez","id":1485},{"c":"fl","en":"Care","tr":"bakmak, ilgilenmek","id":1486},{"c":"is","en":"Mistrust","tr":"güvensizlik","id":1487},{"c":"pv","en":"Sweep away","tr":"alıp götürmek, süpürmek","id":1488},{"c":"sf","en":"Unstable","tr":"kararsız, değişken","id":1489},{"c":"fl","en":"Consult","tr":"danışmak","id":1490},{"c":"zr","en":"Vehemently","tr":"şiddetle","id":1491},{"c":"is","en":"Order","tr":"düzen, sıra, emir","id":1492},{"c":"fl","en":"Preserve","tr":"korumak, muhafaza etmek","id":1493},{"c":"sf","en":"Voluntary","tr":"gönüllü, isteğe bağlı","id":1494},{"c":"is","en":"Peace","tr":"barış, huzur","id":1495},{"c":"fl","en":"Restore","tr":"onarmak","id":1496},{"c":"pv","en":"Call off","tr":"iptal etmek","id":1497},{"c":"is","en":"Predator","tr":"avcı, yırtıcı hayvan","id":1498},{"c":"sf","en":"Valid","tr":"geçerli","id":1499},{"c":"fl","en":"Comment","tr":"yorum yapmak","id":1500},{"c":"zr","en":"Superficially","tr":"yüzeysek, üstünkörü","id":1501},{"c":"is","en":"Preservation","tr":"koruma","id":1502},{"c":"fl","en":"Deliver","tr":"teslim etmek, dağıtmak","id":1503},{"c":"sf","en":"Virtuous","tr":"erdemli","id":1504},{"c":"ep","en":"Rather than","tr":"-den ziyade","id":1505},{"c":"is","en":"Pleasure","tr":"keyif, zevk","id":1506},{"c":"fl","en":"Ensure","tr":"sağlamak, temin etmek","id":1507},{"c":"pv","en":"Catch up","tr":"yetişmek, yakalamak","id":1508},{"c":"sf","en":"Wise","tr":"akıllı","id":1509},{"c":"is","en":"Price","tr":"fiyat, bedel","id":1510},{"c":"fl","en":"Expose","tr":"açığa çıkarmak","id":1511},{"c":"zr","en":"Sensibly","tr":"makul şekilde","id":1512},{"c":"is","en":"Productivity","tr":"üretkenlik, verim","id":1513},{"c":"sf","en":"Wide","tr":"geniş","id":1514},{"c":"fl","en":"Expose to","tr":"maruz bırakmak","id":1515},{"c":"is","en":"Race","tr":"yarış, ırk","id":1516},{"c":"pv","en":"Catch on","tr":"popüler olmak, tutulmak","id":1517},{"c":"fl","en":"Magnify","tr":"büyütmek","id":1518},{"c":"sf","en":"Worthy","tr":"değerli","id":1519},{"c":"is","en":"Record","tr":"rekor, kayıt","id":1520},{"c":"fl","en":"Gain","tr":"kazanmak, elde etmek","id":1521},{"c":"sf","en":"Worthless","tr":"değersiz","id":1522},{"c":"zr","en":"Additionally","tr":"ayrıca","id":1523},{"c":"is","en":"Resolution","tr":"teklif, öneri, karar","id":1524},{"c":"fl","en":"Perceive","tr":"algılamak","id":1525},{"c":"pv","en":"Come along","tr":"eşlik etmek, ortaya çıkmak","id":1526},{"c":"is","en":"Relative","tr":"akraba","id":1527},{"c":"fl","en":"Restrain","tr":"engellemek, sınırlamak","id":1528},{"c":"ep","en":"Instead of / In place of","tr":"yerine","a":["Instead of","In place of"],"id":1529},{"c":"sf","en":"Disabled","tr":"engelli","id":1530},{"c":"is","en":"Resource","tr":"kaynak","id":1531},{"c":"fl","en":"Train","tr":"eğitmek","id":1532},{"c":"sf","en":"Applicable","tr":"uygulanabilir","id":1533},{"c":"fl","en":"Resume","tr":"yeniden başlamak","id":1534},{"c":"is","en":"Reward","tr":"ödül","id":1535},{"c":"zr","en":"Relevantly","tr":"ilgili olarak","id":1536},{"c":"pv","en":"Die out","tr":"yok olmak","id":1537},{"c":"sf","en":"Measurable","tr":"ölçülebilir","id":1538},{"c":"fl","en":"Reinstate","tr":"eski görevine getirmek","id":1539},{"c":"is","en":"Right","tr":"hak","id":1540},{"c":"fl","en":"Applaud","tr":"alkışlamak","id":1541},{"c":"is","en":"Rotation","tr":"dönüş, devir","id":1542},{"c":"sf","en":"Irreversible","tr":"geri döndürülemez","id":1543},{"c":"fl","en":"Announce","tr":"ilan etmek","id":1544},{"c":"pv","en":"Do away with","tr":"yürürlükten kaldırmak","id":1545},{"c":"is","en":"Request","tr":"rica, istek","id":1546},{"c":"zr","en":"Successively","tr":"ard arda","id":1547},{"c":"sf","en":"Emphatic","tr":"güçlü, vurgulu","id":1548},{"c":"fl","en":"Attain","tr":"ulaşmak, başarmak","id":1549},{"c":"is","en":"Remedy","tr":"ilaç, çare","id":1550},{"c":"ep","en":"For example / For instance / To illustrate","tr":"örneğin","a":["For example","For instance","To illustrate"],"id":1551},{"c":"sf","en":"Predominant","tr":"baskın, en etkili","id":1552},{"c":"fl","en":"Base on","tr":"dayandırmak","id":1553},{"c":"is","en":"Refinement","tr":"arıtma","id":1554},{"c":"pv","en":"Put into effect/force","tr":"yürürlüğe koymak","a":["Put into effect","Put into force"],"id":1555},{"c":"fl","en":"Blame for","tr":"suçlamak","id":1556},{"c":"is","en":"Rule","tr":"kural","id":1557},{"c":"sf","en":"Entire","tr":"tüm","id":1558},{"c":"zr","en":"Unfairly","tr":"adaletsizce","id":1559},{"c":"fl","en":"Defend","tr":"savunmak","id":1560},{"c":"is","en":"Progression","tr":"ilerleme","id":1561},{"c":"sf","en":"Handicapped","tr":"engelli","id":1562},{"c":"fl","en":"Doubt","tr":"şüphe duymak","id":1563},{"c":"is","en":"Promise","tr":"söz, vaat","id":1564},{"c":"pv","en":"Come into effect/force","tr":"yürürlüğe girmek","a":["Come into effect","Come into force"],"id":1565},{"c":"fl","en":"Disappoint","tr":"hayal kırıklığına uğratmak, üzmek","id":1566},{"c":"sf","en":"Allied","tr":"müttefik","id":1567},{"c":"is","en":"Proposal","tr":"öneri","id":1568},{"c":"zr","en":"Violently","tr":"şiddetle","id":1569},{"c":"fl","en":"Correspond to","tr":"benzemek, eşleşmek","id":1570},{"c":"is","en":"Rejection","tr":"red","id":1571},{"c":"sf","en":"Abrupt","tr":"ani","id":1572},{"c":"fl","en":"Correspond","tr":"haberleşmek","id":1573},{"c":"ep","en":"In response to","tr":"karşılık olarak, cevaben","id":1574},{"c":"pv","en":"Bring up","tr":"yetiştirmek, gündeme getirmek","id":1575},{"c":"is","en":"Quotation","tr":"alıntı, fiyat teklifi","id":1576},{"c":"sf","en":"Weak","tr":"zayıf","id":1577},{"c":"fl","en":"Employ","tr":"işe almak, kullanmak","id":1578},{"c":"is","en":"Quality","tr":"nitelik, kalite","id":1579},{"c":"fl","en":"Express","tr":"ifade etmek","id":1580},{"c":"zr","en":"Reliably","tr":"güvenilir şekilde","id":1581},{"c":"sf","en":"Versatile","tr":"çok yönlü","id":1582},{"c":"is","en":"Province","tr":"il","id":1583},{"c":"pv","en":"Get off","tr":"inmek, çıkarmak","id":1584},{"c":"fl","en":"Fetch","tr":"gidip getirmek","id":1585},{"c":"is","en":"Punishment","tr":"ceza","id":1586},{"c":"sf","en":"Autonomous","tr":"özerk","id":1587},{"c":"fl","en":"Illuminate","tr":"aydınlatmak","id":1588},{"c":"is","en":"Relief","tr":"rahatlama, kurtarma","id":1589},{"c":"fl","en":"Illustrate","tr":"resmetmek, göstermek","id":1590},{"c":"sf","en":"Trivial","tr":"önemsiz","id":1591},{"c":"zr","en":"Respectfully","tr":"saygılı şekilde","id":1592},{"c":"is","en":"Removal","tr":"çıkarma, ortadan kaldırma","id":1593},{"c":"pv","en":"Carry out","tr":"yapmak, yürütmek","id":1594},{"c":"fl","en":"Justify","tr":"aklamak, doğrulamak","id":1595},{"c":"sf","en":"Unaccountable","tr":"açıklanamaz","id":1596},{"c":"is","en":"Repetition","tr":"tekrar","id":1597},{"c":"ep","en":"Including","tr":"dahil","id":1598},{"c":"fl","en":"Prescribe","tr":"reçete yazmak","id":1599},{"c":"is","en":"Reputation","tr":"ün","id":1600},{"c":"sf","en":"Conspicuous","tr":"apaçık, belli","id":1601},{"c":"fl","en":"Observe","tr":"gözlemlemek","id":1602},{"c":"pv","en":"Turn over","tr":"devretmek, vermek","id":1603},{"c":"zr","en":"Selectively","tr":"seçerek","id":1604},{"c":"is","en":"Retirement","tr":"emeklilik","id":1605},{"c":"fl","en":"Obtain","tr":"elde etmek, almak","id":1606},{"c":"sf","en":"Compulsory","tr":"zorunlu, mecburi","id":1607},{"c":"is","en":"Selection","tr":"seçim","id":1608},{"c":"fl","en":"Recall","tr":"hatırlamak, geri çağırmak","id":1609},{"c":"sf","en":"Impetuous","tr":"aceleci","id":1610},{"c":"is","en":"Slavery","tr":"kölelik","id":1611},{"c":"pv","en":"Turn up","tr":"açmak, çıkagelmek","id":1612},{"c":"fl","en":"Recommend","tr":"tavsiye etmek","id":1613},{"c":"is","en":"Size","tr":"boyut, büyüklük","id":1614},{"c":"zr","en":"Acutely","tr":"çok güçlü şekilde","id":1615},{"c":"sf","en":"Senior","tr":"kıdemli","id":1616},{"c":"fl","en":"Request","tr":"rica etmek, istemek","id":1617},{"c":"is","en":"Service","tr":"hizmet","id":1618},{"c":"fl","en":"Resent","tr":"gücenmek, kırılmak","id":1619},{"c":"ep","en":"At least","tr":"en azından, hiç olmazsa","id":1620},{"c":"sf","en":"Bright","tr":"parlak, zeki","id":1621},{"c":"pv","en":"Run through","tr":"içinden geçmek","id":1622},{"c":"is","en":"Sense","tr":"duyu, anlam","id":1623},{"c":"fl","en":"Rank","tr":"yer almak, sayılmak","id":1624},{"c":"sf","en":"Interested","tr":"ilgili, meraklı","id":1625},{"c":"is","en":"Step","tr":"adım, basamak","id":1626},{"c":"fl","en":"Stamp","tr":"mühürlemek, damgalamak, (para) basmak","id":1627},{"c":"zr","en":"Absolutely","tr":"kesinlikle, tamamen","id":1628},{"c":"is","en":"Store","tr":"depo, dükkan","id":1629},{"c":"fl","en":"Spoil","tr":"bozmak","id":1630},{"c":"sf","en":"Expected","tr":"beklenen","id":1631},{"c":"pv","en":"Put down","tr":"azaltmak, bastırmak","id":1632},{"c":"is","en":"Struggle","tr":"çaba","id":1633},{"c":"fl","en":"Unearth","tr":"ortaya çıkarmak","id":1634},{"c":"sf","en":"Different","tr":"farlı","id":1635},{"c":"is","en":"Subject","tr":"konu, özne, teba","id":1636},{"c":"fl","en":"Refund","tr":"geri ödemek","id":1637},{"c":"zr","en":"Tightly","tr":"sıkıca","id":1638},{"c":"sf","en":"Foreign","tr":"yabancı","id":1639},{"c":"is","en":"Surgery","tr":"ameliyat","id":1640},{"c":"fl","en":"Specify","tr":"belirlemek","id":1641},{"c":"pv","en":"Turn off","tr":"kapatmak","id":1642},{"c":"ep","en":"In case of / In the event of","tr":"durumunda","a":["In case of","In the event of"],"id":1643},{"c":"is","en":"Sustainability","tr":"sürdürülebilirlik","id":1644},{"c":"fl","en":"Store","tr":"depolamak","id":1645},{"c":"sf","en":"Public","tr":"ortak, umumi","id":1646},{"c":"is","en":"Share","tr":"pay, hisse","id":1647},{"c":"fl","en":"Transform (into)","tr":"dönüştürmek","a":["Transform (into)","Transform","Transform into"],"id":1648},{"c":"zr","en":"Arguably","tr":"tartışılır şekilde","id":1649},{"c":"sf","en":"Far","tr":"uzak, ötede","id":1650},{"c":"pv","en":"Bring into","tr":"getirmek, içine karıştırmak","id":1651},{"c":"is","en":"Section","tr":"bölüm","id":1652},{"c":"fl","en":"Stage","tr":"sahnelemek","id":1653},{"c":"fl","en":"Scatter","tr":"dağıtmak, saçmak","id":1654},{"c":"sf","en":"Close","tr":"yakın","id":1655},{"c":"is","en":"Troop","tr":"askeri birlik","id":1656},{"c":"fl","en":"Suspend","tr":"ertelemek, askıya almak","id":1657},{"c":"is","en":"Situation","tr":"durum","id":1658},{"c":"sf","en":"Related","tr":"bağlantılı, ilişkili","id":1659},{"c":"pv","en":"Call for","tr":"gerektirmek, uğramak","id":1660},{"c":"zr","en":"Narrowly","tr":"sıkı sıkıya","id":1661},{"c":"fl","en":"Treat","tr":"tedavi etmek, davranmak, ele almak","id":1662},{"c":"is","en":"Solidarity","tr":"dayanışma, birlik","id":1663},{"c":"sf","en":"Commercial","tr":"ticari","id":1664},{"c":"fl","en":"Signify","tr":"göstermek, belirtmek","id":1665},{"c":"is","en":"Starvation","tr":"açlık, açlıktan ölme","id":1666},{"c":"ep","en":"In particular / Particularly / Especially / Notably","tr":"özellikle","a":["In particular","Particularly","Especially","Notably"],"id":1667},{"c":"fl","en":"Trust","tr":"güvenmek","id":1668},{"c":"sf","en":"Global","tr":"küresel","id":1669},{"c":"is","en":"Submission","tr":"boyun eğme, sunma","id":1670},{"c":"pv","en":"Send for","tr":"çağırmak","id":1671},{"c":"zr","en":"Assertively","tr":"iddialı şekilde","id":1672},{"c":"fl","en":"Transmit","tr":"iletmek, nakletmek","id":1673},{"c":"is","en":"Substance","tr":"madde","id":1674},{"c":"sf","en":"Wealthy","tr":"zengin","id":1675},{"c":"fl","en":"Book","tr":"yer ayırtmak","id":1676},{"c":"is","en":"Suitability","tr":"uygunluk","id":1677},{"c":"pv","en":"Give off","tr":"salmak, yayamak","id":1678},{"c":"sf","en":"Rural","tr":"kırsal","id":1679},{"c":"fl","en":"Market","tr":"pazarlamak","id":1680},{"c":"is","en":"Tradition","tr":"gelenek","id":1681},{"c":"fl","en":"Shrink","tr":"daralmak, küçülmek","id":1682},{"c":"zr","en":"Blatantly","tr":"bariz şekilde","id":1683},{"c":"is","en":"Survey","tr":"araştırma","id":1684},{"c":"sf","en":"Unusual","tr":"alışılmadık, olağan dışı","id":1685},{"c":"fl","en":"Emphasize","tr":"vurgulamak","id":1686},{"c":"is","en":"Treaty","tr":"anlaşma","id":1687},{"c":"pv","en":"Go through","tr":"yaşamak, başından geçmek","id":1688},{"c":"ep","en":"A variety of / A diversity of / A range of","tr":"çeşitli, bir dizi","a":["A variety of","A diversity of","A range of"],"id":1689},{"c":"sf","en":"Confined","tr":"sınırlı, kısıtlı","id":1690},{"c":"fl","en":"Share","tr":"paylaşmak","id":1691},{"c":"is","en":"Scarcity","tr":"kıtlık, azlık","id":1692},{"c":"fl","en":"Surpass","tr":"aşmak, geçmek","id":1693},{"c":"sf","en":"Ordinary","tr":"sıradan, normal","id":1694},{"c":"is","en":"Similarity","tr":"benzerlik","id":1695},{"c":"zr","en":"Briefly","tr":"kısaca","id":1696},{"c":"fl","en":"Trace","tr":"izini sürmek, takip etmek","id":1697},{"c":"pv","en":"Sort out","tr":"çözmek","id":1698},{"c":"is","en":"Structure","tr":"yapı, bina","id":1699},{"c":"sf","en":"Military","tr":"askeri","id":1700},{"c":"fl","en":"Seize","tr":"ele geçirmek, kapmak","id":1701},{"c":"is","en":"Supplier","tr":"tedarikçi, satıcı","id":1702},{"c":"sf","en":"Lunar","tr":"ayla ilgili","id":1703},{"c":"fl","en":"Unite","tr":"birleştirmek","id":1704},{"c":"is","en":"Surplus","tr":"fazlalık","id":1705},{"c":"zr","en":"Attentively","tr":"dikkatlice","id":1706},{"c":"pv","en":"Fall off","tr":"düşmek, damlamak","id":1707},{"c":"fl","en":"Fire","tr":"işten atmak, ateş etmek","id":1708},{"c":"sf","en":"Continental","tr":"kıtasal","id":1709},{"c":"is","en":"Susceptibility","tr":"hassasiyet, savunmasızlık","id":1710},{"c":"fl","en":"Shape","tr":"şekillendirmek","id":1711},{"c":"ep","en":"In order to / So as to / With a view to / To","tr":"-mek için","a":["In order to","So as to","With a view to","To"],"id":1712},{"c":"is","en":"Title","tr":"başlık, unvan","id":1713},{"c":"sf","en":"Traditional","tr":"geleneksel","id":1714},{"c":"fl","en":"Shift","tr":"değiştirmek","id":1715},{"c":"is","en":"Unemployment","tr":"işsizlik","id":1716},{"c":"pv","en":"Do with","tr":"ihtiyacı olmak","id":1717},{"c":"zr","en":"Coincidentally","tr":"tesadüfen","id":1718},{"c":"sf","en":"Determined","tr":"kararlı, belirlenmiş","id":1719},{"c":"fl","en":"Submit","tr":"sunmak/boyun eğmek","id":1720},{"c":"is","en":"Century","tr":"yüzyıl","id":1721},{"c":"fl","en":"Select","tr":"seçmek","id":1722},{"c":"sf","en":"Prosperous","tr":"zengin","id":1723},{"c":"is","en":"Fact","tr":"gerçek, olgu","id":1724},{"c":"fl","en":"Sweep","tr":"silmek, süpürmek","id":1725},{"c":"pv","en":"Be fed up with","tr":"usanmak, bıkmak","id":1726},{"c":"is","en":"Body","tr":"gövde, ceset, kuruluş","id":1727},{"c":"sf","en":"Urban","tr":"kentsel","id":1728},{"c":"fl","en":"Act","tr":"davranmak, hareket etmek","id":1729},{"c":"zr","en":"Brutally","tr":"acımasızca","id":1730},{"c":"is","en":"Cell","tr":"hücre","id":1731},{"c":"fl","en":"Close","tr":"kapamak, son vermek","id":1732},{"c":"sf","en":"Medieval","tr":"ortaçağ","id":1733},{"c":"is","en":"Epoch","tr":"çağ, devir","id":1734},{"c":"ep","en":"Similar to / Akin to","tr":"benzer","a":["Similar to","Akin to"],"id":1735},{"c":"fl","en":"Publish","tr":"yayınlamak","id":1736},{"c":"pv","en":"Get along with","tr":"ile anlaşmak, iyi geçinmek","id":1737},{"c":"sf","en":"Primary","tr":"başlıca, ana","id":1738},{"c":"is","en":"Trade","tr":"ticaret","id":1739},{"c":"fl","en":"Call","tr":"adlandırmak, çağırmak","id":1740},{"c":"zr","en":"Dependently","tr":"bağlı olarak","id":1741},{"c":"is","en":"Knowledge","tr":"bilgi","id":1742},{"c":"sf","en":"Huge","tr":"büyük","id":1743},{"c":"fl","en":"Return","tr":"geri dönmek","id":1744},{"c":"pv","en":"Get around","tr":"gezinmek","id":1745},{"c":"is","en":"Union","tr":"birlik, sendika","id":1746},{"c":"fl","en":"Manage","tr":"yönetmek","id":1747},{"c":"sf","en":"Coastal","tr":"kıyısal","id":1748},{"c":"is","en":"Present","tr":"hediye","id":1749},{"c":"fl","en":"Manage to","tr":"başarmak","id":1750},{"c":"zr","en":"Strictly","tr":"sıkıca","id":1751},{"c":"sf","en":"Useful","tr":"kullanışlı","id":1752},{"c":"is","en":"Case","tr":"vaka, durum, dava","id":1753},{"c":"fl","en":"Fail","tr":"başarısız olmak","id":1754},{"c":"pv","en":"Get away","tr":"kaçmak, kurtulmak","id":1755},{"c":"is","en":"Production","tr":"üretim","id":1756},{"c":"fl","en":"Process","tr":"işlemek","id":1757},{"c":"sf","en":"Creative","tr":"yaratıcı","id":1758},{"c":"ep","en":"The same … as","tr":"ile aynı","nt":1,"id":1759},{"c":"is","en":"Commerce","tr":"ticaret","id":1760},{"c":"fl","en":"Loose","tr":"gevşetmek, serbest bırakmak","id":1761},{"c":"sf","en":"Breathtaking","tr":"nefes kesici","id":1762},{"c":"zr","en":"Relentlessly","tr":"bıkmadan usanmadan, acımasızca","id":1763},{"c":"is","en":"Instance","tr":"örnek, vaka","id":1764},{"c":"fl","en":"Aid","tr":"yardım etmek","id":1765},{"c":"pv","en":"Get up","tr":"kalkmak","id":1766},{"c":"sf","en":"Stunning","tr":"şaşırtıcı","id":1767},{"c":"is","en":"Empire","tr":"imparatorluk","id":1768},{"c":"fl","en":"Realize","tr":"fark etmek, yerine getirmek","id":1769}];
+var N=DATA.length;
+var CATN={zr:'Zarf',sf:'Sıfat',fl:'Fiil',is:'İsim',pv:'Phrasal verb',ep:'Edat kalıbı'};
+var CATS=['fl','is','sf','zr','pv','ep'];
+var INT=[0,1,3,7,14,30,60];
+var LS='yds-kelime-defteri-v1';
+var TTS=('speechSynthesis' in window);
+var ICON={
+  spk:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>',
+  x:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>'
+};
+
+/* ---------- helpers ---------- */
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function rnd(n){return Math.floor(Math.random()*n)}
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=rnd(i+1);var t=a[i];a[i]=a[j];a[j]=t}return a}
+function today(){var d=new Date();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)}
+function fmtDate(n){return new Date(n*864e5).toLocaleDateString('tr-TR',{day:'numeric',month:'long',timeZone:'UTC'})}
+function fmtWd(n){return new Date(n*864e5).toLocaleDateString('tr-TR',{weekday:'short',timeZone:'UTC'})}
+function fold(s){return s.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/ı/g,'i')}
+function norm(s){return s.replace(/[İI]/g,'i').replace(/ı/g,'i').toLowerCase().replace(/[^a-z]/g,'')}
+function chunk(arr,n){var out=[];for(var i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));if(out.length>1&&out[out.length-1].length<3){var l=out.pop();out[out.length-1]=out[out.length-1].concat(l)}return out}
+function main(it){return (it.a||[it.en])[0].replace(/\s*\([^)]*\)/g,'').trim()}
+function sayText(it){return (it.a||[it.en])[0].replace(/[()]/g,'')}
+function speak(t){
+  if(!TTS)return;
+  try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;speechSynthesis.speak(u)}catch(e){}
+}
+DATA.forEach(function(o){o._f=fold(o.en+' '+o.tr)});
+var byCat={};DATA.forEach(function(o){(byCat[o.c]=byCat[o.c]||[]).push(o)});
+
+/* ---------- state ---------- */
+function fresh(){return {v:1,t:0,start:today(),pace:20,ptr:0,days:[],w:{},st:{last:0,n:0,best:0},h:{},snd:1,hs:0}}
+var S=fresh();
+try{var raw=localStorage.getItem(LS);if(raw){S=Object.assign(fresh(),JSON.parse(raw))}}catch(e){}
+var dbDoc=null,remoteTimer=null,remoteBusy=false,remoteDirty=false,syncNote='';
+function commit(){
+  S.t=Date.now();
+  try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}
+  if(dbDoc){remoteDirty=true;clearTimeout(remoteTimer);remoteTimer=setTimeout(pushRemote,1500)}
+}
+function pushRemote(){
+  if(!dbDoc||remoteBusy||!remoteDirty)return;
+  remoteBusy=true;remoteDirty=false;
+  dbDoc.set({s:JSON.stringify(S),t:S.t}).then(function(){syncNote='ok'},function(){syncNote='err'}).then(function(){
+    remoteBusy=false;if(remoteDirty){clearTimeout(remoteTimer);remoteTimer=setTimeout(pushRemote,1500)}
+    var el=$('#sync');if(el)el.innerHTML=syncText();
+  });
+}
+function syncText(){
+  if(!dbDoc)return 'İlerleme bu tarayıcıda kayıtlı. Başka cihaza geçmek için aşağıdan yedek dosyası alabilirsin.';
+  if(syncNote==='err')return 'Bu cihazda kayıtlı. Hesabına yedekleme şu an olmadı, sonra tekrar dener.';
+  return 'Bu cihazda kayıtlı ve hesabına yedekleniyor. Başka bir cihazdan aynı bağlantıyla devam edebilirsin.';
+}
+function initSync(){
+  if(!(window.claude&&window.claude.use))return;
+  Promise.all([window.claude.use('user'),window.claude.use('db')]).then(function(r){
+    var user=r[0],db=r[1];if(!user||!db)return;
+    return user.id().then(function(id){
+      if(!id)return;
+      var doc=db.doc('data/users/'+id+'/progress');
+      return doc.get().then(function(snap){
+        dbDoc=doc;
+        if(snap.exists){
+          var d=snap.data();
+          if(d&&d.s&&d.t>S.t&&!sess){
+            try{S=Object.assign(fresh(),JSON.parse(d.s));try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){}render()}catch(e){}
+          }else if(d&&d.t<S.t){commit()}
+        }else if(S.t>0){commit()}
+        syncNote='ok';var el=$('#sync');if(el)el.innerHTML=syncText();
+      });
+    });
+  }).catch(function(){dbDoc=null});
+}
+function hist(T){return S.h[T]||(S.h[T]={n:0,r:0,c:0})}
+function touchStreak(){
+  var T=today();if(S.st.last===T)return;
+  S.st.n=(S.st.last===T-1)?S.st.n+1:1;S.st.last=T;S.st.best=Math.max(S.st.best,S.st.n);
+}
+function streakNow(){var T=today();return (S.st.last===T||S.st.last===T-1)?S.st.n:0}
+function stOf(id){var w=S.w[id];return !w?0:(w[0]>=4?2:1)}
+function dueList(){
+  var T=today();
+  return Object.keys(S.w).map(Number).filter(function(id){return S.w[id][1]<=T}).sort(function(a,b){return S.w[a][1]-S.w[b][1]||S.w[a][0]-S.w[b][0]});
+}
+function srsResult(id,ok){
+  var T=today(),w=S.w[id];if(!w)return;
+  w[3]++;w[5]=T;hist(T).r++;
+  if(ok){var b=Math.min(w[0]+1,6);w[0]=b;w[1]=T+INT[b];hist(T).c++}
+  else{w[4]++;w[0]=1;w[1]=T+1}
+}
+function introduce(ids){
+  var T=today();
+  ids.forEach(function(id){if(!S.w[id])S.w[id]=[1,T+1,T,0,0,T]});
+  S.ptr=Math.max(S.ptr,ids[ids.length-1]+1);
+  S.days.push({d:T,a:ids[0],b:ids[ids.length-1]});
+  hist(T).n+=ids.length;touchStreak();commit();
+}
+function bumpWrong(id){if(S.w[id])S.w[id][4]++}
+
+/* ---------- question helpers ---------- */
+function toks(s){return s.toLowerCase().split(/[,;]/).map(function(x){return x.replace(/\(.*?\)/g,'').trim()}).filter(Boolean)}
+function makeOpts(it,key,k){
+  k=k||4;
+  var mine={};toks(it.tr).forEach(function(t){mine[t]=1});
+  var pool=byCat[it.c],seenEn={},seenTr={},cands=[],guard=0;
+  seenEn[it.en.toLowerCase()]=1;seenTr[it.tr]=1;
+  while(cands.length<14&&guard++<250){
+    var c=pool[rnd(pool.length)];
+    if(c===it||seenEn[c.en.toLowerCase()]||seenTr[c.tr])continue;
+    if(toks(c.tr).some(function(t){return mine[t]}))continue;
+    seenEn[c.en.toLowerCase()]=1;seenTr[c.tr]=1;cands.push(c);
+  }
+  var L=(key==='tr'?it.tr:it.en).length;
+  cands.sort(function(a,b){
+    return Math.abs((key==='tr'?a.tr:a.en).length-L)-Math.abs((key==='tr'?b.tr:b.en).length-L)+(Math.random()-.5)*6;
+  });
+  return shuffle([it].concat(cands.slice(0,k)));
+}
+function checkTyped(it,val){var v=norm(val);if(!v)return false;return (it.a||[it.en]).some(function(x){return norm(x)===v})}
+function variants(it){
+  var seen={},out=[];
+  (it.a||[it.en]).forEach(function(x){var m=x.replace(/\s*\([^)]*\)/g,'').trim();var k=norm(m);if(k&&!seen[k]){seen[k]=1;out.push(m)}});
+  return out;
+}
+function maskWord(w,lv){
+  var n=lv===1?1:(lv===2?2:Math.ceil(w.length/2));
+  return w.split('').map(function(ch,i){return /[A-Za-z]/.test(ch)?(i<n?ch:'_'):ch}).join(' ');
+}
+function slotText(it,lv){
+  var vs=variants(it);
+  if(lv===0){
+    if(vs.length>1)return vs.length+' farklı ifadeden biri yeterli';
+    return vs[0].split(' ').map(function(w){return w.replace(/[A-Za-z]/g,'_').split('').join(' ')}).join('   ');
+  }
+  return vs.slice(0,6).map(function(v){return v.split(' ').map(function(w){return maskWord(w,lv)}).join('   ')}).join('  /  ');
+}
+function kindFor(id){
+  var b=S.w[id][0],it=DATA[id],r=Math.random();
+  if(b<=2)return r<.5?'e2t':'t2e';
+  if(b<=4)return (it.nt||r<.5)?'t2e':'type';
+  return it.nt?'t2e':'type';
+}
+
+/* ---------- screen plumbing ---------- */
+var view='bugun',sess=null,cur={},timers=[];
+var lst={q:'',cat:'all',st:'all',n:80};
+var gsrc={src:'learned',cat:'all'};
+function stage(h){$('#view').innerHTML=h}
+function later(fn,ms){var t=setTimeout(fn,ms);timers.push(t);return t}
+function clearTimers(){timers.forEach(clearTimeout);timers=[];if(sess&&sess.cleanup){try{sess.cleanup()}catch(e){}sess.cleanup=null}}
+function sessTop(label,i,n){
+  var step=(sess&&sess.kind==='lesson')?'<span class="mono">Adım '+(sess.i+1)+'/'+sess.steps.length+'</span>':'';
+  return '<div class="stbar"><button class="ico" data-act="quit" aria-label="Çık">'+ICON.x+'</button><div class="stmid"><div class="stlab"><span>'+esc(label)+(step?' · ':'')+step+'</span><span class="mono">'+i+'/'+n+'</span></div><div class="bar"><i style="width:'+Math.round((i-1)/n*100)+'%"></i></div></div></div>';
+}
+function nextStep(){
+  if(!sess)return;
+  $('#top').hidden=true;
+  clearTimers();
+  sess.i++;
+  var f=sess.steps[sess.i];
+  if(f)f();else endSession();
+}
+function endSession(){
+  var home=(sess&&sess.kind==='game')?'oyun':'bugun';
+  clearTimers();commit();sess=null;view=home;
+  if(location.hash!=='#'+home)location.hash='#'+home;
+  render();window.scrollTo(0,0);
+}
+
+/* ---------- top header & render ---------- */
+function drawTop(){
+  var n=streakNow();
+  $('#top').innerHTML='<h1>YDS Kelime Defteri</h1><span class="pill mono">'+(n?n+' gün seri':'seri yok')+'</span>';
+  $('#top').hidden=!!sess;
+}
+function render(){
+  document.body.classList.toggle('insess',!!sess);
+  if(sess)return;
+  cur={};
+  var fn={bugun:vToday,oyun:vGames,liste:vList,plan:vPlan,durum:vStats}[view]||vToday;
+  drawTop();
+  stage(fn());
+  $$('.tab').forEach(function(t){if(t.dataset.v===view)t.setAttribute('aria-current','page');else t.removeAttribute('aria-current')});
+  if(cur.post)cur.post();
+}
+function setView(){
+  var h=(location.hash||'#bugun').slice(1);
+  view=['bugun','oyun','liste','plan','durum'].indexOf(h)>=0?h:'bugun';
+  if(!sess){render();window.scrollTo(0,0)}
+}
+window.addEventListener('hashchange',setView);
+document.addEventListener('click',function(e){
+  var el=e.target.closest('[data-act]');if(!el)return;
+  var a=el.dataset.act;
+  if(a==='say'){speak(sayText(DATA[+el.dataset.id]));return}
+  if(a==='quit'){$('#qm').hidden=false;return}
+  if(a==='qno'){$('#qm').hidden=true;return}
+  if(a==='qyes'){$('#qm').hidden=true;clearTimers();commit();sess=null;render();window.scrollTo(0,0);return}
+  if(cur.click)cur.click(a,el,e);
+});
+document.addEventListener('keydown',function(e){if(cur.key)cur.key(e)});
+document.addEventListener('submit',function(e){e.preventDefault();if(cur.submit)cur.submit(e)});
+document.addEventListener('input',function(e){if(cur.input)cur.input(e)});
+document.addEventListener('toggle',function(e){
+  var d=e.target;if(d&&d.dataset&&d.dataset.day!==undefined&&d.open&&!d.dataset.ready){d.dataset.ready='1';var b=$('.dbody',d);if(b)b.innerHTML=dayBody(+d.dataset.a,+d.dataset.b)}
+},true);
+
+/* ---------- TODAY ---------- */
+function vToday(){
+  var T=today(),due=dueList(),last=S.days.length?S.days[S.days.length-1]:null,doneToday=!!(last&&last.d===T);
+  var remaining=N-S.ptr,nNew=Math.min(S.pace,remaining);
+  var dayNo=S.days.length+(doneToday?0:1);
+  var dueCap=Math.min(due.length,40);
+  var est=Math.round(nNew*0.7+dueCap*0.2);
+  var learned=Object.keys(S.w).length;
+  var first=!S.days.length;
+  cur.click=function(a){
+    if(a==='lesson'||a==='extra')startLesson();
+    else if(a==='review')startReview();
+  };
+  var h='<section class="hero"><p class="eyebrow">'+fmtDate(T)+(remaining?' · gün '+dayNo:'')+'</p>';
+  if(!remaining&&!due.length){
+    h+='<h2>Listeyi bitirdin.</h2><p class="lead">Tüm kelimeler tanıştırıldı ve tekrar bekleyen yok. Oyun sekmesinden pekiştirmeye devam edebilirsin.</p></section>';
+  }else{
+    h+='<h2>'+(doneToday?'Bugünkü ders tamam.':(first?'İlk dersin hazır.':'Bugünün dersi hazır.'))+'</h2>';
+    h+='<p class="lead">'+(nNew?nNew+' yeni kelime':'Yeni kelime kalmadı')+(dueCap?' + '+dueCap+' tekrar':'')+(!doneToday&&(nNew||dueCap)?' · yaklaşık '+est+' dk':'')+'</p>';
+    if(!doneToday&&nNew){h+='<button class="btn wide" data-act="lesson">'+(first?'İlk dersi başlat':'Dersi başlat')+'</button>'}
+    if(doneToday&&nNew){h+='<button class="btn ghost wide" data-act="extra">İstersen bir ders daha yap</button><p class="note">Günde tek yeni parti en iyi sonucu verir. Tekrarlar aralıklı gelir.</p>'}
+    h+='</section>';
+  }
+  h+='<div class="stack">';
+  if(first){
+    h+='<div class="card"><h3 class="sec-h">Ders nasıl ilerler</h3><div class="steps3"><div><b>Tanış</b>Kelimeyi gör, dinle, sesli söyle.</div><div><b>Dene</b>Eşleştir, şık seç, yaz.</div><div><b>Tekrar et</b>Yarın, 3, 7, 14 gün sonra yeniden gelir.</div></div></div>';
+  }
+  if(due.length){
+    h+='<div class="card"><h3 class="sec-h">Tekrar bekleyen: '+due.length+' kelime</h3><p class="coach">Unutmaya başladığın anda sorulur. Her seferde en fazla 40 tanesi gelir.</p><div class="actions"><button class="btn ghost" data-act="review">Sadece tekrar yap</button></div></div>';
+  }else if(S.ptr){
+    var tm=Object.keys(S.w).filter(function(id){return S.w[id][1]<=T+1}).length;
+    h+='<div class="card"><h3 class="sec-h">Bekleyen tekrar yok</h3><p class="coach">Yarın '+tm+' kelime tekrar için gelecek.</p></div>';
+  }
+  if(nNew){
+    var ids=[];for(var i=S.ptr;i<S.ptr+nNew;i++)ids.push(i);
+    h+='<div class="card"><details><summary><b>'+(doneToday?'Sıradaki kelimeler':'Bugünün kelimeleri')+'</b></summary><div class="wchips">'+ids.map(function(id){return '<span>'+esc(DATA[id].en)+'</span>'}).join('')+'</div></details></div>';
+  }
+  h+='<div class="card"><div class="stlab"><span>İlerleme</span><span class="mono">'+learned+' / '+N+'</span></div><div class="bar" style="margin-top:8px"><i style="width:'+Math.round(learned/N*100)+'%"></i></div></div>';
+  h+='</div>';
+  return h;
+}
+
+/* ---------- lesson & review flow ---------- */
+function startLesson(){
+  var ids=[];for(var i=S.ptr;i<Math.min(N,S.ptr+S.pace);i++)ids.push(i);
+  if(!ids.length)return;
+  var due=dueList().slice(0,40);
+  sess={kind:'lesson',steps:[],i:-1,stats:{ok:0,tot:0,newN:ids.length,rev:0}};
+  if(due.length)sess.steps.push(function(){runReview(due,'Tekrar')});
+  sess.steps.push(function(){stepMeet(ids)},function(){stepMatch(ids)},function(){stepMC(ids)},function(){stepType(ids)},function(){stepSay(ids)},function(){stepFinish()});
+  document.body.classList.add('insess');window.scrollTo(0,0);
+  nextStep();
+}
+function startReview(){
+  var due=dueList().slice(0,40);if(!due.length)return;
+  sess={kind:'review',steps:[],i:-1,stats:{ok:0,tot:0,newN:0,rev:due.length}};
+  sess.steps.push(function(){runReview(due,'Tekrar')},function(){stepFinish()});
+  document.body.classList.add('insess');window.scrollTo(0,0);
+  nextStep();
+}
+function runReview(list,title){
+  var items=shuffle(list.map(function(id){return {id:id,kind:kindFor(id)}}));
+  sess.stats.rev=list.length;
+  runQuiz({title:title,items:items,
+    onFirst:function(it,ok){srsResult(it.id,ok);sess.stats.tot++;if(ok)sess.stats.ok++},
+    after:function(){touchStreak();commit();nextStep()}});
+}
+
+/* step: meet */
+function stepMeet(ids){
+  var k=0;
+  function draw(){
+    var it=DATA[ids[k]];
+    stage(sessTop('Tanış',k+1,ids.length)+
+      '<div class="card flash"><span class="tag">'+CATN[it.c]+'</span><div class="big"><span class="hl">'+esc(it.en)+'</span></div><p class="mean">'+esc(it.tr)+'</p>'+
+      (TTS?'<button class="btn ghost sm" data-act="say" data-id="'+it.id+'">'+ICON.spk+' Dinle</button>':'')+
+      '<p class="coach">Kelimeyi duy, sonra yüksek sesle iki kez tekrar et. Anlamını da söyle.</p></div>'+
+      '<div class="actions"><button class="btn ghost" data-act="prev"'+(k?'':' disabled')+'>Geri</button><button class="btn" data-act="next">'+(k===ids.length-1?'Tanışma bitti':'Sonraki')+'</button></div>');
+    if(S.snd)speak(sayText(it));
+  }
+  cur={click:function(a){
+    if(a==='prev'&&k>0){k--;draw()}
+    else if(a==='next'){
+      if(k<ids.length-1){k++;draw();window.scrollTo(0,0)}
+      else{
+        if(!S.w[ids[0]])introduce(ids);
+        nextStep();
+      }
+    }
+  }};
+  draw();
+}
+
+/* match engine (used by lesson step and game) */
+function runMatch(groups,label,done,quiet){
+  var round=0,sel=null,matched=0,miss=0,t0=Date.now(),lock=false;
+  function draw(){
+    var g=groups[round],L=shuffle(g),R=shuffle(g);matched=0;sel=null;lock=false;
+    stage(sessTop(label,round+1,groups.length)+
+      '<p class="coach" style="margin-bottom:10px">Bir İngilizce kelimeye, sonra anlamına dokun.</p><div class="mgrid"><div class="mcol">'+
+      L.map(function(id){return '<button class="tile en" data-act="m" data-s="e" data-id="'+id+'">'+esc(DATA[id].en)+'</button>'}).join('')+
+      '</div><div class="mcol">'+
+      R.map(function(id){return '<button class="tile" data-act="m" data-s="t" data-id="'+id+'">'+esc(DATA[id].tr)+'</button>'}).join('')+'</div></div>');
+  }
+  cur={click:function(a,el){
+    if(a==='cont'){done({miss:miss,sec:Math.round((Date.now()-t0)/1000)});return}
+    if(a!=='m'||lock||el.classList.contains('done'))return;
+    if(!sel){sel=el;el.classList.add('sel');return}
+    if(sel===el){el.classList.remove('sel');sel=null;return}
+    if(sel.dataset.s===el.dataset.s){sel.classList.remove('sel');sel=el;el.classList.add('sel');return}
+    var a1=sel,b1=el;sel=null;
+    if(a1.dataset.id===b1.dataset.id){
+      a1.classList.remove('sel');a1.classList.add('done');b1.classList.add('done');matched++;
+      if(matched===groups[round].length){
+        lock=true;
+        if(round<groups.length-1){later(function(){round++;draw()},550)}
+        else if(quiet){later(function(){done({miss:miss,sec:Math.round((Date.now()-t0)/1000)})},450)}
+        else{later(function(){
+          stage('<div class="stack" style="padding-top:24px"><div class="card"><h3 class="sec-h">Eşleştirme bitti</h3><p>'+miss+' hata · '+Math.round((Date.now()-t0)/1000)+' saniye</p><div class="actions"><button class="btn" data-act="cont">Devam</button></div></div></div>');
+        },550)}
+      }
+    }else{
+      miss++;lock=true;a1.classList.remove('sel');a1.classList.add('bad');b1.classList.add('bad');
+      later(function(){a1.classList.remove('bad');b1.classList.remove('bad');lock=false},450);
+    }
+  }};
+  draw();
+}
+function stepMatch(ids){
+  runMatch(chunk(shuffle(ids),6),'Eşleştir',function(){nextStep()});
+}
+
+/* quiz engine */
+function runQuiz(cfg){
+  var Q=cfg.items.slice(),k=0,total=Q.length,answered=false,copyMode=false,hintLv=0,t=null,it=null,opts=null,correctIdx=0;
+  var letters='ABCDE';
+  function draw(){
+    if(k>=Q.length){if(cfg.after)cfg.after();return}
+    t=Q[k];it=DATA[t.id];answered=false;copyMode=false;hintLv=0;t.hinted=false;
+    if(t.kind==='type')drawType();else drawMC();
+  }
+  function advance(){k++;draw();window.scrollTo(0,0)}
+  function shownIdx(){return Math.min(k+1,total)}
+  function first(ok){
+    if(t.retry)return;
+    if(cfg.onFirst)cfg.onFirst(it,ok,t.kind);
+    if(!ok)Q.push({id:t.id,kind:t.kind==='type'?'type':t.kind,retry:1});
+  }
+  function drawMC(){
+    var e2t=t.kind==='e2t';
+    opts=makeOpts(it,e2t?'tr':'en');
+    correctIdx=opts.indexOf(it);
+    stage(sessTop(cfg.title,shownIdx(),total)+
+      '<div class="q"><p class="qlab">'+(e2t?'Türkçe anlamı hangisi?':'İngilizcesi hangisi?')+'</p><div class="qprompt">'+(e2t?'<span class="hl">'+esc(it.en)+'</span>':esc(it.tr))+'</div>'+
+      (e2t&&TTS?'<button class="ico" data-act="say" data-id="'+it.id+'" aria-label="Dinle">'+ICON.spk+'</button>':'')+'</div>'+
+      '<div class="opts">'+opts.map(function(o,i){return '<button class="opt" data-act="pick" data-i="'+i+'"><span class="bub">'+letters[i]+'</span><span class="otxt">'+esc(e2t?o.tr:o.en)+'</span></button>'}).join('')+'</div><div class="fb" id="fb"></div>');
+  }
+  function pick(i){
+    if(answered)return;answered=true;
+    var ok=(i===correctIdx),els=$$('.opt');
+    els.forEach(function(b){b.disabled=true});
+    els[i].classList.add(ok?'ok':'no');
+    if(!ok)els[correctIdx].classList.add('ok');
+    first(ok);
+    var fb=$('#fb');
+    if(ok){fb.innerHTML='<span class="good">Doğru</span>';later(advance,650)}
+    else{fb.innerHTML='<div class="bad"><span class="hl">'+esc(it.en)+'</span> = '+esc(it.tr)+'</div><div class="actions"><button class="btn" data-act="cont">Devam</button></div>'}
+  }
+  function drawType(){
+    stage(sessTop(cfg.title,shownIdx(),total)+
+      '<div class="q"><p class="qlab">'+(variants(it).length>1?'Bu anlama gelen ifadelerden birini yaz':'İngilizcesini yaz')+'</p><div class="qprompt">'+esc(it.tr)+'</div><p class="slots mono" id="slots">'+esc(slotText(it,0))+'</p></div>'+
+      '<form id="tf" autocomplete="off"><input id="ans" type="text" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" aria-label="İngilizce karşılığı yaz">'+
+      '<div class="actions"><button type="button" class="btn ghost sm" data-act="hint">İpucu</button><button type="button" class="btn ghost sm" data-act="idk">Bilmiyorum</button><button type="submit" class="btn">Kontrol et</button></div></form><div class="fb" id="fb"></div>');
+    var inp=$('#ans');if(inp)inp.focus();
+  }
+  function wrongType(){
+    answered=true;copyMode=true;first(false);
+    var fb=$('#fb');
+    fb.innerHTML='<div class="bad">Doğrusu: <span class="hl">'+esc(variants(it).join(' / '))+'</span></div><p class="coach" style="margin-top:8px">Doğrusunu yazarak devam et.</p>';
+    var inp=$('#ans');inp.value='';inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake');inp.focus();
+  }
+  cur={
+    click:function(a,el){
+      if(a==='pick')pick(+el.dataset.i);
+      else if(a==='cont')advance();
+      else if(a==='hint'){if(answered)return;hintLv=Math.min(3,hintLv+1);t.hinted=true;$('#slots').textContent=slotText(it,hintLv);$('#ans').focus()}
+      else if(a==='idk'){if(!answered)wrongType()}
+    },
+    submit:function(){
+      var inp=$('#ans');if(!inp)return;
+      var ok=checkTyped(it,inp.value);
+      if(copyMode){
+        if(ok){later(advance,150);$('#fb').innerHTML='<span class="good">Tamam</span>'}
+        else{inp.classList.remove('shake');void inp.offsetWidth;inp.classList.add('shake')}
+        return;
+      }
+      if(answered)return;
+      if(ok&&!t.hinted){
+        answered=true;first(true);inp.disabled=true;
+        $('#fb').innerHTML='<span class="good">Doğru</span>';later(advance,650);
+      }else if(ok&&t.hinted){
+        answered=true;first(false);inp.disabled=true;
+        $('#fb').innerHTML='<span class="good">Doğru, ama ipucuyla. Bir kez daha sorulacak.</span><div class="actions"><button class="btn" data-act="cont">Devam</button></div>';
+      }else{wrongType()}
+    },
+    key:function(e){
+      if(!t)return;
+      var tag=(document.activeElement&&document.activeElement.tagName)||'';
+      if(t.kind!=='type'){
+        if(!answered){
+          var m={a:0,b:1,c:2,d:3,e:4,'1':0,'2':1,'3':2,'4':3,'5':4}[e.key.toLowerCase()];
+          if(m!==undefined&&m<opts.length&&!e.ctrlKey&&!e.metaKey){pick(m)}
+        }else if(e.key==='Enter'){var c=$('[data-act="cont"]');if(c)advance()}
+      }else if(e.key==='Enter'&&answered&&!copyMode&&tag!=='INPUT'){var c2=$('[data-act="cont"]');if(c2)advance()}
+    }
+  };
+  draw();
+}
+function stepMC(ids){
+  var items=shuffle(ids).map(function(id){return {id:id,kind:'e2t'}}).concat(shuffle(ids).map(function(id){return {id:id,kind:'t2e'}}));
+  runQuiz({title:'Çoktan seçmeli',items:items,
+    onFirst:function(it,ok){sess.stats.tot++;if(ok)sess.stats.ok++;else bumpWrong(it.id)},
+    after:function(){commit();nextStep()}});
+}
+function stepType(ids){
+  var list=shuffle(ids.filter(function(id){return !DATA[id].nt}));
+  if(!list.length){nextStep();return}
+  runQuiz({title:'Yazma',items:list.map(function(id){return {id:id,kind:'type'}}),
+    onFirst:function(it,ok){sess.stats.tot++;if(ok)sess.stats.ok++;else bumpWrong(it.id)},
+    after:function(){commit();nextStep()}});
+}
+
+/* step: say it aloud, then check */
+function stepSay(ids){
+  var Q=shuffle(ids).slice(),k=0,total=Q.length,revealed=false,retried={};
+  function draw(){
+    if(k>=Q.length){commit();nextStep();return}
+    var it=DATA[Q[k]];revealed=false;
+    stage(sessTop('Sesli tekrar',Math.min(k+1,total),total)+
+      '<div class="card flash"><span class="tag">'+CATN[it.c]+'</span><p class="qlab">İngilizcesini yüksek sesle söyle</p><div class="big">'+esc(it.tr)+'</div>'+
+      '<div id="rv"><button class="btn wide" data-act="show">Cevabı göster</button></div></div>');
+  }
+  cur={click:function(a){
+    var id=Q[k],it=DATA[id];
+    if(a==='show'&&!revealed){
+      revealed=true;
+      $('#rv').innerHTML='<div class="big" style="margin-bottom:10px"><span class="hl">'+esc(it.en)+'</span></div>'+
+        (TTS?'<button class="btn ghost sm" data-act="say" data-id="'+it.id+'">'+ICON.spk+' Dinle</button>':'')+
+        '<p class="coach" style="margin-block:10px">Doğru söyledin mi? Dürüst işaretle, tekrar zamanlaması buna göre ayarlanır.</p>'+
+        '<div class="actions"><button class="btn ghost" data-act="no">Hatırlamadım</button><button class="btn" data-act="yes">Doğru söyledim</button></div>';
+      if(S.snd)speak(sayText(it));
+    }else if(a==='yes'&&revealed){k++;draw()}
+    else if(a==='no'&&revealed){
+      bumpWrong(id);
+      if(!retried[id]){retried[id]=1;Q.push(id)}
+      k++;draw();
+    }
+  }};
+  draw();
+}
+function stepFinish(){
+  var st=sess.stats,T=today();
+  var tomorrow=Object.keys(S.w).filter(function(id){return S.w[id][1]<=T+1}).length;
+  var acc=st.tot?Math.round(st.ok/st.tot*100):null;
+  commit();
+  stage('<div class="stack" style="padding-top:28px"><p class="eyebrow">'+(sess.kind==='lesson'?'Ders bitti':'Tekrar bitti')+'</p><h2 style="font-size:2rem">Güzel iş.</h2>'+
+    '<div class="card"><div class="kv">'+
+    (st.newN?'<div><b>'+st.newN+'</b><span>yeni kelime</span></div>':'')+
+    (st.rev?'<div><b>'+st.rev+'</b><span>tekrar</span></div>':'')+
+    (acc!==null?'<div><b>%'+acc+'</b><span>ilk denemede doğru</span></div>':'')+
+    '</div></div>'+
+    '<div class="card"><p>Yarın <b>'+tomorrow+'</b> kelime tekrar için gelecek. Bu kelimeleri yarın aç, çünkü aralıklı tekrarın işe yaraması buna bağlı.</p></div>'+
+    '<div class="actions"><button class="btn wide" data-act="end">Bitir</button></div></div>');
+  cur={click:function(a){if(a==='end')endSession()}};
+}
+
+/* ---------- GAMES ---------- */
+function gamePool(){
+  var ids=[];
+  for(var i=0;i<N;i++){
+    if(gsrc.src==='learned'&&!S.w[i])continue;
+    if(gsrc.cat!=='all'&&DATA[i].c!==gsrc.cat)continue;
+    ids.push(i);
+  }
+  return ids;
+}
+function vGames(){
+  var learned=Object.keys(S.w).length;
+  if(gsrc.src==='learned'&&learned<8)gsrc.src='all';
+  var pool=gamePool();
+  cur.click=function(a,el){
+    if(a==='gs'){gsrc.src=el.dataset.v;render()}
+    else if(a==='gc'){gsrc.cat=el.dataset.v;render()}
+    else if(a==='g'){startGame(el.dataset.k)}
+  };
+  var h='<div class="stack"><div class="hero"><p class="eyebrow">Oyunlar</p><h2>Kısa turlar, kolay ezber.</h2><p class="lead">Oyunlar tekrar takvimini değiştirmez. Ders ve tekrarın yanında ek pratiktir.</p></div>';
+  h+='<div class="card sp"><div><p class="qlab" style="margin-bottom:8px">Kelime kaynağı</p><div class="chips">'+
+    '<button class="chip" data-act="gs" data-v="learned" aria-pressed="'+(gsrc.src==='learned')+'"'+(learned<8?' disabled':'')+'>Öğrendiklerim ('+learned+')</button>'+
+    '<button class="chip" data-act="gs" data-v="all" aria-pressed="'+(gsrc.src==='all')+'">Tüm liste</button></div></div>'+
+    '<div><p class="qlab" style="margin-bottom:8px">Tür</p><div class="chips"><button class="chip" data-act="gc" data-v="all" aria-pressed="'+(gsrc.cat==='all')+'">Hepsi</button>'+
+    CATS.map(function(c){return '<button class="chip" data-act="gc" data-v="'+c+'" aria-pressed="'+(gsrc.cat===c)+'">'+CATN[c]+'</button>'}).join('')+'</div></div>'+
+    '<p class="note">'+pool.length+' kelime seçili'+(learned<8?'. Birkaç ders yaptıktan sonra "Öğrendiklerim" açılır.':'.')+'</p></div>';
+  var ok=pool.length>=6;
+  h+='<div class="card gcard"><h3>Hız turu</h3><p class="coach">60 saniyede olabildiğince çok doğru şık. Yanlış cevap 3 saniye götürür.'+(S.hs?' En yüksek: '+S.hs+'.':'')+'</p><div class="actions"><button class="btn" data-act="g" data-k="speed"'+(ok?'':' disabled')+'>Başla</button></div></div>';
+  h+='<div class="card gcard"><h3>Eşleştirme</h3><p class="coach">Üç tur, her turda altı çift. Süreye ve hataya bakar.</p><div class="actions"><button class="btn" data-act="g" data-k="match"'+(pool.length>=12?'':' disabled')+'>Başla</button></div></div>';
+  h+='<div class="card gcard"><h3>Harf sırala</h3><p class="coach">Karışık harflerden kelimeyi kur. Türkçe anlam ipucu olarak görünür.</p><div class="actions"><button class="btn" data-act="g" data-k="scramble"'+(ok?'':' disabled')+'>Başla</button></div></div></div>';
+  return h;
+}
+function startGame(kind){
+  var pool=gamePool();
+  sess={kind:'game',steps:[],i:0,stats:{}};
+  $('#top').hidden=true;
+  document.body.classList.add('insess');window.scrollTo(0,0);
+  if(kind==='speed')gameSpeed(pool);
+  else if(kind==='match')gameMatch(pool);
+  else gameScramble(pool);
+}
+function gameEnd(html){
+  stage('<div class="stack" style="padding-top:28px">'+html+'<div class="actions"><button class="btn ghost" data-act="again">Tekrar oyna</button><button class="btn" data-act="end">Bitir</button></div></div>');
+}
+function gameSpeed(pool){
+  var bag=shuffle(pool),bi=0,score=0,left=60,over=false,lock=false,wrong=[],it=null,opts=null,cidx=0,e2t=true,iv=null,letters='ABCDE';
+  function bar(){
+    var g=$('#gt'),l=$('#gl'),s=$('#gs');
+    if(g)g.style.width=Math.max(0,left/60*100)+'%';if(l)l.textContent=Math.max(0,Math.ceil(left));if(s)s.textContent=score;
+  }
+  function q(){
+    if(over)return;
+    it=DATA[bag[bi++%bag.length]];e2t=Math.random()<.5;lock=false;
+    opts=makeOpts(it,e2t?'tr':'en');cidx=opts.indexOf(it);
+    stage('<div class="gbar"><button class="ico" data-act="quit" aria-label="Çık">'+ICON.x+'</button><span class="mono" id="gs">'+score+'</span><div class="bar"><i id="gt" style="width:'+Math.max(0,left/60*100)+'%"></i></div><span class="mono" id="gl">'+Math.max(0,Math.ceil(left))+'</span></div>'+
+      '<div class="q"><p class="qlab">'+(e2t?'Türkçesi?':'İngilizcesi?')+'</p><div class="qprompt">'+(e2t?'<span class="hl">'+esc(it.en)+'</span>':esc(it.tr))+'</div></div>'+
+      '<div class="opts">'+opts.map(function(o,i){return '<button class="opt" data-act="pick" data-i="'+i+'"><span class="bub">'+letters[i]+'</span><span class="otxt">'+esc(e2t?o.tr:o.en)+'</span></button>'}).join('')+'</div>');
+  }
+  function finish(){
+    over=true;clearInterval(iv);
+    var best=score>S.hs;if(best){S.hs=score;commit()}
+    gameEnd('<p class="eyebrow">Süre doldu</p><h2 style="font-size:2.4rem">'+score+' doğru</h2>'+(best?'<p class="good" style="color:var(--good);font-weight:600">Yeni rekor.</p>':'')+
+      (wrong.length?'<div class="card"><h3 class="sec-h">Takıldıkların</h3>'+wrong.slice(0,10).map(function(w){return '<div style="display:flex;justify-content:space-between;gap:10px;padding:4px 0"><b style="font-family:var(--f-disp)">'+esc(w.en)+'</b><span class="dim" style="text-align:right">'+esc(w.tr)+'</span></div>'}).join('')+'</div>':''));
+  }
+  function pick(i){
+    if(lock||over)return;lock=true;
+    var els=$$('.opt'),ok=i===cidx;els.forEach(function(b){b.disabled=true});
+    els[i].classList.add(ok?'ok':'no');if(!ok)els[cidx].classList.add('ok');
+    if(ok){score++;bar();later(q,260)}else{left-=3;wrong.push(it);bar();later(q,800)}
+  }
+  sess.cleanup=function(){clearInterval(iv)};
+  cur={click:function(a,el){
+    if(a==='pick')pick(+el.dataset.i);
+    else if(a==='again'){clearInterval(iv);clearTimers();startGame('speed')}
+    else if(a==='end')endSession();
+  },key:function(e){
+    if(over||lock)return;var m={a:0,b:1,c:2,d:3,e:4,'1':0,'2':1,'3':2,'4':3,'5':4}[e.key.toLowerCase()];
+    if(m!==undefined&&m<opts.length)pick(m);
+  }};
+  iv=setInterval(function(){
+    if(over)return;left-=0.1;bar();if(left<=0){left=0;bar();finish()}
+  },100);
+  q();
+}
+function gameMatch(pool){
+  var ids=shuffle(pool).slice(0,18);
+  var groups=chunk(ids,6);
+  runMatch(groups,'Eşleştirme',function(r){
+    gameEnd('<p class="eyebrow">Eşleştirme bitti</p><h2 style="font-size:2.2rem">'+r.sec+' saniye</h2><p class="lead">'+r.miss+' hata</p>');
+    cur={click:function(a){
+      if(a==='again'){clearTimers();startGame('match')}else if(a==='end')endSession();
+    }};
+  },true);
+}
+function gameScramble(pool){
+  var cand=pool.filter(function(id){var it=DATA[id];return !it.nt&&/^[A-Za-z]{4,12}$/.test(main(it))});
+  if(cand.length<6){cand=[];for(var i=0;i<N;i++){var x=DATA[i];if(!x.nt&&/^[A-Za-z]{4,12}$/.test(main(x)))cand.push(i)}}
+  var rounds=shuffle(cand).slice(0,10),r=0,score=0,hints=0,word='',tiles=[],used=[],built=[],locked=false;
+  function scr(w){var a=w.split(''),s;var tries=0;do{s=shuffle(a);tries++}while(s.join('')===w&&tries<10);return s}
+  function draw(){
+    if(r>=rounds.length){
+      gameEnd('<p class="eyebrow">Harf sırala bitti</p><h2 style="font-size:2.4rem">'+score+' / '+rounds.length+'</h2><p class="lead">'+hints+' ipucu kullandın.</p>');return;
+    }
+    var it=DATA[rounds[r]];word=main(it).toLowerCase();tiles=scr(word);used=tiles.map(function(){return false});built=[];locked=false;
+    stage(sessTop('Harf sırala',r+1,rounds.length)+
+      '<div class="q"><p class="qlab">Anlamı</p><div class="qprompt">'+esc(it.tr)+'</div></div><div class="ans" id="ans"></div><div class="letters" id="lt"></div>'+
+      '<div class="actions"><button class="btn ghost sm" data-act="del">Sil</button><button class="btn ghost sm" data-act="hint">İpucu</button><button class="btn ghost sm" data-act="skip">Geç</button></div><div class="fb" id="fb"></div>');
+    paint();
+  }
+  function paint(){
+    var a=$('#ans');if(!a)return;
+    var s='';for(var i=0;i<word.length;i++)s+='<span>'+(built[i]!==undefined?esc(tiles[built[i]]):'')+'</span>';
+    a.innerHTML=s;
+    $('#lt').innerHTML=tiles.map(function(ch,i){return '<button class="lt" data-act="t" data-i="'+i+'"'+(used[i]?' disabled':'')+'>'+esc(ch)+'</button>'}).join('');
+  }
+  function check(){
+    var guess=built.map(function(i){return tiles[i]}).join('');
+    var a=$('#ans');
+    if(guess===word){
+      locked=true;score++;a.classList.add('okk');$('#fb').innerHTML='<span class="good">Doğru</span>';
+      later(function(){r++;draw()},800);
+    }else{
+      locked=true;a.classList.add('badd');
+      later(function(){built=[];used=tiles.map(function(){return false});locked=false;paint();var aa=$('#ans');if(aa)aa.classList.remove('badd')},600);
+    }
+  }
+  cur={click:function(a,el){
+    if(a==='again'){clearTimers();startGame('scramble');return}
+    if(a==='end'){endSession();return}
+    if(locked)return;
+    if(a==='t'){
+      var i=+el.dataset.i;if(used[i]||built.length>=word.length)return;
+      used[i]=true;built.push(i);paint();if(built.length===word.length)check();
+    }else if(a==='del'){
+      if(built.length){used[built.pop()]=false;paint()}
+    }else if(a==='hint'){
+      /* rebuild the correct prefix, then add the next letter */
+      var ok=0;for(var j=0;j<built.length;j++){if(tiles[built[j]]===word[j])ok++;else break}
+      while(built.length>ok){used[built.pop()]=false}
+      var need=word[built.length],found=-1;
+      for(var k=0;k<tiles.length;k++){if(!used[k]&&tiles[k]===need){found=k;break}}
+      if(found>=0){used[found]=true;built.push(found);hints++;paint();if(built.length===word.length)check()}
+    }else if(a==='skip'){
+      locked=true;$('#fb').innerHTML='<div class="bad">Doğrusu: <span class="hl">'+esc(word)+'</span></div>';later(function(){r++;draw()},1400);
+    }
+  }};
+  draw();
+}
+
+/* ---------- LIST ---------- */
+function rowHtml(o){
+  var s=stOf(o.id),w=S.w[o.id],hard=w&&w[4]>=3&&w[0]<4;
+  return '<li class="row"><span class="dot s'+s+'" title="'+['Yeni','Öğreniliyor','Pekişti'][s]+'"></span><div style="min-width:0"><b>'+esc(o.en)+'</b> <span class="tag">'+CATN[o.c]+'</span>'+(hard?' <span class="tag" style="color:var(--bad);border-color:var(--bad)">zor</span>':'')+'<div class="tr">'+esc(o.tr)+'</div></div>'+(TTS?'<button class="ico" data-act="say" data-id="'+o.id+'" aria-label="Dinle">'+ICON.spk+'</button>':'<span></span>')+'</li>';
+}
+function filtered(){
+  var q=fold(lst.q.trim());
+  return DATA.filter(function(o){
+    if(lst.cat!=='all'&&o.c!==lst.cat)return false;
+    if(lst.st!=='all'&&String(stOf(o.id))!==lst.st)return false;
+    if(q&&o._f.indexOf(q)<0)return false;
+    return true;
+  });
+}
+function paintList(){
+  var f=filtered(),box=$('#lst');if(!box)return;
+  box.innerHTML=(f.length?'<ul class="rows">'+f.slice(0,lst.n).map(rowHtml).join('')+'</ul>':'<p class="coach" style="padding:20px 0">Eşleşen kelime yok.</p>')+
+    (f.length>lst.n?'<div class="actions"><button class="btn ghost" data-act="more">Daha fazla göster ('+(f.length-lst.n)+')</button></div>':'');
+  var c=$('#cnt');if(c)c.textContent=f.length+' kelime';
+}
+function vList(){
+  cur.click=function(a,el){
+    if(a==='lc'){lst.cat=el.dataset.v;lst.n=80;$$('[data-act="lc"]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===lst.cat)});paintList()}
+    else if(a==='ls'){lst.st=el.dataset.v;lst.n=80;$$('[data-act="ls"]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.v===lst.st)});paintList()}
+    else if(a==='more'){lst.n+=120;paintList()}
+  };
+  cur.input=function(e){if(e.target.id==='q'){lst.q=e.target.value;lst.n=80;paintList()}};
+  cur.post=paintList;
+  return '<div class="stack"><div class="hero"><p class="eyebrow">Liste</p><h2>'+N+' kelime ve kalıp</h2></div>'+
+    '<input id="q" type="search" placeholder="İngilizce ya da Türkçe ara" value="'+esc(lst.q)+'" aria-label="Kelime ara" autocomplete="off" autocapitalize="off" spellcheck="false">'+
+    '<div class="chips"><button class="chip" data-act="lc" data-v="all" aria-pressed="'+(lst.cat==='all')+'">Hepsi</button>'+CATS.map(function(c){return '<button class="chip" data-act="lc" data-v="'+c+'" aria-pressed="'+(lst.cat===c)+'">'+CATN[c]+'</button>'}).join('')+'</div>'+
+    '<div class="chips"><button class="chip" data-act="ls" data-v="all" aria-pressed="'+(lst.st==='all')+'">Her durum</button><button class="chip" data-act="ls" data-v="0" aria-pressed="'+(lst.st==='0')+'">Yeni</button><button class="chip" data-act="ls" data-v="1" aria-pressed="'+(lst.st==='1')+'">Öğreniliyor</button><button class="chip" data-act="ls" data-v="2" aria-pressed="'+(lst.st==='2')+'">Pekişti</button></div>'+
+    '<div class="legend"><span id="cnt" class="mono"></span><span><i class="dot"></i>yeni</span><span><i class="dot s1"></i>öğreniliyor</span><span><i class="dot s2"></i>pekişti</span></div>'+
+    '<div id="lst"></div></div>';
+}
+
+/* ---------- PLAN ---------- */
+function dayBody(a,b){
+  var s='';for(var i=a;i<=b;i++){s+='<div><span>'+esc(DATA[i].en)+'</span><span>'+esc(DATA[i].tr)+'</span></div>'}
+  return s;
+}
+function catMix(a,b){
+  var c={};for(var i=a;i<=b;i++)c[DATA[i].c]=(c[DATA[i].c]||0)+1;
+  return CATS.filter(function(k){return c[k]}).map(function(k){return c[k]+' '+CATN[k].toLowerCase()}).join(' · ');
+}
+function vPlan(){
+  var T=today(),remaining=N-S.ptr,perDay=S.pace;
+  var last=S.days.length?S.days[S.days.length-1]:null,doneToday=!!(last&&last.d===T);
+  var daysLeft=Math.ceil(remaining/perDay);
+  var finish=daysLeft?T+(doneToday?daysLeft:daysLeft-1):T;
+  cur.click=function(a,el){
+    if(a==='pace'){S.pace=+el.dataset.v;commit();render()}
+  };
+  var h='<div class="stack"><div class="hero"><p class="eyebrow">Plan</p><h2>'+(daysLeft?daysLeft+' ders kaldı':'Plan tamamlandı')+'</h2>'+
+    (daysLeft?'<p class="lead">Her gün bir ders yaparsan listeyi '+fmtDate(finish)+' civarında bitirirsin. Tekrarlar bunun dışında aralıklı gelir.</p>':'')+'</div>';
+  h+='<div class="card"><h3 class="sec-h">Günlük yeni kelime</h3><div class="chips">'+[10,15,20,25,30,40].map(function(n){return '<button class="chip mono" data-act="pace" data-v="'+n+'" aria-pressed="'+(S.pace===n)+'">'+n+'</button>'}).join('')+'</div>'+
+    '<p class="note" style="margin-top:10px">20 kelime çoğu kişi için rahat bir tempodur. Değiştirirsen yalnızca henüz tanışmadığın kelimelerin günlere dağılımı değişir. Öğrendiklerin ve tekrar takvimin aynen kalır.</p></div>';
+  h+='<div><h3 class="sec-h">Gün gün</h3>';
+  var n=0;
+  S.days.forEach(function(d){
+    n++;
+    h+='<details class="day" data-day="'+n+'" data-a="'+d.a+'" data-b="'+d.b+'"><summary><span class="dn">Gün '+n+' · '+fmtDate(d.d)+'</span><span class="st dim">tamamlandı · '+(d.b-d.a+1)+'</span></summary><div class="dbody"></div></details>';
+  });
+  var p=S.ptr;
+  while(p<N){
+    n++;var e=Math.min(N-1,p+perDay-1);
+    var isNow=(p===S.ptr&&!doneToday);
+    h+='<details class="day'+(isNow?' now':'')+'" data-day="'+n+'" data-a="'+p+'" data-b="'+e+'"><summary><span class="dn">Gün '+n+(isNow?' · bugün':'')+'</span><span class="st dim">'+(e-p+1)+' kelime</span></summary><p class="note" style="margin-bottom:6px">'+esc(catMix(p,e))+'</p><div class="dbody"></div></details>';
+    p=e+1;
+  }
+  h+='</div></div>';
+  return h;
+}
+
+/* ---------- STATS ---------- */
+function vStats(){
+  var T=today(),total=N,intro=Object.keys(S.w).length,mastered=0,learning=0;
+  var per={};CATS.forEach(function(c){per[c]={n:byCat[c].length,m:0,l:0}});
+  Object.keys(S.w).forEach(function(k){
+    var id=+k,b=S.w[id][0],c=DATA[id].c;
+    if(b>=4){mastered++;per[c].m++}else{learning++;per[c].l++}
+  });
+  var fc=[];for(var d=0;d<7;d++)fc.push(0);
+  Object.keys(S.w).forEach(function(k){var due=S.w[k][1],d=Math.max(0,due-T);if(d<7)fc[d]++});
+  var mx=Math.max.apply(null,fc.concat([1]));
+  var hard=Object.keys(S.w).map(Number).filter(function(id){return S.w[id][4]>0}).sort(function(a,b){return S.w[b][4]-S.w[a][4]}).slice(0,8);
+  var h7=0,c7=0,r7=0;for(var i=0;i<7;i++){var x=S.h[T-i];if(x){h7+=x.n;r7+=x.r;c7+=x.c}}
+  cur.click=function(a,el){
+    if(a==='snd'){S.snd=S.snd?0:1;commit();render()}
+    else if(a==='exp'){exportProgress()}
+    else if(a==='imp'){var f=$('#impf');if(f)f.click()}
+    else if(a==='rs'){$('#rsb').hidden=false;el.hidden=true}
+    else if(a==='rsno'){$('#rsb').hidden=true;$('[data-act="rs"]').hidden=false}
+    else if(a==='rsyes'){S=fresh();try{localStorage.removeItem(LS)}catch(e){}commit();render()}
+  };
+  var h='<div class="stack"><div class="hero"><p class="eyebrow">Durum</p><h2>'+intro+' kelimeyle tanıştın</h2></div>';
+  h+='<div class="card"><div class="kv"><div><b>'+streakNow()+'</b><span>gün seri</span></div><div><b>'+mastered+'</b><span>pekişti</span></div><div><b>'+learning+'</b><span>öğreniliyor</span></div></div>'+
+    '<p class="note" style="margin-top:12px">Son 7 gün: '+h7+' yeni kelime, '+r7+' tekrar'+(r7?', %'+Math.round(c7/r7*100)+' doğru':'')+'. En uzun seri: '+S.st.best+' gün.</p></div>';
+  h+='<div class="card"><h3 class="sec-h">Türlere göre</h3>'+CATS.map(function(c){
+    var p=per[c];
+    return '<div class="crow"><span>'+CATN[c]+'</span><div class="cbar"><i class="m" style="width:'+(p.m/p.n*100)+'%"></i><i class="l" style="width:'+(p.l/p.n*100)+'%"></i></div><span class="mono dim">'+(p.m+p.l)+'/'+p.n+'</span></div>';
+  }).join('')+'<div class="legend" style="margin-top:8px"><span><i class="dot s2"></i>pekişti</span><span><i class="dot s1"></i>öğreniliyor</span><span><i class="dot"></i>yeni</span></div></div>';
+  h+='<div class="card"><h3 class="sec-h">Önümüzdeki 7 gün tekrar yükü</h3><div class="fc">'+fc.map(function(n,i){
+    return '<div><span class="mono">'+n+'</span><i style="height:'+Math.max(2,Math.round(n/mx*72))+'px"></i><span>'+(i===0?'bugün':fmtWd(T+i))+'</span></div>';
+  }).join('')+'</div></div>';
+  if(hard.length){
+    h+='<div class="card"><h3 class="sec-h">En çok zorlandıkların</h3>'+hard.map(function(id){
+      return '<div style="display:flex;justify-content:space-between;gap:10px;padding:5px 0"><b style="font-family:var(--f-disp)">'+esc(DATA[id].en)+'</b><span class="dim" style="text-align:right">'+esc(DATA[id].tr)+'</span></div>';
+    }).join('')+'</div>';
+  }
+  h+='<div class="card"><h3 class="sec-h">Bu yöntem neden böyle</h3><div class="sp" style="font-size:.93rem">'+
+    '<p><b>Aralıklı tekrar.</b> Kelime tam unutulmaya yaklaşırken yeniden sorulur: yarın, 3, 7, 14, 30, 60 gün sonra. Unutursan basamak başa döner.</p>'+
+    '<p><b>Aktif hatırlama.</b> Cevabı görmeden önce kendin çıkarırsın. Tekrar okumaktan daha kalıcıdır.</p>'+
+    '<p><b>Üretme.</b> Önce şık seçersin, sonra yazar ve sesli söylersin. Her aşama bir öncekinden zordur.</p>'+
+    '<p><b>Karışık sunum.</b> Fiil, isim, sıfat ve kalıplar aynı günde gelir. Bu, hepsini tek türde görmekten daha az rahat ama daha kalıcıdır.</p>'+
+    '<p><b>Kısa ve her gün.</b> Bir ders yaklaşık 15 ila 25 dakikadır. Uzun ve seyrek çalışmak yerine her gün kısa çalışmak daha iyi sonuç verir.</p></div></div>';
+  h+='<div class="card sp"><h3 class="sec-h">Ayarlar</h3><div class="chips"><button class="chip" data-act="snd" aria-pressed="'+(!!S.snd)+'">Otomatik seslendirme: '+(S.snd?'açık':'kapalı')+'</button></div>'+
+    (TTS?'':'<p class="note">Bu görünümde sesli okuma desteklenmiyor. Kelimeleri yine yüksek sesle okuyarak çalış.</p>')+
+    '<p class="note" id="sync">'+esc(syncText())+'</p>'+
+    '<div class="chips"><button class="chip" data-act="exp">İlerlemeyi yedekle (dosya)</button><button class="chip" data-act="imp">Yedekten yükle</button></div><input type="file" id="impf" accept=".json,application/json" hidden><p class="note" id="bknote"></p>'+
+    '<button class="btn ghost sm" data-act="rs" style="align-self:flex-start">İlerlemeyi sıfırla</button>'+
+    '<div id="rsb" class="warn" hidden><p>Tüm ilerleme, seri ve tekrar takvimi silinecek. Bu geri alınamaz.</p><div class="actions"><button class="btn ghost" data-act="rsno">Vazgeç</button><button class="btn" data-act="rsyes">Evet, sıfırla</button></div></div></div></div>';
+  return h;
+}
+
+
+function bkNote(m){var el=document.getElementById('bknote');if(el)el.textContent=m}
+function exportProgress(){
+  var name='yds-ilerleme-'+new Date().toISOString().slice(0,10)+'.json',data=JSON.stringify(S);
+  function viaLink(){
+    try{var b=new Blob([data],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);bkNote('Yedek dosyası indirildi.')}catch(e){bkNote('Yedek alınamadı.')}
+  }
+  if(window.claude&&window.claude.use){
+    window.claude.use('downloads').then(function(d){
+      if(!d){viaLink();return}
+      d.save({filename:name,data:data}).then(function(){bkNote('Yedek dosyası kaydedildi.')},function(){bkNote('Kaydetme iptal edildi.')});
+    },viaLink);
+  }else viaLink();
+}
+document.addEventListener('change',function(e){
+  if(!e.target||e.target.id!=='impf')return;
+  var f=e.target.files&&e.target.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{var o=JSON.parse(r.result);if(!o||typeof o!=='object'||!o.w||!o.st)throw 0;S=Object.assign(fresh(),o);commit();render();setTimeout(function(){bkNote('Yedek yüklendi.')},0)}
+    catch(x){bkNote('Bu dosya geçerli bir YDS yedeği değil.')}
+  };
+  r.readAsText(f);
+});
+/* ---------- boot ---------- */
+setView();
+render();
+initSync();
+})();
+</script>
+</body></html>
